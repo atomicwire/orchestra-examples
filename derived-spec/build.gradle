@@ -1,0 +1,16 @@
+plugins {
+  id 'io.atomicwire.gradle.orchestra'
+}
+
+orchestra {
+  specs {
+    fixLatest {
+      orchestraHub('fix-latest-enriched')
+    }
+  }
+
+  tablature {
+    inputMarkdownFile = layout.projectDirectory.file('derived-spec.md')
+    referenceFile(specs.fixLatest)
+  }
+}

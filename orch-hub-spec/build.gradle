@@ -1,0 +1,26 @@
+plugins {
+  id 'io.atomicwire.gradle.orchestra'
+}
+
+orchestra {
+  specs {
+    fixLatest {
+      orchestraHub('fix-latest')
+    }
+  }
+}
+
+def specProvider = orchestra.specs.fixLatest.resolveFileProvider(project)
+
+artifacts {
+  orchestraSpec(specProvider)
+}
+
+tasks.register("extractSpec", Sync) {
+  from(specProvider)
+  into(layout.buildDirectory)
+
+  doLast {
+    println("Extracted ${orchestra.specs.fixLatest.name} to ${outputs.files.asFileTree.singleFile}")
+  }
+}
