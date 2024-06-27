@@ -1,0 +1,17 @@
+plugins {
+  id 'io.atomicwire.gradle.orchestra'
+}
+
+orchestra {
+  tablature {
+    inputMarkdownFile = layout.projectDirectory.file('quickstart-spec.md')
+    typeInfoFile = layout.projectDirectory.file('quickstart-spec.yml')
+  }
+}
+
+tasks.register("build") {
+  inputs.file orchestra.tablature.tasks.runTablature.flatMap { it.outputXmlFile }
+  doLast {
+    println "Built Quickstart Spec: ${inputs.files.singleFile.path}"
+  }
+}

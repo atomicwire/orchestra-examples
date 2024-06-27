@@ -1,0 +1,73 @@
+plugins {
+  id 'idea'
+  id 'com.github.davidmc24.gradle.plugin.avro-base'
+  id 'io.atomicwire.gradle.orchestra'
+}
+
+apply from: "${rootDir}/dependencies.gradle"
+
+allprojects {
+  repositories {
+    mavenCentral()
+
+    maven {
+      name = 'atomicWireExternal'
+      url = uri('https://maven.atomicwire.dev/external')
+      credentials(PasswordCredentials)
+    }
+  }
+
+  configurations {
+    orchestraSpec {
+      canBeConsumed = true
+      canBeResolved = false
+    }
+    orchHubSpecPath {
+      canBeConsumed = false
+      canBeResolved = true
+    }
+  }
+}
+
+dependencies {
+  orchHubSpecPath project(path: ':orch-hub-spec', configuration: 'orchestraSpec')
+}
+
+orchestra {
+  specs {
+    derivedSpec {
+      tablatureProject = project(':derived-spec')
+    }
+    orchHubSpec {
+      file = configurations.orchHubSpecPath.singleFile
+    }
+    quickstartSpec {
+      tablatureProject = project(':quickstart-spec')
+    }
+  }
+
+  genAvro {
+    fromSpecs {
+      quickstartSpec {
+        spec = specs.named('quickstartSpec')
+        packageName = 'org.orchestra.quickstart.quickstartspec'
+      }
+    }
+  }
+}
+
+def printSchemaLocation = tasks.register("printAvroSchemaLocation") {
+  inputs.dir orchestra.genAvro.genSchemasTask.flatMap { it.outputDirectory }
+  doLast {
+    println "Generated Avro schemas dir: ${orchestra.genAvro.schemasOutputDir.get()}"
+  }
+}
+
+tasks.register("build") {
+  dependsOn printSchemaLocation
+}
+
+wrapper {
+  gradleVersion = versions.gradle
+  distributionType = Wrapper.DistributionType.ALL
+}

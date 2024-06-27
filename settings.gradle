@@ -1,0 +1,26 @@
+pluginManagement {
+  plugins {
+    id 'com.github.davidmc24.gradle.plugin.avro-base' version '1.9.1'
+    id 'io.atomicwire.gradle.orchestra' version '20240614133826-e1290a6'
+  }
+
+  repositories {
+    gradlePluginPortal()
+
+    maven {
+      name = 'atomicWireExternal'
+      url = uri('https://maven.atomicwire.dev/external')
+      credentials(PasswordCredentials)
+
+    }
+
+    mavenLocal()
+  }
+}
+
+rootProject.name = 'orchestra-quickstart'
+
+include ':derived-spec'
+include ':orch-hub-spec'
+include ':quickstart-spec'
+
