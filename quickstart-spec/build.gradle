@@ -5,7 +5,7 @@ plugins {
 orchestra {
   tablature {
     inputMarkdownFile = layout.projectDirectory.file('quickstart-spec.md')
-    typeInfoFile = layout.projectDirectory.file('quickstart-spec.yml')
+    typeInfoFile = layout.projectDirectory.file('quickstart-type-info.yml')
   }
 }
 
