@@ -2,15 +2,10 @@ plugins {
   id 'io.atomicwire.gradle.orchestra'
 }
 
-orchestra {
-  specs {
-    fixLatest {
-      orchestraHub('fix-latest-enriched')
+newOrchestra {
+  specification {
+    markdown {
+      reference orchestraHub(name: 'fix-latest-enriched', version: 'ep287')
     }
-  }
-
-  tablature {
-    inputMarkdownFile = layout.projectDirectory.file('derived-spec.md')
-    referenceFile(specs.fixLatest)
   }
 }

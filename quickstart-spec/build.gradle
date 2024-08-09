@@ -2,16 +2,26 @@ plugins {
   id 'io.atomicwire.gradle.orchestra'
 }
 
-orchestra {
-  tablature {
-    inputMarkdownFile = layout.projectDirectory.file('quickstart-spec.md')
-    typeInfoFile = layout.projectDirectory.file('quickstart-type-info.yml')
+newOrchestra {
+  specification {
+    markdown {}
+
+    enrich {
+      typeInfoFile = layout.projectDirectory.file('markdown/type-info.yml')
+    }
+  }
+
+  genAvro {
+    packageName = 'org.orchestra.quickstart.quickstartspec'
   }
 }
 
-tasks.register("build") {
-  inputs.file orchestra.tablature.tasks.runTablature.flatMap { it.outputXmlFile }
+def printSchemaLocation = tasks.register('printAvroSchemaLocation') {
   doLast {
-    println "Built Quickstart Spec: ${inputs.files.singleFile.path}"
+    println "Generated Avro schemas dir: ${newOrchestra.genAvro.schemaOutputDir.get()}"
   }
+}
+
+tasks.named('build') {
+  dependsOn printSchemaLocation
 }
