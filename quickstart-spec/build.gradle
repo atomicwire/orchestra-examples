@@ -12,7 +12,7 @@ orchestra {
   }
 
   avro {
-    packageName = 'org.orchestra.quickstart.quickstartspec'
+    namespace = 'org.orchestra.quickstart.quickstartspec'
   }
 }
 
