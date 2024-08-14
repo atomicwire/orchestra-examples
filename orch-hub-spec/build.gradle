@@ -2,7 +2,7 @@ plugins {
   id 'io.atomicwire.gradle.orchestra'
 }
 
-newOrchestra {
+orchestra {
   specification {
     repository orchestraHub(name: 'fix-latest', version: 'ep287')
   }
