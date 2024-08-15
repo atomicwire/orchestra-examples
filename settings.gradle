@@ -1,7 +1,7 @@
 pluginManagement {
   plugins {
     id 'com.github.davidmc24.gradle.plugin.avro-base' version '1.9.1'
-    id 'io.atomicwire.gradle.orchestra' version '20240815141255-6a4dd14'
+    id 'io.atomicwire.gradle.orchestra' version '0.1.0'
   }
 
   repositories {
