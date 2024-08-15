@@ -1,0 +1,31 @@
+plugins {
+  id 'io.atomicwire.gradle.orchestra'
+}
+
+/*
+
+This example demonstrates authoring an Orchestra spec from scratch using Markdown. Like the previous example, this spec
+can be used in applications and have other artifacts created from it.
+
+Run `./gradlew :basic-examples:02-markdown:printSpecLocation` to print the location where the built spec can be found.
+
+ */
+
+orchestra {
+  specification {
+    // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
+    markdown {}
+  }
+}
+
+def printSpecLocation = tasks.register('printSpecLocation') {
+  dependsOn tasks.named('orchestraBuildSpec')
+
+  doLast {
+    println "Created Orchestra spec ${orchestra.specification.provider.get()}"
+  }
+}
+
+tasks.named('build') {
+  dependsOn printSpecLocation
+}

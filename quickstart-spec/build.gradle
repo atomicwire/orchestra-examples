@@ -2,23 +2,23 @@ plugins {
   id 'io.atomicwire.gradle.orchestra'
 }
 
-newOrchestra {
+orchestra {
   specification {
     markdown {}
 
     enrich {
-      typeInfoFile = layout.projectDirectory.file('markdown/type-info.yml')
+      typeInfoFile = layout.projectDirectory.file('orchestra/specification/type-info.yml')
     }
   }
 
-  genAvro {
-    packageName = 'org.orchestra.quickstart.quickstartspec'
+  avro {
+    namespace = 'org.orchestra.quickstart.quickstartspec'
   }
 }
 
 def printSchemaLocation = tasks.register('printAvroSchemaLocation') {
   doLast {
-    println "Generated Avro schemas dir: ${newOrchestra.genAvro.schemaOutputDir.get()}"
+    println "Generated Avro schemas dir: ${orchestra.avro.schemaOutputDir.get()}"
   }
 }
 
