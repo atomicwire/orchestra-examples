@@ -7,7 +7,20 @@ orchestra {
     markdown {}
 
     enrich {
-      typeInfoFile = layout.projectDirectory.file('orchestra/specification/type-info.yml')
+      datatypeMapping([
+        double: [
+          Avro: 'double',
+        ],
+        string: [
+          Avro: 'string',
+        ],
+        timestamp: [
+          Avro: [
+            standardType: 'long',
+            avroLogicalType: 'timestamp-micros',
+          ],
+        ],
+      ])
     }
   }
 
@@ -17,6 +30,8 @@ orchestra {
 }
 
 def printSchemaLocation = tasks.register('printAvroSchemaLocation') {
+  dependsOn tasks.named('orchestraGenerateAvroSchema')
+
   doLast {
     println "Generated Avro schemas dir: ${orchestra.avro.schemaOutputDir.get()}"
   }

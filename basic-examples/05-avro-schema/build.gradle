@@ -19,7 +19,20 @@ orchestra {
     // In order to generate an Avro schema for an Orchestra spec, additional type information is required that indicates
     // which Avro datatype corresponds to each datatype in the Orchestra spec.
     enrich {
-      typeInfoFile = layout.projectDirectory.file('orchestra/specification/type-info.yml')
+      datatypeMapping([
+        double: [
+          Avro: 'double',
+        ],
+        string: [
+          Avro: 'string',
+        ],
+        timestamp: [
+          Avro: [
+            standardType: 'long',
+            avroLogicalType: 'timestamp-micros',
+          ],
+        ],
+      ])
     }
   }
 
