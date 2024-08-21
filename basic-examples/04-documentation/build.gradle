@@ -23,7 +23,7 @@ orchestra {
 }
 
 def printMdrLocation = tasks.register('printMdrLocation') {
-  dependsOn tasks.named('orchestraGenerateMessageDefinitionReport')
+  dependsOn tasks.named('orchestraGenerateMessageDefinitionReportDocx')
 
   doLast {
     println "Created Message Definition Report in ${orchestra.documentation.outputDir.get()}"
