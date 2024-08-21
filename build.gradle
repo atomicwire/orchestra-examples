@@ -1,13 +1,24 @@
 apply from: "${rootDir}/dependencies.gradle"
 
+def credentialsProps = new Properties()
+file("${rootDir}/atomicwire-maven-credentials.properties").withInputStream {
+  credentialsProps.load(it)
+}
+
+def mavenUsername = credentialsProps.getProperty('atomicwire-maven-username', '')
+def mavenPassword = credentialsProps.getProperty('atomicwire-maven-password', '')
+
 allprojects {
   repositories {
     mavenCentral()
 
     maven {
-      name = 'atomicWireExternal'
+      name = 'atomicwire'
       url = uri('https://maven.atomicwire.dev/external')
-      credentials(PasswordCredentials)
+      credentials {
+        username = mavenUsername
+        password = mavenPassword
+      }
     }
   }
 }

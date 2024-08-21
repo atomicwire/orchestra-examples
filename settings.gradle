@@ -1,27 +1,36 @@
 pluginManagement {
   plugins {
     id 'com.github.davidmc24.gradle.plugin.avro-base' version '1.9.1'
-    id 'io.atomicwire.gradle.orchestra' version '0.1.0'
+    id 'io.atomicwire.gradle.orchestra' version '0.1.1'
+  }
+
+  def credentialsProps = new Properties()
+  file("${rootDir}/atomicwire-maven-credentials.properties").withInputStream {
+    credentialsProps.load(it)
+  }
+
+  def mavenUsername = credentialsProps.getProperty('atomicwire-maven-username', '')
+  def mavenPassword = credentialsProps.getProperty('atomicwire-maven-password', '')
+
+  if (mavenUsername == '' || mavenPassword == '') {
+    throw new GradleException('Atomic Wire Maven username or password unset, please see the README.md for more information')
   }
 
   repositories {
     gradlePluginPortal()
 
     maven {
-      name = 'atomicWireExternal'
+      name = 'atomicwire'
       url = uri('https://maven.atomicwire.dev/external')
-      credentials(PasswordCredentials)
+      credentials {
+        username = mavenUsername
+        password = mavenPassword
+      }
     }
-
-    mavenLocal()
   }
 }
 
 rootProject.name = 'orchestra-examples'
-
-include ':derived-spec'
-include ':orch-hub-spec'
-include ':quickstart-spec'
 
 include ':basic-examples:01-orchestra-hub'
 include ':basic-examples:02-markdown'

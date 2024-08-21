@@ -34,7 +34,9 @@ orchestra {
   }
 
   java {
-    packageName = 'io.atomicwire.orchestra.example'
+    codeGen {
+      packageName = 'io.atomicwire.orchestra.example'
+    }
   }
 }
 
@@ -42,7 +44,7 @@ def printOrchestraJavaLocation = tasks.register('printOrchestraJavaLocation') {
   dependsOn tasks.named('orchestraGenerateJava')
 
   doLast {
-    println "Generated Orchestra Java code in ${orchestra.java.outputDir.get()}"
+    println "Generated Orchestra Java code in ${orchestra.java.codeGen.outputDir.get()}"
   }
 }
 
