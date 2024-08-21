@@ -5,8 +5,12 @@ pluginManagement {
   }
 
   def credentialsProps = new Properties()
-  file("${rootDir}/atomicwire-maven-credentials.properties").withInputStream {
-    credentialsProps.load(it)
+
+  def credentialsFile = file("${rootDir}/maven-credentials.properties")
+  if (credentialsFile.exists()) {
+    credentialsFile.withInputStream {
+      credentialsProps.load(it)
+    }
   }
 
   def mavenUsername = credentialsProps.getProperty('atomicwire-maven-username', '')

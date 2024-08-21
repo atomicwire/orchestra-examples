@@ -1,7 +1,7 @@
 apply from: "${rootDir}/dependencies.gradle"
 
 def credentialsProps = new Properties()
-file("${rootDir}/atomicwire-maven-credentials.properties").withInputStream {
+file("${rootDir}/maven-credentials.properties").withInputStream {
   credentialsProps.load(it)
 }
 
