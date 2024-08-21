@@ -19,10 +19,6 @@ pluginManagement {
 
 rootProject.name = 'orchestra-examples'
 
-include ':derived-spec'
-include ':orch-hub-spec'
-include ':quickstart-spec'
-
 include ':basic-examples:01-orchestra-hub'
 include ':basic-examples:02-markdown'
 include ':basic-examples:03-derived'
