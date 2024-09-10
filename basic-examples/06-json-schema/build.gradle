@@ -18,7 +18,7 @@ orchestra {
 
     // In order to generate a JSON schema for an Orchestra spec, additional type information is required that indicates
     // which JSON datatype corresponds to each datatype in the Orchestra spec.
-    enrich {
+    encoding {
       datatypeMapping([
         double: [
           JSON: 'number',
