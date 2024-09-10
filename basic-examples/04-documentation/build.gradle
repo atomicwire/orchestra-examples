@@ -1,4 +1,5 @@
 plugins {
+  id 'com.bmuschko.docker-remote-api'
   id 'io.atomicwire.gradle.orchestra'
 }
 
@@ -26,7 +27,7 @@ def printMdrLocation = tasks.register('printMdrLocation') {
   dependsOn tasks.named('orchestraGenerateMessageDefinitionReportDocx')
 
   doLast {
-    println "Created Message Definition Report in ${orchestra.documentation.outputDir.get()}"
+    println "Created Message Definition Report in ${orchestra.documentation.buildDir.get()}"
   }
 }
 
