@@ -19,6 +19,7 @@ orchestra {
       reference orchestraHub(name: 'fix-latest', version: 'ep287')
     }
   }
+
   quickfix {
     dataDictionary {}
   }
