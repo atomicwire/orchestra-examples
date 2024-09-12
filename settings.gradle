@@ -1,8 +1,9 @@
 pluginManagement {
   plugins {
     id 'com.bmuschko.docker-remote-api' version '9.4.0'
+    id 'com.diffplug.spotless' version '6.25.0'
     id 'com.github.davidmc24.gradle.plugin.avro-base' version '1.9.1'
-    id 'io.atomicwire.gradle.orchestra' version '0.1.4'
+    id 'io.atomicwire.gradle.orchestra' version '0.1.5'
   }
 
   def credentialsProps = new Properties()
@@ -36,6 +37,9 @@ pluginManagement {
 }
 
 rootProject.name = 'orchestra-examples'
+
+include ':app-examples:orchestra-specs:fix-44'
+include ':app-examples:01-basic'
 
 include ':basic-examples:01-orchestra-hub'
 include ':basic-examples:02-markdown'

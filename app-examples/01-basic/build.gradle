@@ -1,0 +1,74 @@
+plugins {
+  id 'application'
+}
+
+dependencies {
+
+  // FIX Latest orchestra spec
+  implementation project(':app-examples:orchestra-specs:fix-44')
+  implementation platform(group: 'io.atomicwire.orchestra', name: 'external-orch-specs-bom', version: 'ci-1209')
+  implementation group: 'io.atomicwire.orchestra.spec', name: 'fix-44-plugins'
+
+  // Orchestra Java library
+  implementation platform(group: 'io.atomicwire.orchestra', name: 'orch-transformer-bom', version: 'ci-704')
+  implementation group: 'io.atomicwire.orchestra', name: 'orchestra-core'
+  implementation group: 'io.atomicwire.orchestra', name: 'orchestra-accessor-quickfix'
+
+  // Picocli
+  implementation group: 'info.picocli', name: 'picocli', version: '4.6.3'
+
+  // Jackson
+  implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.+'
+
+  // Jakarta Annotation API
+  implementation group: 'jakarta.annotation', name: 'jakarta.annotation-api', version: '3.0.+'
+
+  // Lombok
+  annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.+'
+  compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.+'
+  testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.+'
+  testCompileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.+'
+
+  // Logging
+  implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.+'
+  runtimeOnly group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.23.+'
+  runtimeOnly group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.23.+'
+  runtimeOnly group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.23.+'
+
+}
+
+application {
+  mainClass = 'org.example.orchestra.BasicAppCli'
+}
+
+run {
+  def inputDir = layout.projectDirectory.dir('example-input-data')
+  inputs.dir(inputDir)
+
+  def outputFile = layout.buildDirectory.file('summary.json')
+  outputs.file(outputFile)
+
+  outputs.upToDateWhen {
+    // Always run
+    return false
+  }
+
+  args \
+    '--input-dir', inputDir.getAsFile(), \
+    '--output-file', outputFile.get()
+}
+
+tasks.register('generateData', JavaExec) {
+  def outputFile = layout.buildDirectory.file('generated-data.txt')
+  outputs.file outputFile
+
+  classpath = sourceSets.main.runtimeClasspath
+  mainClass = 'org.example.orchestra.DataGeneratorCli'
+  args \
+    '--message-count', 10_000, \
+    '--output-file', outputFile.get()
+}
+
+tasks.named('test', Test) {
+  useJUnitPlatform()
+}

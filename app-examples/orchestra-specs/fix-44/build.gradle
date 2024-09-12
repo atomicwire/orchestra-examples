@@ -1,0 +1,41 @@
+plugins {
+  id 'java-library'
+  id 'io.atomicwire.gradle.orchestra'
+}
+
+dependencies {
+
+  implementation platform(group: 'io.atomicwire.orchestra', name: 'orch-transformer-bom', version: 'ci-704')
+  implementation group: 'io.atomicwire.orchestra', name: 'orchestra-core'
+
+}
+
+orchestra {
+  specification {
+    repository orchestraHub(name: 'fix-4.4', version: '4.4')
+
+    encoding {
+      typeInfoFile = layout.projectDirectory.file('datatypes.yml')
+    }
+
+    revisions {
+      messageLibrary {
+        apply('fix-44') {
+          description('The message XMLnonFIX (n) contains no non-StandardHeader/Trailer fields which causes QuickFIX to reject the data dictionary')
+        }
+      }
+    }
+  }
+
+  java {
+    codeGen {
+      packageName = 'org.example.orchestra.fix44'
+    }
+  }
+}
+
+spotless {
+  java {
+    targetExclude "${layout.projectDirectory.getAsFile().relativePath(orchestra.java.codeGen.outputDir.get().asFile)}/**" as String
+  }
+}
