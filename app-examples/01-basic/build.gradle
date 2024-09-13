@@ -12,14 +12,8 @@ dependencies {
   implementation libs.orchestra.core
   implementation libs.orchestra.accessor.quickfix
 
-  // Picocli
-  implementation libs.picocli
-
   // Jackson
   implementation libs.jackson.databind
-
-  // Jakarta Annotation API
-  implementation libs.jakarta.annotation.api
 
   // Lombok
   annotationProcessor libs.lombok
@@ -34,7 +28,7 @@ dependencies {
 }
 
 application {
-  mainClass = 'org.example.orchestra.BasicAppCli'
+  mainClass = 'org.example.orchestra.BasicApp'
 }
 
 run {
@@ -49,9 +43,7 @@ run {
     return false
   }
 
-  args \
-    '--input-dir', inputDir.getAsFile(), \
-    '--output-file', outputFile.get()
+  args inputDir.asFile.toString(), outputFile.get().toString()
 }
 
 tasks.named('test', Test) {

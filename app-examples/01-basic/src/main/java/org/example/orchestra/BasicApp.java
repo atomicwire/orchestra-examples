@@ -1,5 +1,7 @@
 package org.example.orchestra;
 
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import io.atomicwire.orchestra.accessor.quickfix.QuickFixResourceAccessorConfig;
 import io.atomicwire.orchestra.accessor.quickfix.QuickFixResourceAccessorFactory;
 import io.atomicwire.orchestra.spec.OrchestraSpecBox;
@@ -9,10 +11,12 @@ import io.atomicwire.orchestra.spec.OrchestraSpecSource;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.function.Consumer;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import lombok.extern.jackson.Jacksonized;
 import lombok.extern.slf4j.Slf4j;
 import org.example.orchestra.fix44.Messages;
 import org.example.orchestra.fix44.messages.NewOrderSingle;
@@ -29,15 +33,53 @@ import org.example.orchestra.fix44.messages.NewOrderSingle;
  * </ul>
  */
 @Slf4j
-@RequiredArgsConstructor(staticName = "of")
+@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public class BasicApp {
 
   private static final OrchestraSpecSource SPEC_SOURCE = OrchestraSpecSource.of("aw:fix-44");
 
-  @NonNull private final BasicAppConfig config;
+  private static final JsonMapper JSON_MAPPER =
+      JsonMapper.builder().configure(SerializationFeature.INDENT_OUTPUT, true).build();
+
+  /** Where to read input data from (FIX 4.4 tag/value-encoded messages). */
+  @NonNull private final Path inputDir;
+
+  public static BasicApp ofInputDir(Path inputDir) {
+    return new BasicApp(inputDir);
+  }
+
+  public static void main(String[] args) {
+    if (args.length < 2) {
+      log.error("usage: {} <input-dir> <output-file>", BasicApp.class.getSimpleName());
+      System.exit(1);
+    }
+
+    final var inputDir = Path.of(args[0]);
+    final var outputFile = Path.of(args[1]);
+
+    final Summary summary;
+    try {
+      summary = BasicApp.ofInputDir(inputDir).processInput();
+    } catch (Exception e) {
+      log.error("Failed to process data", e);
+      System.exit(1);
+      throw new RuntimeException("unreachable");
+    }
+
+    log.info("Summary: {}", summary);
+
+    try (final var outputStream = Files.newOutputStream(outputFile)) {
+      JSON_MAPPER.writeValue(outputStream, summary);
+    } catch (IOException e) {
+      log.error("Failed to render summary as JSON", e);
+      System.exit(1);
+    }
+  }
 
   public Summary processInput() {
-    final var quickfixAccessorFactory = createQuickFixAccessorFactory();
+    final var quickfixAccessorFactory =
+        QuickFixResourceAccessorFactory.of(
+            loadSpec(), QuickFixResourceAccessorConfig.DEFAULT_CONFIG);
 
     final var totalCountByInstrument = new TreeMap<String, Integer>();
     final var totalQuantityByInstrument = new TreeMap<String, Double>();
@@ -74,13 +116,6 @@ public class BasicApp {
         .build();
   }
 
-  private QuickFixResourceAccessorFactory createQuickFixAccessorFactory() {
-    final var quickfixAccessorConfigBuilder = QuickFixResourceAccessorConfig.builder();
-    config.getTagValueSeparator().ifPresent(quickfixAccessorConfigBuilder::delimiter);
-
-    return QuickFixResourceAccessorFactory.of(loadSpec(), quickfixAccessorConfigBuilder.build());
-  }
-
   private OrchestraSpecBox loadSpec() {
     try {
       return OrchestraSpecBox.from(OrchestraSpecLoader.loadOne(SPEC_SOURCE));
@@ -90,7 +125,7 @@ public class BasicApp {
   }
 
   private void applyToEachInputLine(Consumer<String> fn) {
-    try (final var inputFiles = Files.list(config.getInputDir())) {
+    try (final var inputFiles = Files.list(inputDir)) {
       inputFiles
           .filter(Files::isRegularFile)
           .forEach(
@@ -104,5 +139,14 @@ public class BasicApp {
     } catch (IOException e) {
       throw new RuntimeException("Failed to list input files", e);
     }
+  }
+
+  @Value
+  @Builder
+  @Jacksonized
+  public static class Summary {
+    @NonNull Map<String, Integer> totalCountByInstrument;
+
+    @NonNull Map<String, Double> totalQuantityByInstrument;
   }
 }
