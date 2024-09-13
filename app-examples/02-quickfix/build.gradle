@@ -24,7 +24,7 @@ tasks.register('runQuickFixEngineApp', JavaExec) {
   def quickFixDataDictionary = file("${project.rootDir}/basic-examples/08-quickfix/build/quickfix/08-quickfix.xml")
 
   classpath = sourceSets.main.runtimeClasspath
-  mainClass = 'io.atomicwire.quickfix.QuickFixEngineDataDictionaryApp'
+  mainClass = 'org.example.orchestra.QuickFixEngineDataDictionaryApp'
   args quickFixDataDictionary
 }
 
@@ -33,6 +33,6 @@ tasks.register('runQuickFixClientApp', JavaExec) {
   def quickFixDataDictionary = file("${project.rootDir}/basic-examples/08-quickfix/build/quickfix/08-quickfix.xml")
 
   classpath = sourceSets.main.runtimeClasspath
-  mainClass = 'io.atomicwire.quickfix.QuickFixClientDataDictionaryApp'
+  mainClass = 'org.example.orchestra.QuickFixClientDataDictionaryApp'
   args quickFixDataDictionary
 }
