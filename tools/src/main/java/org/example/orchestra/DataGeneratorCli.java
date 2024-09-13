@@ -1,3 +1,7 @@
+/*
+ * Copyright 2024 Atomic Wire Technology Limited
+ * SPDX-License-Identifier: Apache-2.0
+ */
 package org.example.orchestra;
 
 import java.io.IOException;
