@@ -1,6 +1,6 @@
 # My Custom Spec version 1.0
 
-| Term       | Value                                                                                                      |
+|    Term    |                                                   Value                                                    |
 |------------|------------------------------------------------------------------------------------------------------------|
 | title      | My Custom Spec                                                                                             |
 | conformsTo | [Orchestra v1-0-STANDARD](https://www.fixtrading.org/packages/fix-orchestra-technical-specification-v1-0/) |
@@ -13,7 +13,7 @@
 
 An update to an order book.
 
-| Sort | Name       | Tag | Presence | Documentation                         |
+| Sort |    Name    | Tag | Presence |             Documentation             |
 |------|------------|-----|----------|---------------------------------------|
 | 1    | timestamp  | 1   | required | The microsecond-resolution timestamp. |
 | 2    | instrument | 2   | required | The instrument identifier.            |
@@ -21,7 +21,7 @@ An update to an order book.
 
 ## Fields
 
-| Name       | Tag | Type      | Synopsis | Elaboration |
+|    Name    | Tag |   Type    | Synopsis | Elaboration |
 |------------|-----|-----------|----------|-------------|
 | timestamp  | 1   | timestamp |          |             |
 | instrument | 2   | string    |          |             |
@@ -29,8 +29,9 @@ An update to an order book.
 
 ## Datatypes
 
-| Name      | Synopsis                                                                                             | Example                        |
+|   Name    |                                               Synopsis                                               |            Example             |
 |-----------|------------------------------------------------------------------------------------------------------|--------------------------------|
 | timestamp | An instant in time. SHOULD be encoded as an ISO 8601-encoded ASCII string with a zone offset of 'Z'. | 2023-11-13T16:37:09.974402382Z |
 | string    | A Unicode string. SHOULD be encoded using UTF-8.                                                     | Hello, world!                  |
 | double    | A double-precision floating-point value compatible with IEEE 754.                                    | 123.456                        |
+

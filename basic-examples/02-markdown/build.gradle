@@ -1,5 +1,6 @@
 plugins {
   id 'io.atomicwire.gradle.orchestra'
+  id 'com.diffplug.spotless'
 }
 
 /*
@@ -14,7 +15,10 @@ Run `./gradlew :basic-examples:02-markdown:printSpecLocation` to print the locat
 orchestra {
   specification {
     // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
-    markdown {}
+    markdown {
+      // Use Spotless to automatically format Orchestra Markdown and enforce style
+      enableSpotless()
+    }
   }
 }
 
