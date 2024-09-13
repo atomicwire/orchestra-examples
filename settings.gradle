@@ -40,6 +40,7 @@ rootProject.name = 'orchestra-examples'
 
 include ':app-examples:orchestra-specs:fix-44'
 include ':app-examples:01-basic'
+include ':app-examples:02-quickfix'
 
 include ':basic-examples:01-orchestra-hub'
 include ':basic-examples:02-markdown'
