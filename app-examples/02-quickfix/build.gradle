@@ -3,6 +3,7 @@ plugins {
 }
 
 dependencies {
+
   // QuickFIX
   implementation libs.quickfixj
 
@@ -18,7 +19,7 @@ dependencies {
 
 }
 
-def runQuickFixEngineAppTask = tasks.register('runQuickFixEngineApp', JavaExec) {
+tasks.register('runQuickFixEngineApp', JavaExec) {
   dependsOn project(':basic-examples:08-quickfix').tasks.named('build')
   def quickFixDataDictionary = file("${project.rootDir}/basic-examples/08-quickfix/build/quickfix/08-quickfix.xml")
 
@@ -27,7 +28,7 @@ def runQuickFixEngineAppTask = tasks.register('runQuickFixEngineApp', JavaExec) 
   args quickFixDataDictionary
 }
 
-def runQuickFixClientAppTask = tasks.register('runQuickFixClientApp', JavaExec) {
+tasks.register('runQuickFixClientApp', JavaExec) {
   dependsOn project(':basic-examples:08-quickfix').tasks.named('build')
   def quickFixDataDictionary = file("${project.rootDir}/basic-examples/08-quickfix/build/quickfix/08-quickfix.xml")
 

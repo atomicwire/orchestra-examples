@@ -2,10 +2,10 @@
  * Copyright 2024 Atomic Wire Technology Limited
  * SPDX-License-Identifier: Apache-2.0
  */
-package io.atomicwire.quickfix;
+package org.example.orchestra;
 
-import static io.atomicwire.quickfix.QuickFixEngineDataDictionaryApp.checkArgs;
-import static io.atomicwire.quickfix.QuickFixEngineDataDictionaryApp.prettyLog;
+import static org.example.orchestra.QuickFixEngineDataDictionaryApp.checkArgs;
+import static org.example.orchestra.QuickFixEngineDataDictionaryApp.prettyLog;
 
 import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;

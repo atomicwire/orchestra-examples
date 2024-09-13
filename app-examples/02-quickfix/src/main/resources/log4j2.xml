@@ -6,7 +6,7 @@
     </Console>
   </Appenders>
   <Loggers>
-    <Logger name="io.atomicwire" level="info" additivity="false">
+    <Logger name="org.example.orchestra" level="info" additivity="false">
       <AppenderRef ref="Console"/>
     </Logger>
     <Root level="warn">

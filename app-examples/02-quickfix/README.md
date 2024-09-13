@@ -10,11 +10,11 @@ is the QuickFIX client application that will send a mixture of valid and invalid
 
 From the command line start the QuickFIX engine using 
 
-    ./gradlew app-examples:02-quickfix:runQuickFixEngineApp
+    ./gradlew :app-examples:02-quickfix:runQuickFixEngineApp
 
 In another console window start the QuickFIX client app using 
 
-    ./gradlew app-examples:02-quickfix:runQuickFixClientApp
+    ./gradlew :app-examples:02-quickfix:runQuickFixClientApp
 
 The client application will send the following messages:
 
