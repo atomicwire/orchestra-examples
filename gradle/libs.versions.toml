@@ -6,6 +6,7 @@ lombok = "1.18.+"
 orchestra-bom = "ci-704"
 orchestra-specs-bom = "ci-1209"
 picocli = "4.6.+"
+quickfixj = "2.3.+"
 slf4j = "1.7.+"
 
 [libraries]
@@ -21,6 +22,7 @@ orchestra-core = { group = "io.atomicwire.orchestra", name = "orchestra-core" }
 orchestra-specs-bom = { group = "io.atomicwire.orchestra", name = "external-orch-specs-bom", version.ref = "orchestra-specs-bom" }
 orchestra-spec-fix44-plugins = { group = "io.atomicwire.orchestra.spec", name = "fix-44-plugins" }
 picocli = { group = "info.picocli", name = "picocli", version.ref = "picocli" }
+quickfixj = { group = "org.quickfixj", name = "quickfixj-core", version.ref = "quickfixj" }
 slf4j-api = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }
 
 [bundles]

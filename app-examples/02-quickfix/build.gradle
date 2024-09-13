@@ -1,0 +1,37 @@
+plugins {
+  id 'application'
+}
+
+dependencies {
+  // QuickFIX
+  implementation libs.quickfixj
+
+  // Lombok
+  annotationProcessor libs.lombok
+  compileOnly libs.lombok
+  testAnnotationProcessor libs.lombok
+  testCompileOnly libs.lombok
+
+  // Logging
+  implementation libs.slf4j.api
+  runtimeOnly libs.bundles.log4j
+
+}
+
+def runQuickFixEngineAppTask = tasks.register('runQuickFixEngineApp', JavaExec) {
+  dependsOn project(':basic-examples:08-quickfix').tasks.named('build')
+  def quickFixDataDictionary = file("${project.rootDir}/basic-examples/08-quickfix/build/quickfix/08-quickfix.xml")
+
+  classpath = sourceSets.main.runtimeClasspath
+  mainClass = 'io.atomicwire.quickfix.QuickFixEngineDataDictionaryApp'
+  args quickFixDataDictionary
+}
+
+def runQuickFixClientAppTask = tasks.register('runQuickFixClientApp', JavaExec) {
+  dependsOn project(':basic-examples:08-quickfix').tasks.named('build')
+  def quickFixDataDictionary = file("${project.rootDir}/basic-examples/08-quickfix/build/quickfix/08-quickfix.xml")
+
+  classpath = sourceSets.main.runtimeClasspath
+  mainClass = 'io.atomicwire.quickfix.QuickFixClientDataDictionaryApp'
+  args quickFixDataDictionary
+}
