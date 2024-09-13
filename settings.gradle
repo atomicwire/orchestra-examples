@@ -49,3 +49,5 @@ include ':basic-examples:05-avro-schema'
 include ':basic-examples:06-json-schema'
 include ':basic-examples:07-java'
 include ':basic-examples:08-quickfix'
+
+include ':tools'

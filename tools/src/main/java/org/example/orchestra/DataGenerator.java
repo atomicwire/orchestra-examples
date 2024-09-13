@@ -17,7 +17,7 @@ import lombok.With;
 import lombok.extern.slf4j.Slf4j;
 import org.example.orchestra.fix44.Fields;
 
-/** A data generator for FIX 4.4 NewOrderSingle messages for use in the {@link BasicApp}. */
+/** A data generator for FIX 4.4 NewOrderSingle messages for use in the basic Java app example. */
 @Slf4j
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public class DataGenerator {

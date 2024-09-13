@@ -5,8 +5,12 @@ plugins {
 
 dependencies {
 
-  implementation platform(group: 'io.atomicwire.orchestra', name: 'orch-transformer-bom', version: 'ci-704')
-  implementation group: 'io.atomicwire.orchestra', name: 'orchestra-core'
+  // Orchestra Java library
+  implementation platform(libs.orchestra.bom)
+  implementation libs.orchestra.core
+
+  api platform(libs.orchestra.specs.bom)
+  api libs.orchestra.spec.fix44.plugins
 
 }
 

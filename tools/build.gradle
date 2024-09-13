@@ -1,5 +1,5 @@
 plugins {
-  id 'application'
+  id 'java'
 }
 
 dependencies {
@@ -10,13 +10,9 @@ dependencies {
   // Orchestra Java library
   implementation platform(libs.orchestra.bom)
   implementation libs.orchestra.core
-  implementation libs.orchestra.accessor.quickfix
 
   // Picocli
   implementation libs.picocli
-
-  // Jackson
-  implementation libs.jackson.databind
 
   // Jakarta Annotation API
   implementation libs.jakarta.annotation.api
@@ -33,24 +29,14 @@ dependencies {
 
 }
 
-application {
-  mainClass = 'org.example.orchestra.BasicAppCli'
-}
+tasks.register('generateBasicAppExampleData', JavaExec) {
+  def outputFile = layout.buildDirectory.file('generated-data.txt')
+  outputs.file outputFile
 
-run {
-  def inputDir = layout.projectDirectory.dir('example-input-data')
-  inputs.dir(inputDir)
-
-  def outputFile = layout.buildDirectory.file('summary.json')
-  outputs.file(outputFile)
-
-  outputs.upToDateWhen {
-    // Always run
-    return false
-  }
-
+  classpath = sourceSets.main.runtimeClasspath
+  mainClass = 'org.example.orchestra.DataGeneratorCli'
   args \
-    '--input-dir', inputDir.getAsFile(), \
+    '--message-count', 10_000, \
     '--output-file', outputFile.get()
 }
 

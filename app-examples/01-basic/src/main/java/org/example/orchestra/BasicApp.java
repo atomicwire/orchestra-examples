@@ -85,7 +85,7 @@ public class BasicApp {
     try {
       return OrchestraSpecBox.from(OrchestraSpecLoader.loadOne(SPEC_SOURCE));
     } catch (OrchestraSpecLoadException e) {
-      throw new BasicAppProcessingException("Failed to load Orchestra spec", e);
+      throw new RuntimeException("Failed to load Orchestra spec", e);
     }
   }
 
@@ -98,11 +98,11 @@ public class BasicApp {
                 try (final var lines = Files.lines(inputFile, StandardCharsets.UTF_8)) {
                   lines.forEach(fn);
                 } catch (IOException e) {
-                  throw new BasicAppProcessingException("Failed to read input file", e);
+                  throw new RuntimeException("Failed to read input file", e);
                 }
               });
     } catch (IOException e) {
-      throw new BasicAppProcessingException("Failed to list input files", e);
+      throw new RuntimeException("Failed to list input files", e);
     }
   }
 }

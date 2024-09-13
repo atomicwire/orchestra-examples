@@ -4,49 +4,30 @@ type_mappings:
   mappings:
   - standard: TAG_VALUE
     converter: io.atomicwire.orchestra.converter.IntStringConverter
-  - standard: JSON
-    standard_type: number
-    converter: io.atomicwire.orchestra.converter.IntBigDecimalConverter
 - orchestra_type: char
   platform_type: string
   mappings:
   - standard: TAG_VALUE
-    converter: io.atomicwire.orchestra.converter.StringConverter
-  - standard: JSON
-    standard_type: string
     converter: io.atomicwire.orchestra.converter.StringConverter
 - orchestra_type: String
   platform_type: string
   mappings:
   - standard: TAG_VALUE
     converter: io.atomicwire.orchestra.converter.StringConverter
-  - standard: JSON
-    standard_type: string
-    converter: io.atomicwire.orchestra.converter.StringConverter
 - orchestra_type: float
   platform_type: decimal
   mappings:
   - standard: TAG_VALUE
     converter: io.atomicwire.orchestra.converter.DecimalStringConverter
-  - standard: JSON
-    standard_type: number
-    converter: io.atomicwire.orchestra.converter.DecimalConverter
 - orchestra_type: UTCTimestamp
   platform_type: instant
   mappings:
   - standard: TAG_VALUE
     converter: io.atomicwire.orchestra.spec.fixlatest.FixUtcTimestampConverter
-  - standard: JSON
-    standard_type: string
-    converter: io.atomicwire.orchestra.converter.Iso8601TimestampConverter
 - orchestra_type: LocalMktDate
   platform_type: local_date
   mappings:
   - standard: TAG_VALUE
     converter: io.atomicwire.orchestra.spec.fixlatest.FixLocalMarketDateConverter
-  - standard: JSON
-    standard_type: string
-    converter: io.atomicwire.orchestra.spec.fixlatest.FixLocalMarketDateConverter
 
-base_types:
-  {}#data: String
+base_types: {}
