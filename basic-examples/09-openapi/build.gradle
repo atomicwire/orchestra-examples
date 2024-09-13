@@ -1,0 +1,78 @@
+plugins {
+  id 'io.atomicwire.gradle.orchestra'
+  id 'org.openapi.generator'
+}
+
+/*
+
+This example demonstrates how Orchestra can be used to support an OpenAPI specification for a REST API. The
+openapi.yaml file is used to describe the API itself, while a schemas.json file is generated from the Orchestra
+specification to describe the underlying data model. Schemas from this file are then referenced from openapi.yaml.
+
+An off-the-shelf OpenAPI documentation generator is then run to demonstrate one possible usage of the OpenAPI spec.
+
+Run `./gradlew :basic-examples:09-api:printDocsOutputLocation` to print the location of the generated documentation.
+
+*/
+
+orchestra {
+  specification {
+    // spec derived from fix-latest
+    markdown {
+      reference orchestraHub(name: 'fix-latest', version: 'ep287')
+
+      enableSpotless()
+    }
+
+    // In order to generate a JSON schema for an Orchestra spec, additional type information is required that indicates
+    // which JSON datatype corresponds to each datatype in the Orchestra spec.
+    encoding {
+      datatypeMapping([
+        int: [
+          JSON: 'number',
+        ],
+        String: [
+          JSON: 'string',
+        ],
+        Pattern: [
+          JSON: 'string',
+        ]
+      ])
+    }
+  }
+
+  // Generate a JSON Schema for inclusion in the OpenAPI spec
+  jsonSchema {
+    namespace = 'io.atomicwire.orchestra.example'
+  }
+}
+
+// Colocate the two files so that the provided openapi.yaml can easily reference Schemas from the
+// generated schemas.json file
+def colocateFiles = tasks.register('colocateOpenApiFiles', Copy) {
+  from(orchestraGenerateJsonSchema) {
+    rename { 'schemas.json' }
+  }
+  from 'openapi.yaml'
+
+  into layout.buildDirectory.dir('tmp/openapi')
+}
+
+// Configure an off-the-shelf OpenAPI documentation generator
+tasks.openApiGenerate {
+  inputs.dir(colocateFiles.map { it.destinationDir })
+  inputSpec = colocateFiles.map {it.destinationDir.toPath().resolve('openapi.yaml').toString() }
+  generatorName = 'html2'
+  outputDir = layout.buildDirectory.dir('openapi').get().toString()
+}
+
+tasks.register('printDocsOutputLocation') {
+  dependsOn tasks.openApiGenerate
+  doLast {
+    println "OpenAPI documentation generated in ${tasks.openApiGenerate.outputDir.get()}"
+  }
+}
+
+tasks.named('build') {
+  dependsOn printDocsOutputLocation
+}
