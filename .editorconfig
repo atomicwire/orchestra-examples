@@ -6,6 +6,10 @@ ij_continuation_indent_size = 2
 indent_size = 2
 ij_continuation_indent_size = 4
 
+[{*.xml,*.xsl}]
+indent_size = 2
+ij_continuation_indent_size = 2
+
 [*]
 insert_final_newline = true
 end_of_line = lf

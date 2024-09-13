@@ -1,5 +1,0 @@
-ext {
-  versions = [
-    gradle: '8.4',
-  ]
-}

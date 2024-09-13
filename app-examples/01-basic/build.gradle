@@ -1,0 +1,51 @@
+plugins {
+  id 'application'
+}
+
+dependencies {
+
+  // FIX 4.4 orchestra spec
+  implementation project(':app-examples:orchestra-specs:fix-44')
+
+  // Orchestra Java library
+  implementation platform(libs.orchestra.bom)
+  implementation libs.orchestra.core
+  implementation libs.orchestra.accessor.quickfix
+
+  // Jackson
+  implementation libs.jackson.databind
+
+  // Lombok
+  annotationProcessor libs.lombok
+  compileOnly libs.lombok
+  testAnnotationProcessor libs.lombok
+  testCompileOnly libs.lombok
+
+  // Logging
+  implementation libs.slf4j.api
+  runtimeOnly libs.bundles.log4j
+
+}
+
+application {
+  mainClass = 'org.example.orchestra.BasicApp'
+}
+
+run {
+  def inputDir = layout.projectDirectory.dir('example-input-data')
+  inputs.dir(inputDir)
+
+  def outputFile = layout.buildDirectory.file('summary.json')
+  outputs.file(outputFile)
+
+  outputs.upToDateWhen {
+    // Always run
+    return false
+  }
+
+  args inputDir.asFile.toString(), outputFile.get().toString()
+}
+
+tasks.named('test', Test) {
+  useJUnitPlatform()
+}

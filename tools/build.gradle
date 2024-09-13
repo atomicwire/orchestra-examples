@@ -1,0 +1,45 @@
+plugins {
+  id 'java'
+}
+
+dependencies {
+
+  // FIX 4.4 orchestra spec
+  implementation project(':app-examples:orchestra-specs:fix-44')
+
+  // Orchestra Java library
+  implementation platform(libs.orchestra.bom)
+  implementation libs.orchestra.core
+
+  // Picocli
+  implementation libs.picocli
+
+  // Jakarta Annotation API
+  implementation libs.jakarta.annotation.api
+
+  // Lombok
+  annotationProcessor libs.lombok
+  compileOnly libs.lombok
+  testAnnotationProcessor libs.lombok
+  testCompileOnly libs.lombok
+
+  // Logging
+  implementation libs.slf4j.api
+  runtimeOnly libs.bundles.log4j
+
+}
+
+tasks.register('generateBasicAppExampleData', JavaExec) {
+  def outputFile = layout.buildDirectory.file('generated-data.txt')
+  outputs.file outputFile
+
+  classpath = sourceSets.main.runtimeClasspath
+  mainClass = 'org.example.orchestra.DataGeneratorCli'
+  args \
+    '--message-count', 10_000, \
+    '--output-file', outputFile.get()
+}
+
+tasks.named('test', Test) {
+  useJUnitPlatform()
+}

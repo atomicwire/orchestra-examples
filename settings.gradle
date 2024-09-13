@@ -38,6 +38,9 @@ pluginManagement {
 
 rootProject.name = 'orchestra-examples'
 
+include ':app-examples:orchestra-specs:fix-44'
+include ':app-examples:01-basic'
+
 include ':basic-examples:01-orchestra-hub'
 include ':basic-examples:02-markdown'
 include ':basic-examples:03-derived'
@@ -46,3 +49,5 @@ include ':basic-examples:05-avro-schema'
 include ':basic-examples:06-json-schema'
 include ':basic-examples:07-java'
 include ':basic-examples:08-quickfix'
+
+include ':tools'
