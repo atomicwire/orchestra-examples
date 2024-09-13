@@ -29,6 +29,7 @@ allprojects {
   pluginManager.withPlugin('java') {
     spotless {
       java {
+        licenseHeaderFile "${rootDir}/.license-header-java.txt"
         googleJavaFormat('1.22.0')
         toggleOffOn()
       }
