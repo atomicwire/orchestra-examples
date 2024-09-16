@@ -8,7 +8,6 @@ dependencies {
   implementation project(':app-examples:orchestra-specs:fix-44')
 
   // Orchestra Java library
-  implementation platform(libs.orchestra.bom)
   implementation libs.orchestra.core
   implementation libs.orchestra.accessor.quickfix
 

@@ -6,7 +6,6 @@ plugins {
 dependencies {
 
   // Orchestra Java library
-  implementation platform(libs.orchestra.bom)
   implementation libs.orchestra.core
 
   api platform(libs.orchestra.specs.bom)
