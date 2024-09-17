@@ -1,8 +1,0 @@
-Instrument:
-  type: object
-  properties:
-    Symbol: { type: string }
-    SecurityID: { type: string }
-    SecurityIDSource:
-      type: string
-      enum: [CUSIP, SEDOL]

@@ -35,7 +35,7 @@ orchestra {
 
   java {
     codeGen {
-      packageName = 'io.atomicwire.orchestra.example'
+      packageName = 'org.example.orchestra'
     }
   }
 }

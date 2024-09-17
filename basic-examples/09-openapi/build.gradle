@@ -11,7 +11,7 @@ specification to describe the underlying data model. Schemas from this file are 
 
 An off-the-shelf OpenAPI documentation generator is then run to demonstrate one possible usage of the OpenAPI spec.
 
-Run `./gradlew :basic-examples:09-api:printDocsOutputLocation` to print the location of the generated documentation.
+Run `./gradlew :basic-examples:09-openapi:printDocsOutputLocation` to print the location of the generated documentation.
 
 */
 
@@ -43,7 +43,7 @@ orchestra {
 
   // Generate a JSON Schema for inclusion in the OpenAPI spec
   jsonSchema {
-    namespace = 'io.atomicwire.orchestra.example'
+    namespace = 'org.example.orchestra'
   }
 }
 
