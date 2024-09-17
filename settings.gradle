@@ -6,7 +6,7 @@ pluginManagement {
     id 'io.atomicwire.gradle.orchestra' version '0.1.5'
     id 'io.spring.dependency-management' version '1.1.6'
     id 'org.openapi.generator' version '7.8.0'
-    id 'org.springframework.boot' version '2.7.15'
+    id 'org.springframework.boot' version '3.3.3'
   }
 
   def credentialsProps = new Properties()

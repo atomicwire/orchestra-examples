@@ -44,7 +44,7 @@ def openApiGenerate = tasks.named('openApiGenerate', GenerateTask) {
   // use the OpenAPI files from basic-examples/09-openapi
   def colocateOpenApiFiles = project(':basic-examples:09-openapi').tasks.named('colocateOpenApiFiles', Copy)
   inputs.dir(colocateOpenApiFiles.map { it.destinationDir })
-  inputSpec = colocateOpenApiFiles.map {it.destinationDir.toPath().resolve('openapi.yaml').toString() }
+  inputSpec = colocateOpenApiFiles.map {"${it.destinationDir}/openapi.yaml" as String }
 
   generatorName = 'spring'
 
@@ -55,8 +55,11 @@ def openApiGenerate = tasks.named('openApiGenerate', GenerateTask) {
   apiPackage = "${basePackage}.api"
   configOptions.putAll(configPackage: "${basePackage}.config")
 
-  // generate Api Delegate classes to enable simple implementation by providing a spring Bean
-  configOptions.putAll(delegatePattern: 'true')
+  configOptions.putAll(
+    // generate Api Delegate classes to enable simple implementation by providing a spring Bean
+    delegatePattern: 'true',
+    useSpringBoot3: 'true',
+  )
 
   // skip generating some extraneous things
   generateApiDocumentation  = false
@@ -72,3 +75,10 @@ def openApiGenerate = tasks.named('openApiGenerate', GenerateTask) {
 // ensure the code is generated before java is compiled and that it is in our main sourceSet
 tasks.named('compileJava') { dependsOn(openApiGenerate) }
 sourceSets.main.java.srcDir generatedSourceDir.get().dir('src/main/java')
+
+// Exclude generated code from spotless
+spotless {
+  java {
+    targetExclude "${layout.projectDirectory.getAsFile().relativePath(generatedSourceDir.get().asFile)}/**" as String
+  }
+}
