@@ -1,0 +1,84 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
+plugins {
+  id 'application'
+
+  id 'io.spring.dependency-management'
+  id 'org.openapi.generator'
+  id 'org.springframework.boot'
+}
+
+/*
+
+This example demonstrates how an OpenAPI spec, generated from Orchestra, can be used to power a Spring Boot server.
+
+The Spring OpenAPI generator generates the server scaffolding, interfaces for the API routes that are configured
+in our OpenAPI spec, and model classes for the Schemas that were ultimately defined in our Orchestra spec.
+
+Our implementation of the API is then provided in
+`src/main/java/org/example/orchestra/springboot/InstrumentApiDelegateImpl.java`. Note that this is a dummy
+implementation that always provides the same response.
+
+This example consumes the spec from basic-examples/09-openapi. See it for further explanation of how the OpenAPI
+spec is generated from Orchestra.
+
+Run `./gradlew :app-examples:03-openapi-springboot:bootRun` to start the server.
+
+It can then be queried over HTTP:
+```
+$ curl localhost:8080/instrument/IBM
+{"UPICode":null,"Symbol":"IBM","SecurityID":"459200-10-1","SecurityIDSource":"CUSIP","Product":"EQUITY","CFICode":"ESNUOB"}
+```
+*/
+
+dependencies {
+  implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+  implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
+  implementation group: 'org.springframework.data', name: 'spring-data-jpa'
+}
+
+def generatedSourceDir = layout.buildDirectory.dir('generated/sources/openapi-springboot')
+
+// Configure the OpenAPI Generator
+def openApiGenerate = tasks.named('openApiGenerate', GenerateTask) {
+  // use the OpenAPI files from basic-examples/09-openapi
+  def colocateOpenApiFiles = project(':basic-examples:09-openapi').tasks.named('colocateOpenApiFiles', Copy)
+  inputs.dir(colocateOpenApiFiles.map { it.destinationDir })
+  inputSpec = colocateOpenApiFiles.map {"${it.destinationDir}/openapi.yaml" as String }
+
+  generatorName = 'spring'
+
+  // configure the package name
+  def basePackage = 'org.example.orchestra.springboot'
+  invokerPackage = basePackage
+  modelPackage = "${basePackage}.model"
+  apiPackage = "${basePackage}.api"
+  configOptions.putAll(configPackage: "${basePackage}.config")
+
+  configOptions.putAll(
+    // generate Api Delegate classes to enable simple implementation by providing a spring Bean
+    delegatePattern: 'true',
+    useSpringBoot3: 'true',
+  )
+
+  // skip generating some extraneous things
+  generateApiDocumentation  = false
+  openapiGeneratorIgnoreList = ['pom.xml', 'src/test/']
+  configOptions.putAll([
+    documentationProvider: 'none',
+    openApiNullable: 'false',
+  ])
+
+  outputDir = generatedSourceDir.get().toString()
+}
+
+// ensure the code is generated before java is compiled and that it is in our main sourceSet
+tasks.named('compileJava') { dependsOn(openApiGenerate) }
+sourceSets.main.java.srcDir generatedSourceDir.get().dir('src/main/java')
+
+// Exclude generated code from spotless
+spotless {
+  java {
+    targetExclude "${layout.projectDirectory.getAsFile().relativePath(generatedSourceDir.get().asFile)}/**" as String
+  }
+}
