@@ -1,0 +1,21 @@
+openapi: 3.0.0
+info:
+  version: 0.1.0
+  title: Orchestra OpenAPI Example
+paths:
+  /instrument/{symbol}:
+    get:
+      operationId: getInstrumentBySymbol
+      description: Gets Instrument details
+      parameters:
+      - name: symbol
+        in: path
+        schema: { type: string }
+        required: true
+      responses:
+        '200':
+          description: Returns a hydrated Instrument object
+          content:
+            'application/json':
+              schema:
+                $ref: 'schemas.json#/$defs/InstrumentComponent'

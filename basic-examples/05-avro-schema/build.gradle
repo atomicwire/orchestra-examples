@@ -37,7 +37,7 @@ orchestra {
   }
 
   avro {
-    namespace = 'io.atomicwire.orchestra.example'
+    namespace = 'org.example.orchestra'
   }
 }
 

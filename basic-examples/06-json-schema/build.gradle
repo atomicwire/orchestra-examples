@@ -34,7 +34,7 @@ orchestra {
   }
 
   jsonSchema {
-    namespace = 'io.atomicwire.orchestra.example'
+    namespace = 'org.example.orchestra'
   }
 }
 
