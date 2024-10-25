@@ -2,35 +2,19 @@ plugins {
   id 'io.atomicwire.gradle.orchestra'
 }
 
-/*
-
-This example demonstrates creating a custom spec that re-uses the data dictionary from an existing spec available on
-Orchestra Hub.
-
-In this case, the spec derives from FIX Latest, defining a single custom message based on elements from the FIX Latest
-data dictionary.
-
-Run `./gradlew :basic-examples:03-derived:printSpecLocation` to print the location where the built spec can be found.
-
- */
-
 orchestra {
   specification {
     markdown {
       // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
-      reference orchestraHub(name: 'fix-latest', version: 'ep287')
+      reference orchestraHub(name: 'fix-latest', version: 'ep292')
     }
   }
 }
 
-def printSpecLocation = tasks.register('printSpecLocation') {
+tasks.register('runExample') {
   dependsOn tasks.named('orchestraBuildSpec')
 
   doLast {
     println "Created Orchestra spec ${orchestra.specification.provider.get()}"
   }
-}
-
-tasks.named('build') {
-  dependsOn printSpecLocation
 }

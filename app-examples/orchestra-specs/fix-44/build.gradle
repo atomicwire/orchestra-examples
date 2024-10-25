@@ -9,7 +9,9 @@ dependencies {
   implementation libs.orchestra.core
 
   api platform(libs.orchestra.specs.bom)
-  api libs.orchestra.spec.fix44.plugins
+  api (libs.orchestra.spec.fix44.plugins) {
+    exclude group: "io.atomicwire.orchestra"
+  }
 
 }
 

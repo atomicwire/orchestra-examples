@@ -2,15 +2,6 @@ plugins {
   id 'io.atomicwire.gradle.orchestra'
 }
 
-/*
-
-This example demonstrates generating an Avro schema for a custom Orchestra spec.
-
-Run `./gradlew :basic-examples:05-avro:printAvroSchemaLocation` to print the location where the generated Avro schema
-can be found.
-
- */
-
 orchestra {
   specification {
     // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
@@ -41,14 +32,10 @@ orchestra {
   }
 }
 
-def printAvroSchemaLocation = tasks.register('printAvroSchemaLocation') {
+tasks.register('runExample') {
   dependsOn tasks.named('orchestraGenerateAvroSchema')
 
   doLast {
     println "Generated Avro schemas in ${orchestra.avro.schemaOutputDir.get()}"
   }
-}
-
-tasks.named('build') {
-  dependsOn printAvroSchemaLocation
 }

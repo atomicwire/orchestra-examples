@@ -1,16 +1,48 @@
 # Orchestra Examples
 
-Code examples for using the [Orchestra Gradle plugin and Orchestra Java library](https://orchestra.atomicwire.io).
+## Introduction
+
+The Orchestra Examples are split into two distinct sections
+
+### Basic examples
+
+The [basic examples](./basic-examples) are targeted to highlight specific functionality offered by the Orchestra plugin.
+
+### Application examples
+
+The [application examples](./app-examples) build on the basic examples to create runnable applications showcasing 
+various use-cases.
 
 
-## Atomic Wire Maven repository
+## Orchestra Plugin
 
-To authenticate with the Atomic Wire Maven repository, add a file to the root of this Git repository named
-`maven-credentials.properties` with the following contents:
+All examples utilise the Orchestra Plugin. 
+
+[settings.gradle](./settings.gradle) contains the complete setup to run these examples, however the Orchestra Gradle 
+Plugin settings of interest are:
+
+```groovy
+pluginManagement {
+  plugins {
+    id 'io.atomicwire.gradle.orchestra' version '<version>'
+  }
+  
+  repositories {
+    gradlePluginPortal()
+
+    maven {
+      name = 'atomicwire'
+      url = uri('https://maven.atomicwire.dev/external')
+    }
+  }
+}
 
 ```
-atomicwire-maven-username=XXX
-atomicwire-maven-password=YYY
-```
 
-Replace `XXX` and `YYY` with the values provided to you. Be sure to not commit these credentials to the Git repository.
+Then to use the plugin in a subproject add the following to `build.gradle`:
+
+```
+plugins {
+    id 'io.atomicwire.gradle.orchestra'
+}
+```

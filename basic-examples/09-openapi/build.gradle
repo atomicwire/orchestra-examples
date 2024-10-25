@@ -3,23 +3,11 @@ plugins {
   id 'org.openapi.generator'
 }
 
-/*
-
-This example demonstrates how Orchestra can be used to support an OpenAPI specification for a REST API. The
-openapi.yaml file is used to describe the API itself, while a schemas.json file is generated from the Orchestra
-specification to describe the underlying data model. Schemas from this file are then referenced from openapi.yaml.
-
-An off-the-shelf OpenAPI documentation generator is then run to demonstrate one possible usage of the OpenAPI spec.
-
-Run `./gradlew :basic-examples:09-openapi:printDocsOutputLocation` to print the location of the generated documentation.
-
-*/
-
 orchestra {
   specification {
     // spec derived from fix-latest
     markdown {
-      reference orchestraHub(name: 'fix-latest', version: 'ep287')
+      reference orchestraHub(name: 'fix-latest', version: 'ep292')
 
       enableSpotless()
     }
@@ -66,13 +54,11 @@ tasks.openApiGenerate {
   outputDir = layout.buildDirectory.dir('openapi').get().toString()
 }
 
-tasks.register('printDocsOutputLocation') {
-  dependsOn tasks.openApiGenerate
+tasks.register('runExample') {
+  dependsOn tasks.named('openApiGenerate')
+
   doLast {
     println "OpenAPI documentation generated in ${tasks.openApiGenerate.outputDir.get()}"
   }
 }
 
-tasks.named('build') {
-  dependsOn printDocsOutputLocation
-}

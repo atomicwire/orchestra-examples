@@ -3,15 +3,6 @@ plugins {
   id 'io.atomicwire.gradle.orchestra'
 }
 
-/*
-
-This example demonstrates generating a Message Definition Report for a custom Orchestra spec.
-
-Run `./gradlew :basic-examples:04-documentation:printMdrLocation` to print the location where the generated
-documentation can be found.
-
- */
-
 orchestra {
   specification {
     // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
@@ -23,14 +14,10 @@ orchestra {
   }
 }
 
-def printMdrLocation = tasks.register('printMdrLocation') {
+tasks.register('runExample') {
   dependsOn tasks.named('orchestraGenerateMessageDefinitionReportPdf')
 
   doLast {
     println "Created Message Definition Report in ${orchestra.documentation.buildDir.get()}"
   }
-}
-
-tasks.named('build') {
-  dependsOn printMdrLocation
 }
