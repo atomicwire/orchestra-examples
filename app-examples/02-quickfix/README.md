@@ -1,9 +1,9 @@
 # QuickFIX application example
 
-An QuickFIX based example application that utilises the custom QuickFIX data dictionary generated in 
+An QuickFIX based example application that utilises the custom QuickFIX data dictionary generated in
 [basic-examples/08-quickfix](../../basic-examples/08-quickfix)
 
-Two applications are started, the first is the [QuickFIX engine](./src/main/java/org/example/orchestra/QuickFixEngineDataDictionaryApp.java) 
+Two applications are started, the first is the [QuickFIX engine](./src/main/java/org/example/orchestra/QuickFixEngineDataDictionaryApp.java)
 running with the custom Data Dictionary, the second is the [QuickFIX client](./src/main/java/org/example/orchestra/QuickFixClientDataDictionaryApp.java)
 application that will send a mixture of valid and invalid messages.
 
@@ -16,13 +16,13 @@ The client application will send the following messages:
 
 ## Run
 
-From the command line start the QuickFIX engine using 
+From the command line start the QuickFIX engine using
 
 ```
 ./gradlew :app-examples:02-quickfix:runQuickFixEngineApp
 ```
 
-In another console window start the QuickFIX client app using 
+In another console window start the QuickFIX client app using
 
 ```
 ./gradlew :app-examples:02-quickfix:runQuickFixClientApp

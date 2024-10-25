@@ -5,11 +5,11 @@ This example demonstrates generating a Message Definition Report for a custom Or
 
 ## Configuration
 
-See [build.gradle](./build.gradle). 
+See [build.gradle](./build.gradle).
 
-The Message Definition Report is generated via Pandoc. 
+The Message Definition Report is generated via Pandoc.
 
-The plugin runs a Pandoc Docker image, installing relevant LaTeX plugins. Using Docker requires that the 
+The plugin runs a Pandoc Docker image, installing relevant LaTeX plugins. Using Docker requires that the
 `com.bmuschko.docker-remote-api` plugin is enabled.
 
 ```groovy
@@ -20,7 +20,7 @@ plugins {
 ```
 
 To generate a Message Definition Report detailing the Messages, Components, Fields and CodeSets defined in the Orchestra
-spec. The `messageDefinitionReport` extension can be used. 
+spec. The `messageDefinitionReport` extension can be used.
 
 ```groovy
 orchestra {
@@ -64,13 +64,13 @@ To generate a PDF Message Definition report from the Markdown file run
 `runExample` is wired to call the `orchestraGenerateMessageDefinitionReportPdf` task from the Orchestra plugin.
 
 
-To generate an ePub, the [build.gradle](./build.gradle) can be modified as described above, then run  
+To generate an ePub, the [build.gradle](./build.gradle) can be modified as described above, then run
 
 ```
 ./gradlew :basic-examples:04-documentation:orchestraGenerateMessageDefinitionReportEpub
 ```
 
-## Results 
+## Results
 
 The Message Definition Report will be generated in the Gradle build folder. e.g.
 

@@ -1,13 +1,13 @@
 # Basic Examples
 
-The basic examples in this folder are targeted to highlight specific functionality offered by the Orchestra plugin. 
+The basic examples in this folder are targeted to highlight specific functionality offered by the Orchestra plugin.
 
 The basic examples are built upon in [app-examples](../app-examples) to show how to build applications using the Orchestra plugin.
 
-The basic examples contained within this section should be run from the root of this repository using the Gradle wrapper. 
+The basic examples contained within this section should be run from the root of this repository using the Gradle wrapper.
 Full run commands are given on the README page of each example subproject.
 
-For all examples, the results are output into the subproject Gradle build folder (e.g. `build/orchestra`). For example, 
+For all examples, the results are output into the subproject Gradle build folder (e.g. `build/orchestra`). For example,
 the results for [01-orchestra-hub](./01-orchestra-hub) will be output to `./basic-examples/01-orchestra-hub/build/orchestra/`
 
 The examples included within this section are:
@@ -25,9 +25,9 @@ The examples included within this section are:
 | [09-openapi](./09-openapi)             | Produce OpenAPI documentation using an Orchestra spec                                    |
 | [10-analyzers](./10-analyzers)         | Generate a report that analyzes an Orchestra spec for style and compatability compliance |
 
-Each of the examples contains a `runExample` Gradle task that is wired to call the Orchestra plugin task that the example 
-is demonstrating. To run all basic examples at once run:
+Each of the examples contains a `runExample` Gradle task that is wired to call the Orchestra plugin task that the example
+is demonstrating. For example to run [02-markdown](./02-markdown), the command would be 
 
 ```
-./gradlew runExample
+./gradlew :basic-examples:02-markdown:runExample
 ```

@@ -12,7 +12,7 @@
 
 #### Synopsis
 
-An example message that will raise multiple warnings from the Specification Analyzers. 
+An example message that will raise multiple warnings from the Specification Analyzers.
 
 | Sort | Name                     | Tag  | Presence | Documentation                                  |
 |------|--------------------------|------|----------|------------------------------------------------|

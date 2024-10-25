@@ -1,9 +1,9 @@
 # Orchestra Hub example
 
 This example fetches an Orchestra spec from [Orchestra Hub](https://orchestrahub.org) which can then be used as a basis
-for a custom derived spec (see example [03-derived](../03-derived)) or in an [application](../../app-examples). 
+for a custom derived spec (see example [03-derived](../03-derived)) or in an [application](../../app-examples).
 
-Later examples also demonstrate other artifacts that can be created from an Orchestra spec, such as [documentation](../04-documentation) 
+Later examples also demonstrate other artifacts that can be created from an Orchestra spec, such as [documentation](../04-documentation)
 and [schemas](../05-avro-schema).
 
 ## Configuration
@@ -28,7 +28,7 @@ To download the Orchestra spec run
 `runExample` is wired to call the `orchestraBuildSpec` task from the Orchestra plugin.
 
 
-## Results 
+## Results
 
 The spec will be downloaded into the Gradle build folder. e.g.
 

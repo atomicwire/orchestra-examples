@@ -5,9 +5,9 @@ Orchestra Hub. A [QuickFIX](https://quickfixengine.org/) Data Dictionary is then
 
 ## Configuration
 
-See [build.gradle](./build.gradle). 
+See [build.gradle](./build.gradle).
 
-The QuickFIX data dictionary generation is activated by the presence of the QuickFIX `dataDictionary` extension. 
+The QuickFIX data dictionary generation is activated by the presence of the QuickFIX `dataDictionary` extension.
 
 ```groovy
 orchestra {
@@ -34,7 +34,7 @@ To generate an Java code from the Markdown file run
 `runExample` is wired to call the `orchestraGenerateQuickfixDataDictionary` task from the Orchestra plugin.
 
 
-## Results 
+## Results
 
 The Java will be generated in the Gradle build folder. e.g.
 

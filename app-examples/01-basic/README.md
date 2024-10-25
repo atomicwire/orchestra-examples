@@ -17,6 +17,6 @@ To execute the example application run
 ./gradlew :app-examples:01-basic:run
 ```
 
-## Results 
+## Results
 
 The Summary results will be displayed in the console.

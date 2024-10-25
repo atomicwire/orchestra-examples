@@ -4,12 +4,12 @@ This example demonstrates generating an JSON schema for a custom Orchestra spec.
 
 ## Configuration
 
-See [build.gradle](./build.gradle). 
+See [build.gradle](./build.gradle).
 
 In order to generate an JSON schema for an Orchestra spec, additional type information is required that indicates
-which JSON datatype corresponds to each datatype in the Orchestra spec. 
+which JSON datatype corresponds to each datatype in the Orchestra spec.
 
-Datatype mapping is supplied via the `encoding` extension. 
+Datatype mapping is supplied via the `encoding` extension.
 
 The JSON schema generation is activated by the presence of the `jsonSchema` extension. A `namespace` value must be provided.
 
@@ -49,7 +49,7 @@ To generate an JSON schema from the Markdown file run
 ```
 `runExample` is wired to call the `orchestraGenerateJsonSchema` task from the Orchestra plugin.
 
-## Results 
+## Results
 
 The Avro schema will be generated in the Gradle build folder. e.g.
 

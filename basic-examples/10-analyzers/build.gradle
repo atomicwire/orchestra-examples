@@ -20,8 +20,4 @@ orchestra {
 
 tasks.register('runExample') {
   dependsOn tasks.named('orchestraValidateSpec')
-
-  doLast {
-    println "Analyzer output results generated in ${tasks.orchestraAnalyzeSpec.outputFile.get()}"
-  }
 }

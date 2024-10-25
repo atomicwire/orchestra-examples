@@ -6,12 +6,12 @@ Java will be generated for the Messages, Components, Fields and CodeSets defined
 
 ## Configuration
 
-See [build.gradle](./build.gradle). 
+See [build.gradle](./build.gradle).
 
-In order to generate the Orchestra Java code for an Orchestra spec, additional type information is required that 
+In order to generate the Orchestra Java code for an Orchestra spec, additional type information is required that
 indicates which Java datatype corresponds to each datatype in the Orchestra spec.
 
-Datatype mapping is supplied via the `encoding` extension. 
+Datatype mapping is supplied via the `encoding` extension.
 
 The Java code generation is activated by the presence of the Java `codeGen` extension. A `packageName` value must be provided.
 
@@ -24,13 +24,13 @@ orchestra {
     encoding {
       datatypeMapping([
         double: [
-          AWP: 'double',
+          Java: 'double',
         ],
         string: [
-          AWP: 'string',
+          Java: 'string',
         ],
         timestamp: [
-          AWP: 'instant',
+          Java: 'instant',
         ],
       ])
     }
@@ -53,7 +53,7 @@ To generate an Java code from the Markdown file run
 ```
 `runExample` is wired to call the `orchestraGenerateJava` task from the Orchestra plugin.
 
-## Results 
+## Results
 
 The Java will be generated in the Gradle build folder. e.g.
 

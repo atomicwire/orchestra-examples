@@ -1,12 +1,12 @@
 # Markdown example
 
-This example demonstrates authoring an Orchestra spec from scratch using Markdown. Like the 
+This example demonstrates authoring an Orchestra spec from scratch using Markdown. Like the
 [previous](../01-orchestra-hub) example, this spec can be used in applications and have other artifacts created from it.
 
 
 ## Configuration
 
-See [build.gradle](./build.gradle). 
+See [build.gradle](./build.gradle).
 
 ```groovy
 orchestra {
@@ -18,7 +18,7 @@ orchestra {
 }
 ```
 
-By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`. If you wish to 
+By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`. If you wish to
 have the Markdown file at a different location, you can use the `inputFile` property. e.g.
 
 ```groovy
@@ -32,7 +32,7 @@ orchestra {
 }
 ```
 
-In the examples above, we also use [Spotless](https://github.com/diffplug/spotless) to automatically format Orchestra 
+In the examples above, we also use [Spotless](https://github.com/diffplug/spotless) to automatically format Orchestra
 Markdown and enforce style.
 
 ## Run
@@ -44,7 +44,7 @@ To generate an Orchestra spec from the Markdown file run
 ```
 `runExample` is wired to call the `orchestraBuildSpec` task from the Orchestra plugin.
 
-## Results 
+## Results
 
 The spec will be generated in the Gradle build folder. e.g.
 
