@@ -48,3 +48,7 @@ run {
 tasks.named('test', Test) {
   useJUnitPlatform()
 }
+
+tasks.named('runExample') {
+  dependsOn tasks.named('run')
+}

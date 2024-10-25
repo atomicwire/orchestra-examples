@@ -59,3 +59,7 @@ spotless {
     targetExclude "${layout.projectDirectory.getAsFile().relativePath(generatedSourceDir.get().asFile)}/**" as String
   }
 }
+
+tasks.named('runExample') {
+  dependsOn tasks.named('bootRun')
+}

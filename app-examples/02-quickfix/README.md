@@ -19,7 +19,7 @@ The client application will send the following messages:
 From the command line start the QuickFIX engine using
 
 ```
-./gradlew :app-examples:02-quickfix:runQuickFixEngineApp
+./gradlew :app-examples:02-quickfix:runExample
 ```
 
 In another console window start the QuickFIX client app using

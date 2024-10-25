@@ -36,3 +36,7 @@ tasks.register('runQuickFixClientApp', JavaExec) {
   mainClass = 'org.example.orchestra.QuickFixClientDataDictionaryApp'
   args quickFixDataDictionary
 }
+
+tasks.named('runExample') {
+  dependsOn tasks.named('runQuickFixEngineApp')
+}

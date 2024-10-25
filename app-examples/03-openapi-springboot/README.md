@@ -17,7 +17,7 @@ explanation of how the OpenAPI spec is generated from Orchestra.
 To start the Spring Boot server run
 
 ```
-./gradlew :app-examples:03-openapi-springboot:bootRun
+./gradlew :app-examples:03-openapi-springboot:runExample
 ```
 
 ## Results

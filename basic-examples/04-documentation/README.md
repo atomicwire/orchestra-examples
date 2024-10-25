@@ -2,6 +2,9 @@
 
 This example demonstrates generating a Message Definition Report for a custom Orchestra spec.
 
+> **Notice** this extension requires Docker to be installed and the Docker daemon to be running on your system. Please ensure that:
+> * Docker is installed and properly configured.
+> * The Docker daemon is running before running the example.
 
 ## Configuration
 
