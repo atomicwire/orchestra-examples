@@ -1,6 +1,10 @@
-# Orchestra Examples
+# Orchestra Gradle Plugin and Java Library Examples
 
 > **Warning**: The examples provided in this repository are experimental.
+
+> **Notice**: While these examples are [open source](LICENSE), the libraries loaded from the Atomic Wire Maven
+> repository require a license to use. If you have found this repository and would like an evaluation license, please
+> contact us via [our website](https://www.atomicwire.io/).
 
 <!-- TOC -->
 * [Orchestra Examples](#orchestra-examples)

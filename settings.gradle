@@ -9,32 +9,12 @@ pluginManagement {
     id 'org.springframework.boot' version '3.3.3'
   }
 
-  def credentialsProps = new Properties()
-
-  def credentialsFile = file("${rootDir}/maven-credentials.properties")
-  if (credentialsFile.exists()) {
-    credentialsFile.withInputStream {
-      credentialsProps.load(it)
-    }
-  }
-
-  def mavenUsername = credentialsProps.getProperty('atomicwire-maven-username', '')
-  def mavenPassword = credentialsProps.getProperty('atomicwire-maven-password', '')
-
-  if (mavenUsername == '' || mavenPassword == '') {
-    throw new GradleException('Atomic Wire Maven username or password unset, please see the README.md for more information')
-  }
-
   repositories {
     gradlePluginPortal()
 
     maven {
       name = 'atomicwire'
       url = uri('https://maven.atomicwire.dev/external')
-      credentials {
-        username = mavenUsername
-        password = mavenPassword
-      }
     }
   }
 }
