@@ -4,22 +4,11 @@ plugins {
   id 'io.atomicwire.gradle.orchestra'
 }
 
-/*
-
-This example demonstrates a FIX-derived specification that doesnt comply with FIX style and tag-value compatibility
-guidelines.
-
-Run `./gradlew :basic-examples:10-analyzers:orchestraValidateSpec` and the specification analyzer output will be
-written to the console.
-
-To cause validation errors to stop the build, rather than just logging warnings, use ValidationRuleSeverity.ERROR
-
- */
-
 orchestra {
   specification {
     markdown {
-      reference orchestraHub(name: 'fix-latest', version: 'ep287')
+      // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
+      reference orchestraHub(name: 'fix-latest', version: 'ep292')
     }
   }
 
@@ -27,4 +16,8 @@ orchestra {
     fixStyleValidationSeverity = ValidationRuleSeverity.WARN
     tagValueCompatibilityValidationSeverity = ValidationRuleSeverity.WARN
   }
+}
+
+tasks.register('runExample') {
+  dependsOn tasks.named('orchestraValidateSpec')
 }

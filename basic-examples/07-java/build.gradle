@@ -2,15 +2,6 @@ plugins {
   id 'io.atomicwire.gradle.orchestra'
 }
 
-/*
-
-This example demonstrates generating code for use with the Orchestra Java library.
-
-Run `./gradlew :basic-examples:07-java:printOrchestraJavaLocation` to print the location where the generated Java source
-files can be found.
-
- */
-
 orchestra {
   specification {
     // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
@@ -21,13 +12,13 @@ orchestra {
     encoding {
       datatypeMapping([
         double: [
-          AWP: 'double',
+          Java: 'double',
         ],
         string: [
-          AWP: 'string',
+          Java: 'string',
         ],
         timestamp: [
-          AWP: 'instant',
+          Java: 'instant',
         ],
       ])
     }
@@ -40,14 +31,10 @@ orchestra {
   }
 }
 
-def printOrchestraJavaLocation = tasks.register('printOrchestraJavaLocation') {
+tasks.register('runExample') {
   dependsOn tasks.named('orchestraGenerateJava')
 
   doLast {
     println "Generated Orchestra Java code in ${orchestra.java.codeGen.outputDir.get()}"
   }
-}
-
-tasks.named('build') {
-  dependsOn printOrchestraJavaLocation
 }

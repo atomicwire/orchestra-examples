@@ -2,21 +2,11 @@ plugins {
   id 'io.atomicwire.gradle.orchestra'
 }
 
-/*
-
-This example demonstrates creating a custom spec that re-uses the data dictionary from an existing spec available on
-Orchestra Hub. A QuickFIX Data Dictionary is then created from the custom spec.
-
-Run `./gradlew :basic-examples:08-quickfix:printDataDictionaryLocation` to print the location where the generated
-QuickFIX Data Dictionary can be found.
-
-*/
-
 orchestra {
   specification {
     markdown {
       // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
-      reference orchestraHub(name: 'fix-latest', version: 'ep287')
+      reference orchestraHub(name: 'fix-latest', version: 'ep292')
     }
   }
 
@@ -25,14 +15,10 @@ orchestra {
   }
 }
 
-def printDataDictionaryLocation = tasks.register('printDataDictionaryLocation') {
+tasks.register('runExample') {
   dependsOn tasks.named('orchestraGenerateQuickfixDataDictionary')
 
   doLast {
     println "Generated QuickFix Data Dictionary in ${orchestra.quickfix.dataDictionary.outputDir.get()}"
   }
-}
-
-tasks.named('build') {
-  dependsOn printDataDictionaryLocation
 }

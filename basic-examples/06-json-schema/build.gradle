@@ -2,15 +2,6 @@ plugins {
   id 'io.atomicwire.gradle.orchestra'
 }
 
-/*
-
-This example demonstrates generating a JSON schema for a custom Orchestra spec.
-
-Run `./gradlew :basic-examples:06-json-schema:printJsonSchemaLocation` to print the location where the generated JSON
-schema can be found.
-
- */
-
 orchestra {
   specification {
     // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
@@ -38,14 +29,10 @@ orchestra {
   }
 }
 
-def printJsonSchemaLocation = tasks.register('printJsonSchemaLocation') {
+tasks.register('runExample') {
   dependsOn tasks.named('orchestraGenerateJsonSchema')
 
   doLast {
     println "Generated Json schema in ${orchestra.jsonSchema.outputDir.get()}"
   }
-}
-
-tasks.named('build') {
-  dependsOn printJsonSchemaLocation
 }

@@ -2,31 +2,16 @@ plugins {
   id 'io.atomicwire.gradle.orchestra'
 }
 
-/*
-
-This example fetches an Orchestra spec from Orchestra Hub (https://orchestrahub.org) which can then be used as a basis
-for a custom derived spec (see example 03-derived) or in an application. Later examples also demonstrate other artifacts
-that can be created from an Orchestra spec, such as documentation and schemas.
-
-Run `./gradlew :basic-examples:01-orchestra-hub:printSpecLocation` to print the location where the spec was downloaded
-to.
-
- */
-
 orchestra {
   specification {
-    repository orchestraHub(name: 'fix-latest', version: 'ep287')
+    repository orchestraHub(name: 'fix-latest', version: 'ep292')
   }
 }
 
-def printSpecLocation = tasks.register('printSpecLocation') {
+tasks.register('runExample') {
   dependsOn tasks.named('orchestraBuildSpec')
 
   doLast {
     println "Downloaded Orchestra spec to ${orchestra.specification.provider.get()}"
   }
-}
-
-tasks.named('build') {
-  dependsOn printSpecLocation
 }
