@@ -14,7 +14,7 @@ The example application
 To execute the example application run
 
 ```
-./gradlew :app-examples:01-basic:runExample
+./gradlew :app-examples:01-basic:run
 ```
 
 ## Results
