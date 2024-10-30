@@ -8,6 +8,8 @@ An implementation of the API is then provided in
 [InstrumentApiDelegateImpl.java](./src/main/java/org/example/orchestra/springboot/InstrumentApiDelegateImpl.java).
 > **Note**: This is a dummy implementation that always provides the same response.
 
+## Configuration
+
 This example uses the spec from [basic-examples/09-openapi](../../basic-examples/09-openapi). Please refer to that example for a detailed
 explanation of how the OpenAPI spec is generated from Orchestra.
 

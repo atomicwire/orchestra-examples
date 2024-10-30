@@ -13,8 +13,7 @@ An MDR details the messages, components, fields and code sets defined in the Orc
 
 MDRs are generated using [Pandoc](https://pandoc.org). The plugin uses a Pandoc Docker image to run Pandoc and install relevant LaTeX plugins. 
 
-Docker requires that the
-`com.bmuschko.docker-remote-api` plugin is enabled.
+The `com.bmuschko.docker-remote-api` Gradle plugin must be enabled to run the MDR generation tasks.
 
 ```groovy
 plugins {
@@ -49,7 +48,7 @@ orchestra {
 
   documentation {
     messageDefinitionReport {
-      epub { }
+      epub {}
     }
   }
 }

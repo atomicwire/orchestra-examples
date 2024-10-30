@@ -39,7 +39,7 @@ Examples should be run from the root directory of this repository using the Grad
 | [09-openapi](./basic-examples/09-openapi)             | Create a REST service using OpenAPI and Orchestra                                   |
 | [10-analyzers](./basic-examples/10-analyzers)         | Check the style, validity and encoding compatibility of an Orchestra spec           |
 
-Each example includes a Gradle task named `runExample`, configured to invoke the specific Orchestra plugin task that the example is demonstrating. For instance, to run [01-orchestra-hub](./basic-examples/01-orchestra-hub) using the Gradle wrapper, use the following command:
+Each basic example includes a Gradle task named `runExample`, configured to invoke the specific Orchestra plugin task that the example is demonstrating. For instance, to run [01-orchestra-hub](./basic-examples/01-orchestra-hub) using the Gradle wrapper, use the following command:
 
 ```shell
 $ ./gradlew :basic-examples:01-orchestra-hub:runExample
@@ -59,8 +59,7 @@ The [application examples](./app-examples) build on the [basic-examples](./basic
 | [02-quickfix](./app-examples/02-quickfix)                     | Example QuickFIX/J server and client applications that use a QuickFIX Data Dictionary generated from Orchestra       |
 | [03-openapi-springboot](./app-examples/03-openapi-springboot) | An OpenAPI Spring Boot application powered by Orchestra                                                              |
 
-The section also includes an [orchestra-specs/fix-44](./app-examples/orchestra-specs/fix-44) project which produces an Orchestra
-spec that is used in the applications above.
+The application examples are each demonstrated differently. Please see their respective READMEs for the command to run them.
 
 ## Plugin configuration
 

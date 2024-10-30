@@ -12,6 +12,10 @@ The client application sends the following messages:
 * An invalid message that is missing the required `Account` field.
 * An invalid message that contains the field `SecondaryOrderID` which is not present in the custom `NewOrderSingle` message definition.
 
+## Configuration
+
+This example utilizes the QuickFIX data dictionary generated in the [QuickFIX basic example](../../basic-examples/08-quickfix).
+
 ## Run
 
 Use the Gradle wrapper to start the QuickFIX engine.
