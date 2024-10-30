@@ -1,35 +1,33 @@
-# QuickFIX application example
+# QuickFIX application
 
-An QuickFIX based example application that utilises the custom QuickFIX data dictionary generated in
-[basic-examples/08-quickfix](../../basic-examples/08-quickfix)
+This example shows how to build a QuickFIX application using a QuickFIX Data Dictionary generated from a custom Orchestra specification in a [previous](../../basic-examples/08-quickfix) example.
 
 Two applications are started, the first is the [QuickFIX engine](./src/main/java/org/example/orchestra/QuickFixEngineDataDictionaryApp.java)
 running with the custom Data Dictionary, the second is the [QuickFIX client](./src/main/java/org/example/orchestra/QuickFixClientDataDictionaryApp.java)
-application that will send a mixture of valid and invalid messages.
+application that sends a mix of valid and invalid messages.
 
-The client application will send the following messages:
+The client application sends the following messages:
 
-* A message that conforms to the Data Dictionary
-* An invalid message that is missing the required `Account` field
-* An invalid message that contains a field `SecondaryOrderID` which isn't in the custom `NewOrderSingle` message
-  definition
+* A valid message that conforms to the generated QuickFIX Data Dictionary.
+* An invalid message that is missing the required `Account` field.
+* An invalid message that contains the field `SecondaryOrderID` which is not present in the custom `NewOrderSingle` message definition.
 
 ## Run
 
-From the command line start the QuickFIX engine using
+Use the Gradle wrapper to start the QuickFIX engine.
 
-```
-./gradlew :app-examples:02-quickfix:runQuickFixEngineApp
+```shell
+$ ./gradlew :app-examples:02-quickfix:runQuickFixEngineApp
 ```
 
-In another console window start the QuickFIX client app using
+Then start the QuickFIX client application Using a separate console window.
 
-```
-./gradlew :app-examples:02-quickfix:runQuickFixClientApp
+```shell
+$ ./gradlew :app-examples:02-quickfix:runQuickFixClientApp
 ```
 
 ## Results
 
-Log messages will be output in both console windows showing the communication between QuickFIX engine and client.
+Log messages will be output in both console windows showing the communication between the QuickFIX engine and client application.
 
-The QuickFIX engine application will terminate after 2 minutes.
+> **Note**: The QuickFIX engine will terminate after 2 minutes.

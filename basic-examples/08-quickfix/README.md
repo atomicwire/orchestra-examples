@@ -1,13 +1,10 @@
-# QuickFIX example
+# QuickFIX
 
-This example demonstrates creating a custom spec that re-uses the data dictionary from an existing spec available on
-Orchestra Hub. A [QuickFIX](https://quickfixengine.org/) Data Dictionary is then created from the custom spec.
+This example shows how to generate a [QuickFIX](https://quickfixengine.org/) Data Dictionary from a custom spec that uses a reference spec obtained from Orchestra Hub. 
 
 ## Configuration
 
-See [build.gradle](./build.gradle).
-
-The QuickFIX data dictionary generation is activated by the presence of the QuickFIX `dataDictionary` extension.
+The QuickFIX data dictionary generation is activated by the presence of the QuickFIX `dataDictionary` extension in the [build.gradle](./build.gradle) file.
 
 ```groovy
 orchestra {
@@ -26,18 +23,18 @@ orchestra {
 
 ## Run
 
-To generate an Java code from the Markdown file run
+Use the Gradle wrapper to run the example.
 
+```shell
+$ ./gradlew :basic-examples:08-quickfix:runExample
 ```
-./gradlew :basic-examples:08-quickfix:runExample
-```
-`runExample` is wired to call the `orchestraGenerateQuickfixDataDictionary` task from the Orchestra plugin.
+> **Note**: `runExample` is wired to call the `orchestraGenerateQuickfixDataDictionary` task from the Orchestra plugin.
 
 
 ## Results
 
-The Java will be generated in the Gradle build folder. e.g.
+The QuickFIX Data Dictionary will be output to the Gradle build folder.
 
-```
-./basic-examples/08-quickfix/build/quickfix/08-quickfix.xml
+```shell
+$ ./basic-examples/08-quickfix/build/quickfix/08-quickfix.xml
 ```

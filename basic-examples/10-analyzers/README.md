@@ -1,13 +1,12 @@
-# Analyzers example
+# Analyzers
 
-This example demonstrates validating a FIX-derived specification for compliance with FIX style and tag-value compatibility guidelines.
+This example shows how to validate a custom FIX specification to ensure it complies with FIX style and tag-value compatibility guidelines.
 
 ## Configuration
 
-See [build.gradle](./build.gradle).
+The analyzers are enabled via the `validation` extension in the [build.gradle](./build.gradle) file. 
 
-The analyzers are enabled via the `validation` extension. To cause validation errors to stop the build, rather than
-just logging warnings, use `ValidationRuleSeverity.ERROR`
+To force validation errors to stop the build (rather than just logging warnings) use `ValidationRuleSeverity.ERROR`.
 
 ```groovy
 orchestra {
@@ -28,14 +27,14 @@ orchestra {
 
 ## Run
 
-To run the analyzers for the derived Orchestra specification run
+Use the Gradle wrapper to run the example.
 
+```shell
+$ ./gradlew :basic-examples:10-analyzers:runExample
 ```
-./gradlew :basic-examples:10-analyzers:runExample
-```
-`runExample` is wired to call the `orchestraValidateSpec` task from the Orchestra plugin.
+> **Note**: `runExample` is wired to call the `orchestraValidateSpec` task from the Orchestra plugin.
 
 
 ## Results
 
-The high-level feedback will be output to the console.
+The analyzer results will be displayed in the console.

@@ -1,80 +1,70 @@
-# Orchestra Gradle Plugin and Java Library Examples
+# Orchestra Gradle Plugin
 
 > **Warning**: The examples provided in this repository are experimental.
 
-> **Notice**: While these examples are [open source](LICENSE), the libraries loaded from the Atomic Wire Maven
-> repository require a license to use. If you have found this repository and would like an evaluation license, please
-> contact us via [our website](https://www.atomicwire.io/).
+> **Notice**: Although these examples are [open source](LICENSE), the libraries obtained from the Atomic Wire Maven repository require a license. To request an evaluation license, please contact us via [our website](https://www.atomicwire.io/).
 
 <!-- TOC -->
-* [Orchestra Examples](#orchestra-examples)
-  * [Introduction](#introduction)
-    * [Basic examples](#basic-examples)
-    * [Application examples](#application-examples)
-  * [Orchestra Plugin](#orchestra-plugin)
+* [Introduction](#introduction)
+  * [Basic examples](#basic-examples)
+  * [Application examples](#application-examples)
+* [Plugin configuration](#plugin-configuration)
 <!-- TOC -->
 
 ## Introduction
 
-The Orchestra Examples are split into two distinct sections
+[Orchestra](https://www.fixtrading.org/standards/fix-orchestra-online/) is an open industry standard created by the [FIX Trading Community](https://www.fixtrading.org) to establish **machine-readable rules of engagement** between counterparties.
+
+This plugin offers convenient tools for working with Orchestra specifications. Users can create and validate specs, manage versioning, and verify compatibility for particular encodings. It also allows for the generation of various useful artifacts, such as code libraries, schemas, and documentation. 
+
+The plugin also enables users to integrate Orchestra into their build pipelines.
 
 ### Basic examples
 
-The [basic examples](./basic-examples) are targeted to highlight specific functionality offered by the Orchestra plugin.
+The [basic examples](./basic-examples) show you how to configure the plugin for specific tasks. 
 
-The basic examples are built upon in [app-examples](./app-examples) to show how to build applications using the Orchestra plugin.
+Examples should be run from the root directory of this repository using the Gradle wrapper (full instructions are in the `README.md` file in each subproject).
 
-The basic examples should be run from the root of this repository using the Gradle wrapper. Full run commands are given
-on the README page of each example subproject.
 
-For all examples, the results are output into the subproject Gradle build folder (e.g. `build/orchestra`). For example,
-the results for [01-orchestra-hub](./01-orchestra-hub) will be output to `./basic-examples/01-orchestra-hub/build/orchestra/`
+| Example                                               | Description                                                                         |
+|-------------------------------------------------------|-------------------------------------------------------------------------------------|
+| [01-orchestra-hub](./basic-examples/01-orchestra-hub) | Pull an existing spec from the [Orchestra Hub](https://orchestrahub.org) repository |
+| [02-markdown](./basic-examples/02-markdown)           | Create a new Orchestra spec using Markdown                                          |
+| [03-derived](./basic-examples/03-derived)             | Create a new Orchestra spec by customising an existing spec                         |
+| [04-documentation](./basic-examples/04-documentation) | Generate a Message Definition Report (MDR) from an Orchestra spec                   |
+| [05-avro-schema](./basic-examples/05-avro-schema)     | Generate Avro schemas from an Orchestra spec                                        |
+| [06-json-schema](./basic-examples/06-json-schema)     | Generate JSON schemas from an Orchestra spec                                        |
+| [07-java](./basic-examples/07-java)                   | Generate Java code from an Orchestra spec                                           |
+| [08-quickfix](./basic-examples/08-quickfix)           | Generate a QuickFIX Data Dictionary from an Orchestra spec                          |
+| [09-openapi](./basic-examples/09-openapi)             | Create a REST service using OpenAPI and Orchestra                                   |
+| [10-analyzers](./basic-examples/10-analyzers)         | Check the style, validity and encoding compatibility of an Orchestra spec           |
 
-The examples included within the section are:
+Each example includes a Gradle task named `runExample`, configured to invoke the specific Orchestra plugin task that the example is demonstrating. For instance, to run [01-orchestra-hub](./basic-examples/01-orchestra-hub) using the Gradle wrapper, use the following command:
 
-| Example                                | Description                                                                              |
-|----------------------------------------|------------------------------------------------------------------------------------------|
-| [01-orchestra-hub](./01-orchestra-hub) | Fetches an Orchestra spec from [Orchestra Hub](https://orchestrahub.org)                 |
-| [02-markdown](./02-markdown)           | Authoring an Orchestra spec from scratch using Markdown                                  |
-| [03-derived](./03-derived)             | Creating a custom spec that re-uses the data dictionary from an existing Orchestra spec  |
-| [04-documentation](./04-documentation) | Producing a Message Definition Report for a custom Orchestra spec                        |
-| [05-avro-schema](./05-avro-schema)     | Generating an Avro schema for a custom Orchestra spec                                    |
-| [06-json-schema](./06-json-schema)     | Generating a JSON schema for a custom Orchestra spec                                     |
-| [07-java](./07-java)                   | Generating Java code for use with the Orchestra Java library                             |
-| [08-quickfix](./08-quickfix)           | Creates a QuickFIX Data Dictionary from a custom Orchestra spec                          |
-| [09-openapi](./09-openapi)             | Produce OpenAPI documentation using an Orchestra spec                                    |
-| [10-analyzers](./10-analyzers)         | Generate a report that analyzes an Orchestra spec for style and compatability compliance |
-
-Each of the examples contains a `runExample` Gradle task that is wired to call the Orchestra plugin task that the example
-is demonstrating. For example, to run [02-markdown](./02-markdown), the command would be
-
+```shell
+$ ./gradlew :basic-examples:01-orchestra-hub:runExample
 ```
-./gradlew :basic-examples:02-markdown:runExample
-```
+
+Results are output to the subproject Gradle build folder (i.e. `build/orchestra`). For instance, the results for the [01-orchestra-hub](./basic-examples/01-orchestra-hub) example are output to `./basic-examples/01-orchestra-hub/build/orchestra/`
+
 
 ### Application examples
 
-The application examples build on the [basic-examples](./basic-examples) to create runnable applications showcasing
-various use-cases.
-
-The examples included within the section are:
-
-| Example                                          | Description                                                             |
-|--------------------------------------------------|-------------------------------------------------------------------------|
-| [01-basic](./01-basic)                           |                                                                         |
-| [02-quickfix](./02-quickfix)                     | Server and client QuickFIX apps using a                                 |
-| [03-openapi-springboot](./03-openapi-springboot) | An OpenAPI Spring Boot application that is powered by an Orchestra spec |
-
-The section also includes an [orchestra-specs/fix-44](./orchestra-specs/fix-44) project which produces an Orchestra
-spec that is used by the applications above.
+The [application examples](./app-examples) build on the [basic-examples](./basic-examples) to create runnable applications for various use-cases.
 
 
-## Orchestra Plugin
+| Example                                                       | Description                                                                                                          |
+|---------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| [01-basic](./app-examples/01-basic)                           | A basic Java application that uses the Orchestra Java Library to compute aggregations over FIX TagValue encoded data |
+| [02-quickfix](./app-examples/02-quickfix)                     | Example QuickFIX/J server and client applications that use a QuickFIX Data Dictionary generated from Orchestra       |
+| [03-openapi-springboot](./app-examples/03-openapi-springboot) | An OpenAPI Spring Boot application powered by Orchestra                                                              |
 
-All examples utilise the Orchestra Plugin.
+The section also includes an [orchestra-specs/fix-44](./app-examples/orchestra-specs/fix-44) project which produces an Orchestra
+spec that is used in the applications above.
 
-[settings.gradle](./settings.gradle) contains the complete setup to run these examples, however the Orchestra Gradle
-Plugin settings of interest are:
+## Plugin configuration
+
+The [settings.gradle](./settings.gradle) file contains the complete setup to run the examples. The settings relevant to the Orchestra plugin are:
 
 ```groovy
 pluginManagement {
@@ -94,9 +84,9 @@ pluginManagement {
 
 ```
 
-Then to use the plugin in a subproject add the following to `build.gradle`:
+To use the plugin in a subproject add the following to `build.gradle`:
 
-```
+```groovy
 plugins {
   id 'io.atomicwire.gradle.orchestra'
 }

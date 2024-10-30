@@ -1,18 +1,19 @@
-# Documentation example
+# Documentation
 
-This example demonstrates generating a Message Definition Report for a custom Orchestra spec.
+This example shows how to generate a Message Definition Report (MDR) from a custom Orchestra spec.
 
-> **Notice** this extension requires Docker to be installed and the Docker daemon to be running on your system. Please ensure that:
-> * Docker is installed and properly configured.
-> * The Docker daemon is running before running the example.
+An MDR details the messages, components, fields and code sets defined in the Orchestra spec. By default, the plugin follows the documentation structure used by [ISO 20022](https://www.iso20022.org/iso-20022-message-definitions).
+
+
+> **Notice**: This extension requires Docker to be installed with the Docker daemon running on your system. Please make sure that:
+> * Docker is installed and correctly configured.
+> * The Docker daemon is active before running the example.
 
 ## Configuration
 
-See [build.gradle](./build.gradle).
+MDRs are generated using [Pandoc](https://pandoc.org). The plugin uses a Pandoc Docker image to run Pandoc and install relevant LaTeX plugins. 
 
-The Message Definition Report is generated via Pandoc.
-
-The plugin runs a Pandoc Docker image, installing relevant LaTeX plugins. Using Docker requires that the
+Docker requires that the
 `com.bmuschko.docker-remote-api` plugin is enabled.
 
 ```groovy
@@ -22,8 +23,7 @@ plugins {
 }
 ```
 
-To generate a Message Definition Report detailing the Messages, Components, Fields and CodeSets defined in the Orchestra
-spec. The `messageDefinitionReport` extension can be used.
+Generation of an MDR from an Orchestra spec is configured in the [build.gradle](./build.gradle) file using the `messageDefinitionReport` extension.
 
 ```groovy
 orchestra {
@@ -38,7 +38,7 @@ orchestra {
 }
 ```
 
-Only `pdf` is enabled by default, if you wish to generate `epub` too, enable the `epub` extension. e.g.
+Support for Portable Document Format (PDF) is enabled by default. To also enable support for the Electronic Publication (EPUB) format, add the `epub` extension.
 
 ```groovy
 orchestra {
@@ -59,24 +59,25 @@ Gradle tasks.
 
 ## Run
 
-To generate a PDF Message Definition report from the Markdown file run
+Use the Gradle wrapper to run the example.
 
+```shell
+$ ./gradlew :basic-examples:04-documentation:runExample
 ```
-./gradlew :basic-examples:04-documentation:runExample
-```
-`runExample` is wired to call the `orchestraGenerateMessageDefinitionReportPdf` task from the Orchestra plugin.
+
+> **Note**: `runExample` is wired to call the `orchestraGenerateMessageDefinitionReportPdf` task from the Orchestra plugin.
 
 
-To generate an ePub, the [build.gradle](./build.gradle) can be modified as described above, then run
+To generate an ePub file, the [build.gradle](./build.gradle) configuration must be modified as shown above. You can then use the Gradle wrapper as follows:
 
-```
-./gradlew :basic-examples:04-documentation:orchestraGenerateMessageDefinitionReportEpub
+```shell
+$ ./gradlew :basic-examples:04-documentation:orchestraGenerateMessageDefinitionReportEpub
 ```
 
 ## Results
 
-The Message Definition Report will be generated in the Gradle build folder. e.g.
+The MDR files will be output to the Gradle build folder.
 
-```
-./basic-examples/04-documentation/build/orchestra/documentation/mdr/04-documentation.pdf
+```shell
+$ ./basic-examples/04-documentation/build/orchestra/documentation/mdr/04-documentation.pdf
 ```
