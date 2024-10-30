@@ -40,7 +40,7 @@ import org.example.orchestra.fix44.messages.NewOrderSingle;
 @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public class BasicApp {
 
-  private static final OrchestraSpecSource SPEC_SOURCE = OrchestraSpecSource.of("aw:fix-44");
+  private static final OrchestraSpecSource SPEC_SOURCE = OrchestraSpecSource.of("aw:fix-4.4");
 
   private static final JsonMapper JSON_MAPPER =
       JsonMapper.builder().configure(SerializationFeature.INDENT_OUTPUT, true).build();

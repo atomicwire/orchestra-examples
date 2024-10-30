@@ -1,15 +1,17 @@
 plugins {
   id 'application'
+  id 'io.atomicwire.gradle.orchestra'
 }
 
 dependencies {
 
-  // FIX 4.4 orchestra spec
-  implementation project(':app-examples:orchestra-specs:fix-44')
-
   // Orchestra Java library
   implementation libs.orchestra.core
   implementation libs.orchestra.accessor.quickfix
+
+  // Orchestra Java plugins for FIX 4.4
+  implementation platform(libs.orchestra.specs.bom)
+  implementation libs.orchestra.spec.fix44.plugins
 
   // Jackson
   implementation libs.jackson.databind
@@ -24,6 +26,26 @@ dependencies {
   implementation libs.slf4j.api
   runtimeOnly libs.bundles.log4j
 
+}
+
+orchestra {
+  specification {
+    name = 'fix-4.4'
+    repository orchestraHub(group: 'atomicwire', name: 'fix-4.4-enriched', version: '4.4')
+  }
+
+  java {
+    codeGen {
+      packageName = 'org.example.orchestra.fix44'
+    }
+  }
+}
+
+spotless {
+  java {
+    // Exclude generated Java sources from style enforcement
+    targetExclude "${layout.projectDirectory.getAsFile().relativePath(orchestra.java.codeGen.outputDir.get().asFile)}/**" as String
+  }
 }
 
 application {
