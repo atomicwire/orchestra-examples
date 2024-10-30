@@ -21,7 +21,6 @@ pluginManagement {
 
 rootProject.name = 'orchestra-examples'
 
-include ':app-examples:orchestra-specs:fix-44'
 include ':app-examples:01-basic'
 include ':app-examples:02-quickfix'
 include ':app-examples:03-openapi-springboot'

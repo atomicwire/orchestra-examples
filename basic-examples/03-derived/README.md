@@ -1,22 +1,18 @@
-# Derived example
+# Custom specifications
 
-This example demonstrates creating a custom spec that re-uses the data dictionary from an existing spec available on
-[Orchestra Hub](https://orchestrahub.org).
+This example shows how to create a custom spec using elements from a reference spec published on [Orchestra Hub](https://orchestrahub.org).
 
-In this case, the spec derives from [FIX Latest](https://orchestrahub.org/-/fix-latest), defining a single custom
-message based on elements from the FIX Latest data dictionary.
+In this example, the spec is derived from [FIX Latest](https://orchestrahub.org/-/fix-latest) and contains a single custom message using elements from the FIX Latest data dictionary.
 
 ## Configuration
 
-See [build.gradle](./build.gradle).
-
-The existing spec to derive from is specified via the `reference` parameter. The [Markdown file](./orchestra/specification/03-derived.md) is in the default location so does not need to be specified.
+The reference spec is specified in the [build.gradle](./build.gradle) file using the `reference` parameter. The [Markdown file](./orchestra/specification/03-derived.md) for the custom spec is in the default location so does not need to be configured.
 
 ```groovy
 orchestra {
   specification {
     markdown {
-      // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
+      // By default, the plugin looks for a Markdown file at `orchestra/specification/<project-name>.md`
       reference orchestraHub(name: 'fix-latest', version: 'ep292')
     }
   }
@@ -25,19 +21,19 @@ orchestra {
 
 ## Run
 
-To generate a derived Orchestra spec from the Markdown file run
+Use the Gradle wrapper to run the example.
 
-```
-./gradlew :basic-examples:03-derived:runExample
+```shell
+$ ./gradlew :basic-examples:03-derived:runExample
 ```
 
-`runExample` is wired to call the `orchestraBuildSpec` task from the Orchestra plugin.
+> **Note**: `runExample` is wired to call the `orchestraBuildSpec` task from the Orchestra plugin.
 
 
 ## Results
 
-The spec will be generated in the Gradle build folder. e.g.
+The spec will be output to the Gradle build folder.
 
-```
-./basic-examples/03-derived/build/orchestra/specification/03-derived.xml
+```shell
+$ ./basic-examples/03-derived/build/orchestra/specification/03-derived.xml
 ```

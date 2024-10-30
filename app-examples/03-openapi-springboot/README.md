@@ -1,30 +1,31 @@
-# OpenAPI Spring Boot application example
+# OpenAPI Spring Boot application
 
-This example demonstrates how an OpenAPI spec, generated from Orchestra, can be used to power a Spring Boot server.
+This example shows how to use an OpenAPI spec generated from Orchestra to power a Spring Boot server.
 
-The Spring OpenAPI generator generates the server scaffolding, interfaces for the API routes that are configured
-in our OpenAPI spec, and model classes for the Schemas that were ultimately defined in our Orchestra spec.
+The Spring OpenAPI generator creates server scaffolding, interfaces for the API routes defined in the OpenAPI spec, and model classes for the schemas ultimately specified in the Orchestra spec.
 
-Our implementation of the API is then provided in
+An implementation of the API is then provided in
 [InstrumentApiDelegateImpl.java](./src/main/java/org/example/orchestra/springboot/InstrumentApiDelegateImpl.java).
-Note that this is a dummy implementation that always provides the same response.
+> **Note**: This is a dummy implementation that always provides the same response.
 
-This example consumes the spec from [basic-examples/09-openapi](../../basic-examples/09-openapi). See it for further
+## Configuration
+
+This example uses the spec from [basic-examples/09-openapi](../../basic-examples/09-openapi). Please refer to that example for a detailed
 explanation of how the OpenAPI spec is generated from Orchestra.
 
 ## Run
 
-To start the Spring Boot server run
+Use the Gradle wrapper to start the Spring Boot server.
 
-```
-./gradlew :app-examples:03-openapi-springboot:bootRun
+```shell
+$ ./gradlew :app-examples:03-openapi-springboot:bootRun
 ```
 
 ## Results
 
-It can then be queried over HTTP
+You can query the server over HTTP.
 
-```
+```shell
 $ curl localhost:8080/instrument/IBM
 {"UPICode":null,"Symbol":"IBM","SecurityID":"459200-10-1","SecurityIDSource":"CUSIP","Product":"EQUITY","CFICode":"ESNUOB"}
 ```

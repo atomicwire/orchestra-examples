@@ -54,7 +54,7 @@ tasks.openApiGenerate {
   outputDir = layout.buildDirectory.dir('openapi').get().toString()
 }
 
-tasks.register('runExample') {
+tasks.named('runExample') {
   dependsOn tasks.named('openApiGenerate')
 
   doLast {

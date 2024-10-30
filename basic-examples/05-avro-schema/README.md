@@ -1,16 +1,12 @@
-# Avro schema example
+# Avro schemas
 
-This example demonstrates generating an Avro schema for a custom Orchestra spec.
+This example shows how to generate Avro schemas from a custom Orchestra spec.
 
 ## Configuration
 
-See [build.gradle](./build.gradle).
+To generate an Avro schema from an Orchestra specification, additional type information is needed to map each datatype in the Orchestra spec to the corresponding Avro datatype.
 
-In order to generate an Avro schema for an Orchestra spec, additional type information is required that indicates
-which Avro datatype corresponds to each datatype in the Orchestra spec.
-
-Datatype mapping is supplied via the `encoding` extension. [Avro logical types](https://avro.apache.org/docs/1.11.0/spec.html#Logical+Types)
-can be used to represent more complex or semantically meaningful data types on top of Avro's primitive types.
+Datatype mapping is supplied via the `encoding` extension in the [build.gradle](./build.gradle) file. [Avro logical types](https://avro.apache.org/docs/1.11.0/spec.html#Logical+Types) can be used to represent more complex or semantically meaningful data types on top of Avro's primitive types.
 
 The Avro schema generation is activated by the presence of the `avro` extension. A `namespace` value must be provided.
 
@@ -46,17 +42,18 @@ orchestra {
 
 ## Run
 
-To generate an Avro schema from the Markdown file run
+Use the Gradle wrapper to run the example.
 
+```shell
+$ ./gradlew :basic-examples:05-avro-schema:runExample
 ```
-./gradlew :basic-examples:05-avro-schema:runExample
-```
-`runExample` is wired to call the `orchestraGenerateAvroSchema` task from the Orchestra plugin.
+
+> **Note**: `runExample` is wired to call the `orchestraGenerateAvroSchema` task from the Orchestra plugin.
 
 ## Results
 
-The Avro schema will be generated in the Gradle build folder. e.g.
+The Avro schema(s) will be output to the Gradle build folder.
 
-```
-./basic-examples/05-avro-schema/build/generated/sources/orch-gen-avro/main/avro/05-avro-schema.avsc
+```shell
+$ ./basic-examples/05-avro-schema/build/generated/sources/orch-gen-avro/main/avro/05-avro-schema.avsc
 ```

@@ -1,12 +1,14 @@
-# Markdown example
+# Markdown
 
-This example demonstrates authoring an Orchestra spec from scratch using Markdown. Like the
-[previous](../01-orchestra-hub) example, this spec can be used in applications and have other artifacts created from it.
+This example shows how to build a new Orchestra spec using Markdown notation. 
+
+As in the 
+[previous](../01-orchestra-hub) example, the resulting spec can be used to generate artifacts and build applications.
 
 
 ## Configuration
 
-See [build.gradle](./build.gradle).
+The Markdown file used to build the spec is configured in the [build.gradle](./build.gradle) file using the `markdown` option.
 
 ```groovy
 orchestra {
@@ -18,8 +20,9 @@ orchestra {
 }
 ```
 
-By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`. If you wish to
-have the Markdown file at a different location, you can use the `inputFile` property. e.g.
+By default, the plugin looks for a Markdown file at `orchestra/specification/<project-name>.md`. 
+
+To specify a Markdown file in a different location, override the default behaviour using the `inputFile` property.
 
 ```groovy
 orchestra {
@@ -32,22 +35,22 @@ orchestra {
 }
 ```
 
-In the examples above, we also use [Spotless](https://github.com/diffplug/spotless) to automatically format Orchestra
-Markdown and enforce style.
+In these examples, the plugin uses [Spotless](https://github.com/diffplug/spotless) to automatically format Orchestra Markdown and enforce style.
 
 ## Run
 
-To generate an Orchestra spec from the Markdown file run
+Use the Gradle wrapper to run the example.
 
+```shell
+$ ./gradlew :basic-examples:02-markdown:runExample
 ```
-./gradlew :basic-examples:02-markdown:runExample
-```
-`runExample` is wired to call the `orchestraBuildSpec` task from the Orchestra plugin.
+
+> **Note**: `runExample` is wired to call the `orchestraBuildSpec` task from the Orchestra plugin.
 
 ## Results
 
-The spec will be generated in the Gradle build folder. e.g.
+The spec will be output to the Gradle build folder.
 
-```
-./basic-examples/02-markdown/build/orchestra/specification/02-markdown.xml
+```shell
+$ ./basic-examples/02-markdown/build/orchestra/specification/02-markdown.xml
 ```

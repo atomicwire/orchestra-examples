@@ -8,7 +8,7 @@ orchestra {
   }
 }
 
-tasks.register('runExample') {
+tasks.named('runExample') {
   dependsOn tasks.named('orchestraBuildSpec')
 
   doLast {

@@ -1,14 +1,14 @@
-# Orchestra Hub example
+# Orchestra Hub
 
-This example fetches an Orchestra spec from [Orchestra Hub](https://orchestrahub.org) which can then be used as a basis
-for a custom derived spec (see example [03-derived](../03-derived)) or in an [application](../../app-examples).
+[Orchestra Hub](https://orchestrahub.org) is a repository that allows firms to publish and distribute their specifications to other market participants.
 
-Later examples also demonstrate other artifacts that can be created from an Orchestra spec, such as [documentation](../04-documentation)
-and [schemas](../05-avro-schema).
+This example shows how to configure the plugin to pull an existing Orchestra spec directly from the  repository. 
+
+Plugin users can then use these specs to create their own [custom specifications](../03-derived) and generate artifacts (such as [code libraries](../07-java) and [schemas](../05-avro-schema)) for use in their [applications](../../app-examples).
 
 ## Configuration
 
-See [build.gradle](./build.gradle). The configuration references a `repository` using the `orchestraHub` name and version
+The `name` and `version` of the specification is configured in the [build.gradle](./build.gradle) file using the `repository` option.
 
 ```groovy
 orchestra {
@@ -20,18 +20,19 @@ orchestra {
 
 ## Run
 
-To download the Orchestra spec run
+Use the Gradle wrapper to run the example.
 
+```shell
+$ ./gradlew :basic-examples:01-orchestra-hub:runExample
 ```
-./gradlew :basic-examples:01-orchestra-hub:runExample
-```
-`runExample` is wired to call the `orchestraBuildSpec` task from the Orchestra plugin.
+
+> **Note**: `runExample` is wired to call the `orchestraBuildSpec` task from the Orchestra plugin.
 
 
 ## Results
 
-The spec will be downloaded into the Gradle build folder. e.g.
+The spec will be output to the Gradle build folder.
 
-```
-./basic-examples/01-orchestra-hub/build/orchestra/specification/01-orchestra-hub.xml
+```shell
+$ ./basic-examples/01-orchestra-hub/build/orchestra/specification/01-orchestra-hub.xml
 ```
