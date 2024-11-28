@@ -1,11 +1,20 @@
 plugins {
   id 'application'
+  id 'io.atomicwire.gradle.orchestra'
+}
+
+configurations {
+  codeGenClasspath {
+    canBeConsumed = false
+    canBeResolved = true
+  }
 }
 
 dependencies {
 
   // QuickFIX
   implementation libs.quickfixj
+  codeGenClasspath "io.atomicwire.orchestra:orch-gen-quickfix-code-generator-cli:${orchestra.orchestraJavaVersion.get()}"
 
   // Lombok
   annotationProcessor libs.lombok
@@ -19,20 +28,73 @@ dependencies {
 
 }
 
-tasks.register('runQuickFixEngineApp', JavaExec) {
-  dependsOn project(':basic-examples:08-quickfix').tasks.named('build')
-  def quickFixDataDictionary = file("${project.rootDir}/basic-examples/08-quickfix/build/quickfix/08-quickfix.xml")
+orchestra {
+
+  specification {
+    markdown {
+      reference orchestraHub(name: 'fix-4.4', version: '4.4')
+    }
+  }
+  quickfix {
+    dataDictionary {}
+  }
+
+}
+
+def generatedSourceDir = layout.buildDirectory.dir('generated/sources/quickfix')
+
+tasks.register('runServer', JavaExec) {
+  group = "application"
+  dependsOn orchestraGenerateQuickfixDataDictionary
+
+  def quickFixDataDictionary = tasks.named("orchestraGenerateQuickfixDataDictionary").get().outputs.files.singleFile
 
   classpath = sourceSets.main.runtimeClasspath
   mainClass = 'org.example.orchestra.QuickFixEngineDataDictionaryApp'
   args quickFixDataDictionary
 }
 
-tasks.register('runQuickFixClientApp', JavaExec) {
-  dependsOn project(':basic-examples:08-quickfix').tasks.named('build')
-  def quickFixDataDictionary = file("${project.rootDir}/basic-examples/08-quickfix/build/quickfix/08-quickfix.xml")
+tasks.register('runClient', JavaExec) {
+  group = "application"
+  dependsOn orchestraGenerateQuickfixDataDictionary
+
+  def quickFixDataDictionary = tasks.named("orchestraGenerateQuickfixDataDictionary").get().outputs.files.singleFile
 
   classpath = sourceSets.main.runtimeClasspath
   mainClass = 'org.example.orchestra.QuickFixClientDataDictionaryApp'
   args quickFixDataDictionary
+}
+
+// task to generate the QuickFIX messages source code for use in the Server and Client applications, the source is
+// output to build/generated/sources/quickfix. FIXT source generation is disabled to instead utilise the pre-built
+// FIXT11.xml available in QuickFIX/J
+def generateQuickFixMessages = tasks.register("generateQuickFixMessages", JavaExec) {
+  group = "quickfix"
+  dependsOn orchestraBuildSpec
+
+  def orchestraSpec = orchestra.specification.provider
+  inputs.file orchestraSpec
+
+  outputs.dir generatedSourceDir
+
+  classpath = configurations.codeGenClasspath
+  mainClass.set("org.quickfixj.orchestra.CodeGeneratorJ")
+
+  args([
+    '--orchestra-file', orchestraSpec.get().absolutePath,
+    '--output-dir', generatedSourceDir.get().toString(),
+    '--no-generateFixt11Package',
+  ])
+
+}
+
+// ensure the code is generated before java is compiled and that it is in our main sourceSet
+tasks.named('compileJava') { dependsOn(generateQuickFixMessages) }
+sourceSets.main.java.srcDir generatedSourceDir.get()
+
+// Exclude generated code from spotless
+spotless {
+  java {
+    targetExclude "${layout.projectDirectory.getAsFile().relativePath(generatedSourceDir.get().asFile)}/**" as String
+  }
 }

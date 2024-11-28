@@ -9,8 +9,30 @@ import static org.example.orchestra.QuickFixEngineDataDictionaryApp.prettyLog;
 
 import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
-import quickfix.*;
-import quickfix.field.*;
+import quickfix.Application;
+import quickfix.ConfigError;
+import quickfix.DefaultMessageFactory;
+import quickfix.MemoryStoreFactory;
+import quickfix.Message;
+import quickfix.Session;
+import quickfix.SessionID;
+import quickfix.SessionNotFound;
+import quickfix.SessionSettings;
+import quickfix.SocketInitiator;
+import quickfix.custom10.NewOrderSingle;
+import quickfix.custom10.component.Instrument;
+import quickfix.field.Account;
+import quickfix.field.ClOrdID;
+import quickfix.field.CorporateBuyback;
+import quickfix.field.MsgType;
+import quickfix.field.OrdType;
+import quickfix.field.OrderQty;
+import quickfix.field.Rule80A;
+import quickfix.field.SecondaryOrderID;
+import quickfix.field.SecurityID;
+import quickfix.field.SecurityIDSource;
+import quickfix.field.Side;
+import quickfix.field.TransactTime;
 
 @Slf4j
 public class QuickFixClientDataDictionaryApp implements Application {
@@ -66,9 +88,9 @@ public class QuickFixClientDataDictionaryApp implements Application {
   }
 
   private Message getBaseMessage(Boolean includeAccountField) {
-    var message = new Message();
+    var message = new NewOrderSingle();
 
-    message.getHeader().setField(new MsgType(MsgType.ORDER_SINGLE));
+    message.getHeader().setField(new MsgType(MsgType.NEW_ORDER_SINGLE));
 
     if (includeAccountField) {
       message.setField(new Account("ACC123"));
@@ -77,8 +99,14 @@ public class QuickFixClientDataDictionaryApp implements Application {
     message.setField(new Side(Side.SELL));
     message.setField(new TransactTime(LocalDateTime.now()));
     message.setField(new OrdType(OrdType.MARKET));
-    message.setField(new SecurityID("AAPL"));
     message.setField(new OrderQty(3500));
+    // custom fields from the Orchestra spec
+    message.setField(new CorporateBuyback(CorporateBuyback.PERMITTED));
+    message.setField(new Rule80A(Rule80A.PRINCIPAL));
+    var instrument = new Instrument();
+    instrument.setField(new SecurityID("AAPL"));
+    instrument.setField(new SecurityIDSource(SecurityIDSource.ISIN));
+    message.set(instrument);
 
     return message;
   }
@@ -88,8 +116,8 @@ public class QuickFixClientDataDictionaryApp implements Application {
 
     // Load the client session settings from a configuration file
     var settings = new SessionSettings("quickfix-client.cfg");
-    // the Data Dictionary is passed in - it's the path to the output of the
-    // basic-examples/08-quickfix sub-project
+    // the Data Dictionary is passed in, when using AppDataDictionary, FIXT is used for the session
+    // layer
     settings.setString("AppDataDictionary", args[0]);
 
     // Create the FIX client application instance
