@@ -8,8 +8,23 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import lombok.extern.slf4j.Slf4j;
-import quickfix.*;
-import quickfix.field.*;
+import quickfix.Application;
+import quickfix.ConfigError;
+import quickfix.DefaultMessageFactory;
+import quickfix.FieldNotFound;
+import quickfix.IncorrectDataFormat;
+import quickfix.IncorrectTagValue;
+import quickfix.MemoryStoreFactory;
+import quickfix.Message;
+import quickfix.Session;
+import quickfix.SessionID;
+import quickfix.SessionSettings;
+import quickfix.SocketAcceptor;
+import quickfix.field.CorporateBuyback;
+import quickfix.field.MsgType;
+import quickfix.field.Rule80A;
+import quickfix.field.SecurityID;
+import quickfix.field.Side;
 
 @Slf4j
 public class QuickFixEngineDataDictionaryApp implements Application {
@@ -73,12 +88,14 @@ public class QuickFixEngineDataDictionaryApp implements Application {
     }
 
     // Perform application specific processing
-    if ((MsgType.ORDER_SINGLE).equals(message.getHeader().getString(MsgType.FIELD))) {
+    if ((MsgType.NEW_ORDER_SINGLE).equals(message.getHeader().getString(MsgType.FIELD))) {
       char side = message.getChar(Side.FIELD);
       log.info(
-          "NewOrderSingle received: Symbol={}, Side={}",
+          "NewOrderSingle received: Symbol={}, Side={}, CorporateBuyBack={}, Rule80A={}",
           message.getString(SecurityID.FIELD),
-          (side == '1' ? "Buy" : "Sell"));
+          (side == '1' ? "Buy" : "Sell"),
+          message.getChar(CorporateBuyback.FIELD),
+          message.getChar(Rule80A.FIELD));
     }
   }
 
@@ -92,8 +109,9 @@ public class QuickFixEngineDataDictionaryApp implements Application {
 
     // Load the session settings from a configuration file
     var settings = new SessionSettings("quickfix-server.cfg");
-    // the Data Dictionary is passed in - it's the path to the output of the
-    // basic-examples/08-quickfix sub-project
+    // the Data Dictionary is passed in
+    log.info("Using data dictionary at {}", args[0]);
+    // when using AppDataDictionary, FIXT is used for the session layer
     settings.setString("AppDataDictionary", args[0]);
 
     // Create the FIX engine instance
