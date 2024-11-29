@@ -1,15 +1,17 @@
 plugins {
-  id 'com.bmuschko.docker-remote-api'
   id 'io.atomicwire.gradle.orchestra'
+  id 'com.bmuschko.docker-remote-api'
 }
 
 orchestra {
   specification {
-    // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
-    markdown {}
+    markdown {
+      reference orchestraHub(name: 'fix-4.4', version: '4.4')
+    }
   }
 
   documentation {
+    // Enable documentation
     messageDefinitionReport {}
   }
 }

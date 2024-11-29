@@ -5,8 +5,8 @@ plugins {
 orchestra {
   specification {
     markdown {
-      // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
-      reference orchestraHub(name: 'fix-latest', version: 'ep292')
+      // Specify the name and version of the reference specification
+      reference orchestraHub(name: 'fix-4.4', version: '4.4')
     }
   }
 }

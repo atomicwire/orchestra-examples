@@ -1,19 +1,25 @@
-# Custom specifications
+# Derived Specifications
 
-This example shows how to create a custom spec using elements from a reference spec published on [Orchestra Hub](https://orchestrahub.org).
+This example demonstrates how to create a derived specification based on a reference standard. 
 
-In this example, the spec is derived from [FIX Latest](https://orchestrahub.org/-/fix-latest) and contains a single custom message using elements from the FIX Latest data dictionary.
+Using a reference specification greatly simplifies the management of custom specifications by allowing standard elements to be inherited rather than redefined. This allows users to focus exclusively on data customisations required for their business. 
+
+As in the [previous](../02-markdown) example, the derived specification is described in a Markdown file located on the user's local file system. Here, the plugin is configured to use [FIX.4.4](https://orchestrahub.org/-/fix-latest) as the reference specification.
+
+The derived specification features a single custom FIX message incorporating user-defined fields not part of the FIX standard, along with deprecated fields from earlier versions of FIX that are needed for backward compatibility. 
 
 ## Configuration
 
-The reference spec is specified in the [build.gradle](./build.gradle) file using the `reference` parameter. The [Markdown file](./orchestra/specification/03-derived.md) for the custom spec is in the default location so does not need to be configured.
+The reference specification is configured in the [build.gradle](./build.gradle) file using the `reference` parameter. 
+
+The [Markdown file](./orchestra/specification/03-derived.md) for the derived specification is in the default location so does not need to be configured.
 
 ```groovy
 orchestra {
   specification {
     markdown {
-      // By default, the plugin looks for a Markdown file at `orchestra/specification/<project-name>.md`
-      reference orchestraHub(name: 'fix-latest', version: 'ep292')
+      // Specify the name and version of the reference specification
+      reference orchestraHub(name: 'fix-4.4', version: '4.4')
     }
   }
 }
@@ -37,3 +43,9 @@ The spec will be output to the Gradle build folder.
 ```shell
 $ ./basic-examples/03-derived/build/orchestra/specification/03-derived.xml
 ```
+
+### Visualisation
+
+You can search and explore the specification in [Orchimate](https://orchimate.org/).
+
+![](docs/images/orchimate.png)

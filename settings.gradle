@@ -34,6 +34,6 @@ include ':basic-examples:06-json-schema'
 include ':basic-examples:07-java'
 include ':basic-examples:08-quickfix'
 include ':basic-examples:09-openapi'
-include ':basic-examples:10-analyzers'
+include ':basic-examples:10-verification'
 
 include ':tools'

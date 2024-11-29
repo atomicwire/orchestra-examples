@@ -4,6 +4,7 @@ plugins {
 
 orchestra {
   specification {
+    // Specify the name and version of the specification to retrieve from the repository
     repository orchestraHub(name: 'fix-latest', version: 'ep292')
   }
 }

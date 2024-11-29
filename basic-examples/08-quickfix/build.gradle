@@ -5,11 +5,11 @@ plugins {
 orchestra {
   specification {
     markdown {
-      // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
-      reference orchestraHub(name: 'fix-latest', version: 'ep292')
+      reference orchestraHub(name: 'fix-4.4', version: '4.4')
     }
   }
 
+  // Enable QuickFIX data dictionary generation
   quickfix {
     dataDictionary {}
   }
