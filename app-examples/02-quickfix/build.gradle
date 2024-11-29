@@ -4,7 +4,7 @@ plugins {
 }
 
 configurations {
-  codeGenClasspath {
+  quickfixCodeGenClasspath {
     canBeConsumed = false
     canBeResolved = true
   }
@@ -14,7 +14,7 @@ dependencies {
 
   // QuickFIX
   implementation libs.quickfixj
-  codeGenClasspath "io.atomicwire.orchestra:orch-gen-quickfix-code-generator-cli:${orchestra.orchestraJavaVersion.get()}"
+  quickfixCodeGenClasspath libs.orch.gen.quickfix.code.generator
 
   // Lombok
   annotationProcessor libs.lombok
@@ -35,13 +35,12 @@ orchestra {
       reference orchestraHub(name: 'fix-4.4', version: '4.4')
     }
   }
+
   quickfix {
     dataDictionary {}
   }
 
 }
-
-def generatedSourceDir = layout.buildDirectory.dir('generated/sources/quickfix')
 
 tasks.register('runServer', JavaExec) {
   group = "application"
@@ -65,36 +64,41 @@ tasks.register('runClient', JavaExec) {
   args quickFixDataDictionary
 }
 
-// task to generate the QuickFIX messages source code for use in the Server and Client applications, the source is
-// output to build/generated/sources/quickfix. FIXT source generation is disabled to instead utilise the pre-built
-// FIXT11.xml available in QuickFIX/J
+def quickfixGeneratedSourcesDir = layout.buildDirectory.dir('generated/sources/quickfix')
+
 def generateQuickFixMessages = tasks.register("generateQuickFixMessages", JavaExec) {
   group = "quickfix"
-  dependsOn orchestraBuildSpec
+  description = "Generate QuickFIX/J message sources for the customized data dictionary"
 
+  // Register the project's Orchestra spec as an input to this task
   def orchestraSpec = orchestra.specification.provider
   inputs.file orchestraSpec
 
-  outputs.dir generatedSourceDir
+  // Register the generated sources build directory as an output of this task
+  outputs.dir quickfixGeneratedSourcesDir
 
-  classpath = configurations.codeGenClasspath
-  mainClass.set("org.quickfixj.orchestra.CodeGeneratorJ")
+  classpath = configurations.quickfixCodeGenClasspath
+  mainClass = 'org.quickfixj.orchestra.CodeGeneratorJ'
 
   args([
     '--orchestra-file', orchestraSpec.get().absolutePath,
-    '--output-dir', generatedSourceDir.get().toString(),
+    '--output-dir', quickfixGeneratedSourcesDir.get().asFile.absolutePath,
+
+    // Disable FIXT package generation to instead utilize the version of FIXT11.xml bundled with QuickFIX/J
     '--no-generateFixt11Package',
   ])
-
 }
-
-// ensure the code is generated before java is compiled and that it is in our main sourceSet
-tasks.named('compileJava') { dependsOn(generateQuickFixMessages) }
-sourceSets.main.java.srcDir generatedSourceDir.get()
+sourceSets {
+  main {
+    java {
+      srcDir generateQuickFixMessages
+    }
+  }
+}
 
 // Exclude generated code from spotless
 spotless {
   java {
-    targetExclude "${layout.projectDirectory.getAsFile().relativePath(generatedSourceDir.get().asFile)}/**" as String
+    targetExclude "${layout.projectDirectory.getAsFile().relativePath(quickfixGeneratedSourcesDir.get().asFile)}/**" as String
   }
 }

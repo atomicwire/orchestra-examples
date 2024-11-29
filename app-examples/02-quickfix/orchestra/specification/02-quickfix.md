@@ -1,14 +1,14 @@
 # Derived Specification Example version 1.0
 
-| Term       | Value                                                                                                                                                                                                                                                                                             |
-|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| title      | Derived Specification Example                                                                                                                                                                                                                                                                     |
-| creator    | Atomic Wire Technology Limited                                                                                                                                                                                                                                                                    |
-| created    | 2024-11-01                                                                                                                                                                                                                                                                                        |
-| conformsTo | [Orchestra v1-0-STANDARD](https://www.fixtrading.org/packages/fix-orchestra-technical-specification-v1-0/)                                                                                                                                                                                        |
-| abstract   | A derived specification based on FIX 4.4 as the reference standard. This specification features a single custom FIX message incorporating user-defined fields not part of the FIX standard, along with deprecated fields from earlier versions of FIX that are needed for backward compatibility. |
-| source     | [FIX.4.4](https://orchestrahub.org/-/fix-4.4)                                                                                                                                                                                                                                                     |
-| rights     | Copyright 2024 Atomic Wire Technology Limited                                                                                                                                                                                                                                                     |
+| Term       | Value                                                                                                                                                                                                                                                                                      |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| title      | Derived Specification Example                                                                                                                                                                                                                                                              |
+| creator    | Atomic Wire Technology Limited                                                                                                                                                                                                                                                             |
+| created    | 2024-11-01                                                                                                                                                                                                                                                                                 |
+| conformsTo | [Orchestra v1-0-STANDARD](https://www.fixtrading.org/packages/fix-orchestra-technical-specification-v1-0/)                                                                                                                                                                                 |
+| abstract   | A derived specification based on FIX 4.4 as the reference standard. This specification features a single FIX message incorporating user-defined fields not part of the FIX standard, along with deprecated fields from earlier versions of FIX that are needed for backward compatibility. |
+| source     | [FIX.4.4](https://orchestrahub.org/-/fix-4.4)                                                                                                                                                                                                                                              |
+| rights     | Copyright 2024 Atomic Wire Technology Limited                                                                                                                                                                                                                                              |
 
 ## Messages
 
@@ -16,7 +16,7 @@
 
 #### Synopsis
 
-This example illustrates how to define a custom `NewOrderSingle` message as part of a derived specification.
+This example illustrates how to define a `NewOrderSingle` message as part of a derived specification.
 
 Users only need to specify the desired elements for the message and provide details for any custom fields.
 
@@ -29,7 +29,7 @@ In this example, most fields and components follow the standard from the referen
 
 | Name                  | Tag       | Presence | Added   | Documentation                                                                                                          |
 |-----------------------|-----------|----------|---------|------------------------------------------------------------------------------------------------------------------------|
-| StandardHeader        | component | required | FIX.2.7 |                                                                                                                        |
+| StandardHeader        | component | required | FIX.2.7 | MsgType=D                                                                                                              |
 | Account               | 1         | required | FIX.2.7 | **Custom Presence**: `Account` is an optional field in FIX 4.4.                                                        |
 | ClOrdID               | 11        | required | FIX.2.7 |                                                                                                                        |
 | Currency              | 15        | optional | FIX.2.7 |                                                                                                                        |
@@ -56,7 +56,6 @@ In this example, most fields and components follow the standard from the referen
 | SecondaryClOrdID      | 526       | optional | FIX.4.3 |                                                                                                                        | 
 | CorporateBuyback      | 5001      | optional |         | **Custom Field**: `CorporateBuyback` is a user-defined field (UDF) that is not present in the reference specification. |
 | StandardTrailer       | component | required | FIX.2.7 |                                                                                                                        | 
-
 
 ## Components
 

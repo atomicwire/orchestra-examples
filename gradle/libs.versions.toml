@@ -3,7 +3,7 @@ jackson = "2.13.+"
 jakarta-annotation-api = "3.0.+"
 log4j = "2.23.+"
 lombok = "1.18.+"
-orchestra = "0.1.5"
+orchestra = "0.1.8"
 orchestra-specs-bom = "ci-1223"
 picocli = "4.6.+"
 quickfixj = "2.3.+"
@@ -18,6 +18,7 @@ log4j-slf4j-impl = { group = "org.apache.logging.log4j", name = "log4j-slf4j-imp
 lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" }
 orchestra-accessor-quickfix = { group = "io.atomicwire.orchestra", name = "orchestra-accessor-quickfix", version.ref = "orchestra" }
 orchestra-core = { group = "io.atomicwire.orchestra", name = "orchestra-core", version.ref = "orchestra" }
+orch-gen-quickfix-code-generator = { group = "io.atomicwire.orchestra", name = "orch-gen-quickfix-code-generator-cli", version.ref = "orchestra" }
 orchestra-specs-bom = { group = "io.atomicwire.orchestra", name = "external-orch-specs-bom", version.ref = "orchestra-specs-bom" }
 orchestra-spec-fix44-plugins = { group = "io.atomicwire.orchestra.spec", name = "fix-44-plugins" }
 picocli = { group = "info.picocli", name = "picocli", version.ref = "picocli" }
