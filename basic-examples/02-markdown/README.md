@@ -138,7 +138,7 @@ BUILD FAILED in 3s
 To apply the proposed changes, run the `spotlessApply` task.
 
 ```shell
-$ './gradlew :basic-examples:02-markdown:spotlessApply'
+$ ./gradlew :basic-examples:02-markdown:spotlessApply
 ```
 
 ## Run

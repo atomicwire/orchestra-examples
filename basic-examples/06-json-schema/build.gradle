@@ -41,6 +41,6 @@ tasks.named('runExample') {
   dependsOn tasks.named('orchestraGenerateJsonSchema')
 
   doLast {
-    println "Generated Json schema in ${orchestra.jsonSchema.outputDir.get()}"
+    println "Generated JSON schema in ${orchestra.jsonSchema.outputDir.get()}"
   }
 }

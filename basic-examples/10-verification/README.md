@@ -27,7 +27,7 @@ orchestra {
     }
   }
 
-  // Enable validation
+  // Validation is enabled by default; shown here for completeness
   validation {}
 }
 ```
@@ -42,7 +42,7 @@ orchestra {
 
 ### Encoding compatibility
 
-To enable encoding compatibility checking for FIX tagvalue, use the `fixTagValueCompatibility` property.
+To enable encoding compatibility checking for FIX tagvalue, use the `fixCompatible` extension.
 
 ```groovy
 orchestra {
@@ -52,9 +52,9 @@ orchestra {
     }
   }
 
-  // Enable encoding compatibility checking for FIX tag value
+  // Enable encoding compatibility checking for FIX tagvalue
   validation {
-    fixTagValueCompatibility = 'fix-latest'
+    fixCompatible {}
   }
 }
 ```
@@ -73,7 +73,7 @@ orchestra {
     }
   }
 
-  // Enable validation
+  // Validation is enabled by default; shown here for completeness
   validation {}
 
   // Enable metadata checking for document generation

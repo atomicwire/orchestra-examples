@@ -40,6 +40,6 @@ $ ./basic-examples/01-orchestra-hub/build/orchestra/specification/01-orchestra-h
 
 ### Visualisation
 
-You can search and explore the specification in [Orchimate](https://orchimate.org/).
+You can search and explore the specification in [Orchimate](https://orchimate.org/), loading it with "Add Local Spec".
 
 ![](docs/images/orchimate.png)

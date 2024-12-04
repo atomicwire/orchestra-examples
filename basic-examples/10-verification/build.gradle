@@ -11,7 +11,9 @@ orchestra {
   }
 
   // Enable encoding compatibility checking for FIX tagvalue
-  validation {}
+  validation {
+    //fixCompatible {} // TODO: uncomment when updating plugin to >= 0.1.15
+  }
 
   // Enable metadata checking for document generation
   documentation {
