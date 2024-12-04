@@ -5,9 +5,9 @@ plugins {
 
 orchestra {
   specification {
-    // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
+    // By default, the plugin will search for a Markdown file at `orchestra/specification/<project-name>.md`
     markdown {
-      // Use Spotless to automatically format Orchestra Markdown and enforce style
+      // Enable Spotless to automatically format Orchestra Markdown and enforce style
       enableSpotless()
     }
   }

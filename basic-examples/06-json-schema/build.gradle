@@ -4,26 +4,34 @@ plugins {
 
 orchestra {
   specification {
-    // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
     markdown {}
 
-    // In order to generate a JSON schema for an Orchestra spec, additional type information is required that indicates
-    // which JSON datatype corresponds to each datatype in the Orchestra spec.
+    // Specify the corresponding JSON datatype for each datatype in the Orchestra specification.
     encoding {
       datatypeMapping([
-        double: [
+        Double: [
           JSON: 'number',
         ],
-        string: [
+        Integer: [
+          JSON: 'number',
+        ],
+        Price: [
+          JSON: 'number',
+        ],
+        Quantity: [
+          JSON: 'number',
+        ],
+        String: [
           JSON: 'string',
         ],
-        timestamp: [
+        Timestamp: [
           JSON: 'string',
         ],
       ])
     }
   }
 
+  // Enable JSON schema generation
   jsonSchema {
     namespace = 'org.example.orchestra'
   }
@@ -33,6 +41,6 @@ tasks.named('runExample') {
   dependsOn tasks.named('orchestraGenerateJsonSchema')
 
   doLast {
-    println "Generated Json schema in ${orchestra.jsonSchema.outputDir.get()}"
+    println "Generated JSON schema in ${orchestra.jsonSchema.outputDir.get()}"
   }
 }

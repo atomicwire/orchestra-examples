@@ -1,14 +1,16 @@
 # Orchestra Hub
 
-[Orchestra Hub](https://orchestrahub.org) is a repository that allows firms to publish and distribute their specifications to other market participants.
+This example demonstrates how to fetch Orchestra specifications from a remote repository.
 
-This example shows how to configure the plugin to pull an existing Orchestra spec directly from the  repository. 
+[Orchestra Hub](https://orchestrahub.org) is a public platform where organizations can share their Orchestra specifications with the broader community, access specifications published by others, and collaborate on standardization efforts.
 
-Plugin users can then use these specs to create their own [custom specifications](../03-derived) and generate artifacts (such as [code libraries](../07-java) and [schemas](../05-avro-schema)) for use in their [applications](../../app-examples).
+The plugin enables users to fetch a specification from the repository, create [derived](../03-derived) versions, and generate artifacts like [code libraries](../07-java) and [schemas](../05-avro-schema) to simplify application integration. 
+
+> **Note**: Orchestra Hub supports versioning, allowing users to update their applications by simply adjusting the version number specified in their build files whenever a new version of a specification is published. 
 
 ## Configuration
 
-The `name` and `version` of the specification is configured in the [build.gradle](./build.gradle) file using the `repository` option.
+Specify the `name` and `version` of the specification in the [build.gradle](./build.gradle) file using the `repository` extension.
 
 ```groovy
 orchestra {
@@ -28,11 +30,16 @@ $ ./gradlew :basic-examples:01-orchestra-hub:runExample
 
 > **Note**: `runExample` is wired to call the `orchestraBuildSpec` task from the Orchestra plugin.
 
-
 ## Results
 
-The spec will be output to the Gradle build folder.
+The specification will be output to the Gradle build folder.
 
 ```shell
 $ ./basic-examples/01-orchestra-hub/build/orchestra/specification/01-orchestra-hub.xml
 ```
+
+### Visualisation
+
+You can search and explore the specification in [Orchimate](https://orchimate.org/), loading it with "Add Local Spec".
+
+![](docs/images/orchimate.png)

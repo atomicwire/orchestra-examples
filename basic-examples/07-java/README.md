@@ -1,38 +1,52 @@
-# Java example
+# Java Code Generation
 
-This example shows how to generate code for use with the Orchestra Java library.
+This example demonstrates how to generate Java code directly from an Orchestra specification.
 
-Java will be generated for the messages, components, fields and codesets defined in the Orchestra spec.
+This feature allows developers to streamline the creation of applications that process Orchestra-specified data using the Orchestra Java library with built-in support for multiple data encodings. 
+
+The plugin generates Java classes for the messages, components, fields, and codesets specified in the Orchestra specification.
+
+The example uses the Order Book specification from a [previous](../02-markdown) example.
 
 ## Configuration
 
-To generate Java code from an Orchestra specification, additional type information is needed to map each datatype in the Orchestra spec to the corresponding Java datatype.
+To generate Java code from an Orchestra specification, additional type information is needed to map each datatype in the Orchestra specification to the corresponding Java datatype.
 
-Datatype mapping is supplied via the `encoding` extension in the [build.gradle](./build.gradle).
+Add the `encoding` extension to the [build.gradle](./build.gradle) file and define a datatype mapping for each datatype in your Orchestra specification.
 
-The Java code generation is activated by the presence of the Java `codeGen` extension. A `packageName` value must be provided.
+Java code generation is enabled by the presence of the Java `codeGen` extension. A `packageName` value must be provided.
 
 ```groovy
 orchestra {
   specification {
-    // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
     markdown {}
 
+    // Specify the corresponding Java type for each datatype in the Orchestra specification.
     encoding {
       datatypeMapping([
-        double: [
+        Double: [
           Java: 'double',
         ],
-        string: [
+        Integer: [
+          Java: 'int',
+        ],
+        Price: [
+          Java: 'double',
+        ],
+        Quantity: [
+          Java: 'int',
+        ],
+        String: [
           Java: 'string',
         ],
-        timestamp: [
+        Timestamp: [
           Java: 'instant',
         ],
       ])
     }
   }
 
+  // Enable Java code generation
   java {
     codeGen {
       packageName = 'org.example.orchestra'

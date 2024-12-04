@@ -1,36 +1,50 @@
-# JSON schemas
+# JSON Schema Generation
 
-This example shows how to generate JSON schemas from a custom Orchestra spec.
+This example demonstrates how to generate [JSON schemas](https://json-schema.org/) directly from an Orchestra specification.
+
+This feature streamlines the creation of REST APIs and integration with modern UI frameworks, data storage solutions, and analytics tools like [Elasticsearch](https://www.elastic.co/) by eliminating the need for separate JSON schema management.
+
+The example uses the Order Book specification from a [previous](../02-markdown) example.
 
 ## Configuration
 
-To generate an JSON schema from an Orchestra specification, additional type information is needed to map each datatype in the Orchestra spec to the corresponding JSON datatype.
+To generate a JSON schema from an Orchestra specification, additional type information is needed to map each datatype in the Orchestra specification to the corresponding JSON datatype.
 
-Datatype mapping is supplied via the `encoding` extension in the [build.gradle](./build.gradle).
+Add the `encoding` extension to the [build.gradle](./build.gradle) file and define a datatype mapping for each datatype in your Orchestra specification.
 
-The JSON schema generation is activated by the presence of the `jsonSchema` extension. A `namespace` value must be provided.
+JSON schema generation is enabled by the presence of the `jsonSchema` extension. A `namespace` value must be provided.
 
 ```groovy
 orchestra {
   specification {
-    // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
     markdown {}
 
+    // Specify the corresponding JSON datatype for each datatype in the Orchestra specification.
     encoding {
       datatypeMapping([
-        double: [
+        Double: [
           JSON: 'number',
         ],
-        string: [
+        Integer: [
+          JSON: 'number',
+        ],
+        Price: [
+          JSON: 'number',
+        ],
+        Quantity: [
+          JSON: 'number',
+        ],
+        String: [
           JSON: 'string',
         ],
-        timestamp: [
+        Timestamp: [
           JSON: 'string',
         ],
       ])
     }
   }
 
+  // Enable JSON schema generation
   jsonSchema {
     namespace = 'org.example.orchestra'
   }
@@ -49,7 +63,7 @@ $ ./gradlew :basic-examples:06-json-schema:runExample
 
 ## Results
 
-The JSON schema(s) will be output to the Gradle build folder.
+The JSON schema will be output to the Gradle build folder.
 
 ```shell
 $ ./basic-examples/06-json-schema/build/generated/sources/orch-gen-jsonschema/main/jsonschema/06-json-schema.json

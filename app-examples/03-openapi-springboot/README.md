@@ -27,5 +27,6 @@ You can query the server over HTTP.
 
 ```shell
 $ curl localhost:8080/instrument/IBM
+
 {"UPICode":null,"Symbol":"IBM","SecurityID":"459200-10-1","SecurityIDSource":"CUSIP","Product":"EQUITY","CFICode":"ESNUOB"}
 ```

@@ -4,26 +4,34 @@ plugins {
 
 orchestra {
   specification {
-    // By default, the plugin looks for your Markdown file at `orchestra/specification/<project-name>.md`
     markdown {}
 
-    // In order to generate the Orchestra Java code for an Orchestra spec, additional type information is required that
-    // indicates which Java datatype corresponds to each datatype in the Orchestra spec.
+    // Specify the corresponding Java type for each datatype in the Orchestra specification.
     encoding {
       datatypeMapping([
-        double: [
+        Double: [
           Java: 'double',
         ],
-        string: [
+        Integer: [
+          Java: 'int',
+        ],
+        Price: [
+          Java: 'double',
+        ],
+        Quantity: [
+          Java: 'int',
+        ],
+        String: [
           Java: 'string',
         ],
-        timestamp: [
+        Timestamp: [
           Java: 'instant',
         ],
       ])
     }
   }
 
+  // Enable Java code generation
   java {
     codeGen {
       packageName = 'org.example.orchestra'

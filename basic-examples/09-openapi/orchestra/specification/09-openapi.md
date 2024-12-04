@@ -7,7 +7,7 @@
 
 ## Messages
 
-### Message Custom Message type C1 (1)
+### Message NewOrderSingle type D category SingleGeneralOrderHandling (14)
 
 #### Synopsis
 
@@ -19,7 +19,7 @@ An example Execution Report
 
 ## Components
 
-### Component Instrument (1003)
+### Component Instrument category Common (1003)
 
 |       Name       | Tag  | Presence |
 |------------------|------|----------|
