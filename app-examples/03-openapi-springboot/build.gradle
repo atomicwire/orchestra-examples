@@ -1,25 +1,77 @@
 import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
   id 'application'
-
-  id 'io.spring.dependency-management'
+  id 'io.atomicwire.gradle.orchestra'
   id 'org.openapi.generator'
   id 'org.springframework.boot'
 }
 
+configurations {
+  openApiSpringBootScaffolding {
+    canBeConsumed = true
+    canBeResolved = false
+  }
+}
+
 dependencies {
+
+  // Spring Boot BOM
+  implementation platform(SpringBootPlugin.BOM_COORDINATES)
+  annotationProcessor platform(SpringBootPlugin.BOM_COORDINATES)
+  testAnnotationProcessor platform(SpringBootPlugin.BOM_COORDINATES)
+
   implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
   implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
-  implementation group: 'org.springframework.data', name: 'spring-data-jpa'
+
+}
+
+orchestra {
+  specification {
+    markdown {
+      reference orchestraHub(name: 'fix-latest', version: 'ep292')
+      enableSpotless()
+    }
+
+    // In order to generate a JSON schema for an Orchestra spec, additional type information is required that indicates
+    // which JSON datatype corresponds to each datatype in the Orchestra spec.
+    encoding {
+      datatypeMapping([
+        int: [
+          JSON: 'number',
+        ],
+        String: [
+          JSON: 'string',
+        ],
+        Pattern: [
+          JSON: 'string',
+        ]
+      ])
+    }
+  }
+
+  // Generate a JSON Schema for inclusion in the OpenAPI spec
+  jsonSchema {
+    namespace = 'org.example.orchestra'
+  }
+}
+
+// Colocate the two files so that the provided openapi.yaml can easily reference Schemas from the
+// generated schemas.json file
+def colocateOpenApiFiles = tasks.register('colocateOpenApiFiles', Copy) {
+  from(orchestraGenerateJsonSchema) {
+    rename { 'schemas.json' }
+  }
+  from 'openapi.yaml'
+
+  into layout.buildDirectory.dir('tmp/openapi')
 }
 
 def generatedSourceDir = layout.buildDirectory.dir('generated/sources/openapi-springboot')
 
 // Configure the OpenAPI Generator
 def openApiGenerate = tasks.named('openApiGenerate', GenerateTask) {
-  // use the OpenAPI files from basic-examples/09-openapi
-  def colocateOpenApiFiles = project(':basic-examples:09-openapi').tasks.named('colocateOpenApiFiles', Copy)
   inputs.dir(colocateOpenApiFiles.map { it.destinationDir })
   inputSpec = colocateOpenApiFiles.map {"${it.destinationDir}/openapi.yaml" as String }
 
@@ -49,9 +101,13 @@ def openApiGenerate = tasks.named('openApiGenerate', GenerateTask) {
   outputDir = generatedSourceDir.get().toString()
 }
 
-// ensure the code is generated before java is compiled and that it is in our main sourceSet
-tasks.named('compileJava') { dependsOn(openApiGenerate) }
-sourceSets.main.java.srcDir generatedSourceDir.get().dir('src/main/java')
+sourceSets {
+  main {
+    java {
+      srcDir openApiGenerate
+    }
+  }
+}
 
 // Exclude generated code from spotless
 spotless {
