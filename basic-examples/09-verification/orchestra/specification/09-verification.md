@@ -44,9 +44,8 @@ A custom message that demonstrates XML Schema validation errors.
 | Sort | Name                            | Tag   | Scenario | Presence | Documentation                                                                                                                                             |
 |------|---------------------------------|-------|----------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 1    | StandardHeader                  | c     |          | required | MsgType=U1                                                                                                                                                |
-| 2    | FieldWithUnknownType            | 5101  |          | required | **SAXParseException**: lineNumber: 1838; columnNumber: 60; cvc-complex-type.4: Attribute 'type' must appear on element 'fixr:field'.                      |
-| 3    | ScenarioVariantsWithSameNameGrp | g     | Variant  | required | **SAXParseException**: Duplicate key value [ScenarioVariantsWithSameNameGrp,Variant] declared for identity constraint "groupNameKey" of element "groups". |
-| 4    | StandardTrailer                 | c     |          | required |                                                                                                                                                           |
+| 2    | ScenarioVariantsWithSameNameGrp | g     | Variant  | required | **SAXParseException**: Duplicate key value [ScenarioVariantsWithSameNameGrp,Variant] declared for identity constraint "groupNameKey" of element "groups". |
+| 3    | StandardTrailer                 | c     |          | required |                                                                                                                                                           |
 
 ### Message IntegrityCheckingErrors type U2 category IntegrityChecking (2)
 

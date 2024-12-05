@@ -6,8 +6,9 @@
 
 <!-- TOC -->
 * [Introduction](#introduction)
-  * [Basic examples](#basic-examples)
-  * [Application examples](#application-examples)
+* [Examples](#examples)
+  * [Plugin features](#plugin-features)
+  * [Applications](#applications)
 * [Plugin configuration](#plugin-configuration)
 <!-- TOC -->
 
@@ -15,20 +16,30 @@
 
 [Orchestra](https://www.fixtrading.org/standards/fix-orchestra-online/) is an open industry standard created by the [FIX Trading Community](https://www.fixtrading.org) to establish **machine-readable rules of engagement** between counterparties.
 
-This plugin offers convenient tools for working with Orchestra specifications. Users can create and validate specifications, manage versions, and verify compatibility for specific data encodings. It also allows generation of various build artifacts to streamline application development such as code libraries, schemas, and documentation. 
+This plugin provides useful features for working with Orchestra specifications:
+* Create and validate specifications
+* Manage specification versions
+* Verify compatibility with specific data encodings
+* Generate build artifacts (e.g., code libraries, schemas, documentation) to facilitate application development
+* Integrate Orchestra into CI/CD pipelines
+* Use specifications published by other counterparties
 
-The plugin also enables users to integrate Orchestra into their CI/CD pipelines.
+The motivation behind developing tools for the Orchestra standard includes:
+* Simplifying the adoption of Orchestra
+* Reducing implementation effort for industry participants
+* Streamlining the development process for integrating Orchestra specifications into applications
 
-### Basic examples
+## Examples 
 
-The [basic examples](./basic-examples) show you how to configure the plugin for common tasks. 
+### Plugin features
+
+The [basic examples](./basic-examples) demonstrate how to configure core plugin features, including building a specification from Markdown, generating documentation, and creating build artifacts for application integration.
 
 Examples should be run from the root directory of this repository using the Gradle wrapper (full instructions are included in the `README.md` file of each subproject).
 
-
 | Example                                               | Description                                                                                                                    |
 |-------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| [01-orchestra-hub](./basic-examples/01-orchestra-hub) | Fetch an existing specification from a central repository ([Orchestra Hub](https://orchestrahub.org))                          |
+| [01-orchestra-hub](./basic-examples/01-orchestra-hub) | Fetch an Orchestra specification from a central repository ([Orchestra Hub](https://orchestrahub.org))                         |
 | [02-markdown](./basic-examples/02-markdown)           | Build a custom specification from a Markdown file                                                                              |
 | [03-derived](./basic-examples/03-derived)             | Create a derived specification from a reference specification                                                                  |
 | [04-documentation](./basic-examples/04-documentation) | Generate PDF and EPUB documentation from an Orchestra specification                                                            |
@@ -46,11 +57,9 @@ $ ./gradlew :basic-examples:01-orchestra-hub:runExample
 
 Results are output to the subproject Gradle build folder (i.e. `build/orchestra`). For instance, the results for the [01-orchestra-hub](./basic-examples/01-orchestra-hub) example are output to `./basic-examples/01-orchestra-hub/build/orchestra/`
 
-
-### Application examples
+### Applications
 
 The [application examples](./app-examples) build on the [basic-examples](./basic-examples) to create runnable applications for various use-cases.
-
 
 | Example                                                       | Description                                                                                                          |
 |---------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
@@ -58,7 +67,7 @@ The [application examples](./app-examples) build on the [basic-examples](./basic
 | [02-quickfix](./app-examples/02-quickfix)                     | Example QuickFIX/J server and client applications that use a QuickFIX Data Dictionary generated from Orchestra       |
 | [03-openapi-springboot](./app-examples/03-openapi-springboot) | An OpenAPI Spring Boot application powered by Orchestra                                                              |
 
-The application examples are each demonstrated differently. Please refer to their respective `README.md` files for the command to run them.
+The application examples are each demonstrated differently. Please refer to their respective `README.md` files for the commands to run them.
 
 ## Plugin configuration
 

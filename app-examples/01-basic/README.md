@@ -1,24 +1,29 @@
 # Java application
 
-This example shows how to build a Java application that parses and manipulates data according to an Orchestra spec (FIX 4.4).
+This example demonstrates how to build a basic Java application that processes and manipulates data using an Orchestra specification (FIX 4.4).
 
 The example application:
-* Reads input data files from the configured [example-input-data](./example-input-data) directory.
-* Parses FIX TagValue encoded data using QuickFIX (via an existing QuickFix Resource Accessor).
-* Sums the order count and total order quantity by instrument for all `NewOrderSingle` messages.
-* Returns a summary of the computed statistics.
+* Loads input data from the designated [example-input-data](./example-input-data) directory.
+* Parses FIX tagvalue-encoded data using QuickFIX (through an existing QuickFIX Resource Accessor).
+* Calculates the order count and total order quantity by instrument for all `NewOrderSingle` messages.
+* Outputs a summary of the computed statistics.
 
 ## Configuration
 
-The FIX 4.4 spec is fetched from Orchestra Hub and Java codegen configured in the [build.gradle](./build.gradle) file.
+The [build.gradle](./build.gradle) includes the Orchestra plugin with configuration to use a reference standard from [Orchestra Hub](https://orchestrahub.org/) and enable Java code generation.
 
 ```groovy
+plugins {
+    id 'io.atomicwire.gradle.orchestra'
+}
+
 orchestra {
   specification {
     name = 'fix-4.4'
     repository orchestraHub(group: 'atomicwire', name: 'fix-4.4-enriched', version: '4.4')
   }
 
+  // Enable Java code generation
   java {
     codeGen {
       packageName = 'org.example.orchestra.fix44'
@@ -37,4 +42,4 @@ $ ./gradlew :app-examples:01-basic:run
 
 ## Results
 
-The summary results will be displayed in the console.
+The summary statistics will be displayed in the console.
