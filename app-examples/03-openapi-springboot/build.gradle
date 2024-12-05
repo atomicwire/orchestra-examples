@@ -34,8 +34,7 @@ orchestra {
       enableSpotless()
     }
 
-    // In order to generate a JSON schema for an Orchestra spec, additional type information is required that indicates
-    // which JSON datatype corresponds to each datatype in the Orchestra spec.
+    // Specify the corresponding JSON datatype for each datatype in the Orchestra specification.
     encoding {
       datatypeMapping([
         int: [
@@ -51,7 +50,7 @@ orchestra {
     }
   }
 
-  // Generate a JSON Schema for inclusion in the OpenAPI spec
+  // Generate a JSON Schema for inclusion in the OpenAPI specification
   jsonSchema {
     namespace = 'org.example.orchestra'
   }

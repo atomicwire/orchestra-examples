@@ -63,7 +63,7 @@ orchestra {
 
 ### Metadata checking
 
-To enable metadata checking for document generation, use the `messageDefinitionReport` extension. Refer to the [documentation](../04-documentation.md) example to configure the Docker plugin.  
+To enable metadata checking for document generation, use the `messageDefinitionReport` extension. Refer to the [documentation](../04-documentation) example to configure the Docker plugin.  
 
 ```groovy
 orchestra {

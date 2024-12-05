@@ -29,17 +29,16 @@ dependencies {
 }
 
 orchestra {
-
   specification {
     markdown {
       reference orchestraHub(name: 'fix-4.4', version: '4.4')
     }
   }
 
+  // Enable QuickFIX data dictionary generation
   quickfix {
     dataDictionary {}
   }
-
 }
 
 tasks.register('runServer', JavaExec) {
