@@ -85,6 +85,9 @@ def generateQuickFixMessages = tasks.register("generateQuickFixMessages", JavaEx
 
     // Disable FIXT package generation to instead utilize the version of FIXT11.xml bundled with QuickFIX/J
     '--no-generateFixt11Package',
+
+    // Use the same version specific package names as QuickFIX/J
+    '--fix-version', 'FIX44',
   ])
 }
 sourceSets {
