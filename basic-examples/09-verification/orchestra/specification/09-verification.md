@@ -41,11 +41,11 @@
 
 A custom message that demonstrates XML Schema validation errors.
 
-| Sort | Name                            | Tag   | Scenario | Presence | Documentation                                                                                                                                             |
-|------|---------------------------------|-------|----------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1    | StandardHeader                  | c     |          | required | MsgType=U1                                                                                                                                                |
-| 2    | ScenarioVariantsWithSameNameGrp | g     | Variant  | required | **SAXParseException**: Duplicate key value [ScenarioVariantsWithSameNameGrp,Variant] declared for identity constraint "groupNameKey" of element "groups". |
-| 3    | StandardTrailer                 | c     |          | required |                                                                                                                                                           |
+| Sort | Name                             | Tag   | Scenario | Presence | Documentation                                                                                                                                             |
+|------|----------------------------------|-------|----------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1    | StandardHeader                   | c     |          | required | MsgType=U1                                                                                                                                                |
+| 2    | ScenarioVariantsWithSameNameGrp2 | g     | Variant  | required | **SAXParseException**: Duplicate key value [ScenarioVariantsWithSameNameGrp,Variant] declared for identity constraint "groupNameKey" of element "groups". |
+| 3    | StandardTrailer                  | c     |          | required |                                                                                                                                                           |
 
 ### Message IntegrityCheckingErrors type U2 category IntegrityChecking (2)
 
@@ -102,7 +102,7 @@ A custom message that demonstrates FIX tagvalue compatibility errors.
 | 3    | FieldB     | 5002 | required |
 | 4    | FieldC     | 5003 | optional |
 
-### Group ScenarioVariantsWithSameNameGrp scenario Variant (1)
+### Group ScenarioVariantsWithSameNameGrp2 scenario Variant (1)
 
 #### Synopsis
 
@@ -111,16 +111,6 @@ A custom message that demonstrates FIX tagvalue compatibility errors.
 | 1    | NoOfGroups | 5000 | optional |
 | 2    | FieldA     | 5001 | required |
 | 3    | FieldB     | 5002 | required |
-
-### Group ScenarioVariantsWithSameNameGrp scenario Variant (1)
-
-#### Synopsis
-
-| Sort | Name       | Tag  | Presence |
-|------|------------|------|----------|
-| 1    | NoOfGroups | 5000 | optional |
-| 2    | FieldB     | 5002 | required |
-| 3    | FieldC     | 5003 | required |
 
 ### Group ScenarioElementsNotSubsetGrp scenario base (2)
 
