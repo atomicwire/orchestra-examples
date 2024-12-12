@@ -119,3 +119,9 @@ The server returns the following response.
 ```json
 {"UPICode":null,"Symbol":"IBM","SecurityID":"459200-10-1","SecurityIDSource":"CUSIP","Product":"EQUITY","CFICode":"ESNUOB"}
 ```
+
+### Visualisation
+
+You can search and explore the specification in [Orchimate](https://orchimate.org/).
+
+![](docs/images/orchimate.png)
