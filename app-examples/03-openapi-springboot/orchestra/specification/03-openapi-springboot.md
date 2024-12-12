@@ -1,9 +1,15 @@
-# Example Custom FIX version 1.0
+# Custom Instrument Example version 1.0
 
-|    Term    |                                                   Value                                                    |
-|------------|------------------------------------------------------------------------------------------------------------|
-| title      | Example Custom FIX spec                                                                                    |
-| conformsTo | [Orchestra v1-0-STANDARD](https://www.fixtrading.org/packages/fix-orchestra-technical-specification-v1-0/) |
+| Term       | Value                                                                                                                                                                      |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| title      | Custom Instrument Example                                                                                                                                                  |
+| creator    | Atomic Wire Technology Limited                                                                                                                                             |
+| created    | 2024-11-01                                                                                                                                                                 |
+| conformsTo | [Orchestra v1-0-STANDARD](https://www.fixtrading.org/packages/fix-orchestra-technical-specification-v1-0/)                                                                 |
+| abstract   | A derived specification based on FIX Latest as the reference standard. This specification features a single FIX message incorporating a user-defined instrument component. |
+| source     | [FIX Latest](https://orchestrahub.org/-/fix-latest)                                                                                                                        |
+| rights     | Copyright 2024 Atomic Wire Technology Limited                                                                                                                              |
+ 
 
 ## Messages
 

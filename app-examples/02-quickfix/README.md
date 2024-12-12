@@ -80,3 +80,9 @@ $ ./gradlew :app-examples:02-quickfix:runClient
 Log messages will be displayed in both console windows, illustrating the communication between the QuickFIX engine and client application, as well as the successful processing of a `NewOrderSingle` message.
 
 > **Note**: The QuickFIX engine will terminate automatically after 2 minutes.
+
+### Visualisation
+
+You can search and explore the specification in [Orchimate](https://orchimate.org/).
+
+![](docs/images/orchimate.png)
