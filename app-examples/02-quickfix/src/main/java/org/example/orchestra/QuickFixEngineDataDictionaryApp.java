@@ -16,18 +16,16 @@ import quickfix.IncorrectDataFormat;
 import quickfix.IncorrectTagValue;
 import quickfix.MemoryStoreFactory;
 import quickfix.Message;
+import quickfix.MessageCracker;
 import quickfix.Session;
 import quickfix.SessionID;
 import quickfix.SessionSettings;
 import quickfix.SocketAcceptor;
-import quickfix.field.CorporateBuyback;
+import quickfix.UnsupportedMessageType;
 import quickfix.field.MsgType;
-import quickfix.field.Rule80A;
-import quickfix.field.SecurityID;
-import quickfix.field.Side;
 
 @Slf4j
-public class QuickFixEngineDataDictionaryApp implements Application {
+public class QuickFixEngineDataDictionaryApp extends MessageCracker implements Application {
 
   @Override
   public void onCreate(SessionID sessionId) {
@@ -61,7 +59,7 @@ public class QuickFixEngineDataDictionaryApp implements Application {
 
   @Override
   public void fromApp(Message message, SessionID sessionId)
-      throws FieldNotFound, IncorrectTagValue, IncorrectDataFormat {
+      throws FieldNotFound, IncorrectTagValue, IncorrectDataFormat, UnsupportedMessageType {
     try (var session = Session.lookupSession(sessionId)) {
       // The validation here is not strictly necessary as the FIX engine has already validated
       // against AppDataDictionary. If however, the custom Data Dictionary contains new msgTypes
@@ -87,16 +85,23 @@ public class QuickFixEngineDataDictionaryApp implements Application {
       throw e;
     }
 
-    // Perform application specific processing
-    if ((MsgType.NEW_ORDER_SINGLE).equals(message.getHeader().getString(MsgType.FIELD))) {
-      char side = message.getChar(Side.FIELD);
-      log.info(
-          "NewOrderSingle received: Symbol={}, Side={}, CorporateBuyBack={}, Rule80A={}",
-          message.getString(SecurityID.FIELD),
-          (side == '1' ? "Buy" : "Sell"),
-          message.getChar(CorporateBuyback.FIELD),
-          message.getChar(Rule80A.FIELD));
-    }
+    // Perform application specific processing - the message cracker will call the appropriate
+    // method for the type of the message. In this example application the method handlers are
+    // annotated with @Handler, so newOrderSingleHandler() will be called for any NewOrderSingle
+    // message
+    crack(message, sessionId);
+  }
+
+  @Handler
+  public void newOrderSingleHandler(quickfix.fix44.NewOrderSingle newOrderSingle, SessionID sessionID) throws FieldNotFound {
+    char side = newOrderSingle.getSide().getValue();
+    log.info(
+        "NewOrderSingle received: Symbol={}, Side={}, CorporateBuyBack={}, Rule80A={} for session {}",
+        newOrderSingle.getInstrumentComponent().getSecurityID().getValue(),
+        (side == '1' ? "Buy" : "Sell"),
+        newOrderSingle.getCorporateBuyback().getValue(),
+        newOrderSingle.getRule80A().getValue(),
+        sessionID);
   }
 
   /** Replaces the SOH in messages with pipes for readability in log messages */
