@@ -89,7 +89,7 @@ orchestra {
 Use the Gradle wrapper to run the example.
 
 ```shell
-$ ./gradlew :basic-examples:10-verification:runExample
+$ ./gradlew :basic-examples:09-verification:runExample
 ```
 > **Note**: `runExample` is wired to call the `orchestraValidateSpec` task from the Orchestra plugin.
 

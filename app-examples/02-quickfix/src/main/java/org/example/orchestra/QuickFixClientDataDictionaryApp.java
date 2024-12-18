@@ -19,12 +19,9 @@ import quickfix.SessionID;
 import quickfix.SessionNotFound;
 import quickfix.SessionSettings;
 import quickfix.SocketInitiator;
-import quickfix.fix44.NewOrderSingle;
-import quickfix.fix44.component.Instrument;
 import quickfix.field.Account;
 import quickfix.field.ClOrdID;
 import quickfix.field.CorporateBuyback;
-import quickfix.field.MsgType;
 import quickfix.field.OrdType;
 import quickfix.field.OrderQty;
 import quickfix.field.Rule80A;
@@ -33,6 +30,9 @@ import quickfix.field.SecurityID;
 import quickfix.field.SecurityIDSource;
 import quickfix.field.Side;
 import quickfix.field.TransactTime;
+import quickfix.fix44.NewOrderSingle;
+import quickfix.fix44.component.Instrument;
+import quickfix.fix44.component.OrderQtyData;
 
 @Slf4j
 public class QuickFixClientDataDictionaryApp implements Application {
@@ -90,22 +90,22 @@ public class QuickFixClientDataDictionaryApp implements Application {
   private Message getBaseMessage(Boolean includeAccountField) {
     var message = new NewOrderSingle();
 
-    message.getHeader().setField(new MsgType(MsgType.NEW_ORDER_SINGLE));
-
     if (includeAccountField) {
-      message.setField(new Account("ACC123"));
+      message.set(new Account("ACC123"));
     }
-    message.setField(new ClOrdID("ORD12123"));
-    message.setField(new Side(Side.SELL));
-    message.setField(new TransactTime(LocalDateTime.now()));
-    message.setField(new OrdType(OrdType.MARKET));
-    message.setField(new OrderQty(3500));
+    message.set(new ClOrdID("ORD12123"));
+    message.set(new Side(Side.SELL));
+    message.set(new TransactTime(LocalDateTime.now()));
+    message.set(new OrdType(OrdType.MARKET));
+    var orderQtyData = new OrderQtyData();
+    orderQtyData.set(new OrderQty(3500));
+    message.set(orderQtyData);
     // custom fields from the Orchestra spec
-    message.setField(new CorporateBuyback(CorporateBuyback.PERMITTED));
-    message.setField(new Rule80A(Rule80A.PRINCIPAL));
+    message.set(new CorporateBuyback(CorporateBuyback.PERMITTED));
+    message.set(new Rule80A(Rule80A.PRINCIPAL));
     var instrument = new Instrument();
-    instrument.setField(new SecurityID("AAPL"));
-    instrument.setField(new SecurityIDSource(SecurityIDSource.ISIN));
+    instrument.set(new SecurityID("AAPL"));
+    instrument.set(new SecurityIDSource(SecurityIDSource.ISIN));
     message.set(instrument);
 
     return message;
