@@ -4,7 +4,7 @@ This example demonstrates how to create a derived specification based on a refer
 
 Using a reference specification greatly simplifies the management of custom specifications by allowing standard elements to be inherited rather than redefined. This allows users to focus exclusively on data customisations required for their business. 
 
-As in the [previous](../02-markdown) example, the derived specification is described in a Markdown file located on the user's local file system. Here, the plugin is configured to use [FIX.4.4](https://orchestrahub.org/-/fix-latest) as the reference specification.
+As in the [previous](../02-markdown) example, the derived specification is described in a Markdown file located on the user's local file system. Here, the plugin is configured to use [FIX.4.4](https://orchestrahub.org/-/fix-4.4) as the reference specification.
 
 The derived specification features a single custom FIX message incorporating user-defined fields not part of the FIX standard, along with deprecated fields from earlier versions of FIX that are needed for backward compatibility. 
 

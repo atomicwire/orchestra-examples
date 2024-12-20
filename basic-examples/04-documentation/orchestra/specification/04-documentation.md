@@ -29,35 +29,35 @@ In this example, most fields and components follow the standard from the referen
 * Including the `ExecBroker` field, which was deprecated in FIX 4.3.
 * Reordering the fields.
 
-| Name                  | Tag       | Presence | Added   | Documentation                                                                                                          |
-|-----------------------|-----------|----------|---------|------------------------------------------------------------------------------------------------------------------------|
-| StandardHeader        | component | required | FIX.2.7 | MsgType=D                                                                                                              |
-| Account               | 1         | required | FIX.2.7 | **Custom Presence**: `Account` is an optional field in FIX 4.4.                                                        |
-| ClOrdID               | 11        | required | FIX.2.7 |                                                                                                                        |
-| Currency              | 15        | optional | FIX.2.7 |                                                                                                                        |
-| ExecInst              | 18        | optional | FIX.2.7 |                                                                                                                        |
-| HandlInst             | 21        | optional | FIX.2.7 |                                                                                                                        |
-| Instrument            | component | required | FIX.4.3 | **Custom Component**: `Instrument` is custom component that defines a `SecurityID` and a `SecurityIDSource`.           |
-| OrderQtyData          | component | required | FIX.4.3 |                                                                                                                        |
-| OrdType               | 40        | required | FIX.2.7 |                                                                                                                        |
-| Price                 | 44        | optional | FIX.2.7 |                                                                                                                        |
-| Rule80A               | 47        | required | FIX.2.7 | **Custom Field**: `Rule80A` is from FIX 4.2. Replaced by OrderCapacity (tag 528) as of FIX.4.3.                        |
-| Side                  | 54        | required | FIX.2.7 |                                                                                                                        |
-| TimeInForce           | 59        | optional | FIX.2.7 |                                                                                                                        |
-| TransactTime          | 60        | required | FIX.4.2 |                                                                                                                        |
-| ExecBroker            | 76        | optional | FIX.2.7 | **Custom Field**: `ExecBroker` is from FIX 4.2. Deprecated as of FIX.4.3.                                              |
-| StopPx                | 99        | optional | FIX.2.7 |                                                                                                                        | 
-| ExDestination         | 100       | optional | FIX.2.7 |                                                                                                                        | 
-| MinQty                | 110       | optional | FIX.2.7 |                                                                                                                        | 
-| MaxFloor              | 111       | optional | FIX.2.7 |                                                                                                                        | 
-| LocateReqd            | 114       | optional | FIX.4.0 |                                                                                                                        | 
-| SettlCurrency         | 120       | optional | FIX.4.0 |                                                                                                                        | 
-| ExpireTime            | 126       | optional | FIX.4.0 |                                                                                                                        | 
-| ComplianceID          | 376       | optional | FIX.4.2 |                                                                                                                        | 
-| SolicitedFlag         | 377       | optional | FIX.4.2 |                                                                                                                        | 
-| SecondaryClOrdID      | 526       | optional | FIX.4.3 |                                                                                                                        | 
-| CorporateBuyback      | 5001      | optional |         | **Custom Field**: `CorporateBuyback` is a user-defined field (UDF) that is not present in the reference specification. |
-| StandardTrailer       | component | required | FIX.2.7 |                                                                                                                        | 
+| Sort | Name                  | Tag       | Presence | Added   | Documentation                                                                                                          |
+|------|-----------------------|-----------|----------|---------|------------------------------------------------------------------------------------------------------------------------|
+| 1    | StandardHeader        | component | required | FIX.2.7 | MsgType=D                                                                                                              |
+| 2    | Account               | 1         | required | FIX.2.7 | **Custom Presence**: `Account` is an optional field in FIX 4.4.                                                        |
+| 3    | ClOrdID               | 11        | required | FIX.2.7 |                                                                                                                        |
+| 4    | Currency              | 15        | optional | FIX.2.7 |                                                                                                                        |
+| 5    | ExecInst              | 18        | optional | FIX.2.7 |                                                                                                                        |
+| 6    | HandlInst             | 21        | optional | FIX.2.7 |                                                                                                                        |
+| 7    | Instrument            | component | required | FIX.4.3 | **Custom Component**: `Instrument` is custom component that defines a `SecurityID` and a `SecurityIDSource`.           |
+| 8    | OrderQtyData          | component | required | FIX.4.3 |                                                                                                                        |
+| 9    | OrdType               | 40        | required | FIX.2.7 |                                                                                                                        |
+| 10   | Price                 | 44        | optional | FIX.2.7 |                                                                                                                        |
+| 11   | Rule80A               | 47        | required | FIX.2.7 | **Custom Field**: `Rule80A` is from FIX 4.2. Replaced by OrderCapacity (tag 528) as of FIX.4.3.                        |
+| 12   | Side                  | 54        | required | FIX.2.7 |                                                                                                                        |
+| 13   | TimeInForce           | 59        | optional | FIX.2.7 |                                                                                                                        |
+| 14   | TransactTime          | 60        | required | FIX.4.2 |                                                                                                                        |
+| 15   | ExecBroker            | 76        | optional | FIX.2.7 | **Custom Field**: `ExecBroker` is from FIX 4.2. Deprecated as of FIX.4.3.                                              |
+| 16   | StopPx                | 99        | optional | FIX.2.7 |                                                                                                                        | 
+| 17   | ExDestination         | 100       | optional | FIX.2.7 |                                                                                                                        | 
+| 18   | MinQty                | 110       | optional | FIX.2.7 |                                                                                                                        | 
+| 19   | MaxFloor              | 111       | optional | FIX.2.7 |                                                                                                                        | 
+| 20   | LocateReqd            | 114       | optional | FIX.4.0 |                                                                                                                        | 
+| 21   | SettlCurrency         | 120       | optional | FIX.4.0 |                                                                                                                        | 
+| 22   | ExpireTime            | 126       | optional | FIX.4.0 |                                                                                                                        | 
+| 23   | ComplianceID          | 376       | optional | FIX.4.2 |                                                                                                                        | 
+| 24   | SolicitedFlag         | 377       | optional | FIX.4.2 |                                                                                                                        | 
+| 25   | SecondaryClOrdID      | 526       | optional | FIX.4.3 |                                                                                                                        | 
+| 26   | CorporateBuyback      | 5001      | optional |         | **Custom Field**: `CorporateBuyback` is a user-defined field (UDF) that is not present in the reference specification. |
+| 27   | StandardTrailer       | component | required | FIX.2.7 |                                                                                                                        | 
 
 ## Components
 

@@ -33,5 +33,6 @@ include ':basic-examples:06-json-schema'
 include ':basic-examples:07-java'
 include ':basic-examples:08-quickfix'
 include ':basic-examples:09-verification'
+include ':basic-examples:10-scenarios'
 
 include ':tools'
