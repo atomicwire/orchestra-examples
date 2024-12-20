@@ -93,7 +93,8 @@ public class QuickFixEngineDataDictionaryApp extends MessageCracker implements A
   }
 
   @Handler
-  public void newOrderSingleHandler(quickfix.fix44.NewOrderSingle newOrderSingle, SessionID sessionID) throws FieldNotFound {
+  public void newOrderSingleHandler(
+      quickfix.fix44.NewOrderSingle newOrderSingle, SessionID sessionID) throws FieldNotFound {
     char side = newOrderSingle.getSide().getValue();
     log.info(
         "NewOrderSingle received: Symbol={}, Side={}, CorporateBuyBack={}, Rule80A={} for session {}",
