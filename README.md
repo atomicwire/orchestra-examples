@@ -48,6 +48,7 @@ Examples should be run from the root directory of this repository using the Grad
 | [07-java](./basic-examples/07-java)                   | Generate Java code from an Orchestra specification                                                                             |
 | [08-quickfix](./basic-examples/08-quickfix)           | Generate a QuickFIX Data Dictionary from an Orchestra specification                                                            |
 | [09-verification](./basic-examples/09-verification)   | Verify that an Orchestra specification adheres to syntax rules, semantic correctness, and encoding compatibility requirements. |
+| [10-scenarios](./basic-examples/10-scenarios)         | Create custom message definitions for specific contexts.                                                                       |
 
 Each example includes a Gradle task named `runExample`, configured to invoke the specific Orchestra plugin task that the example is demonstrating. For instance, to run [01-orchestra-hub](./basic-examples/01-orchestra-hub) using the Gradle wrapper, use the following command:
 
