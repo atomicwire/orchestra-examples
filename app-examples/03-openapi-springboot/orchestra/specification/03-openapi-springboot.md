@@ -1,6 +1,6 @@
 # Custom Instrument Example version 1.0
 
-| Term       | Value                                                                                                                                                                      |
+|    Term    |                                                                                   Value                                                                                    |
 |------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | title      | Custom Instrument Example                                                                                                                                                  |
 | creator    | Atomic Wire Technology Limited                                                                                                                                             |
@@ -9,7 +9,6 @@
 | abstract   | A derived specification based on FIX Latest as the reference standard. This specification features a single FIX message incorporating a user-defined instrument component. |
 | source     | [FIX Latest](https://orchestrahub.org/-/fix-latest)                                                                                                                        |
 | rights     | Copyright 2024 Atomic Wire Technology Limited                                                                                                                              |
- 
 
 ## Messages
 
