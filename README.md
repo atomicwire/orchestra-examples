@@ -1,7 +1,5 @@
 # Orchestra Gradle Plugin
 
-> **Warning**: The examples provided in this repository are experimental.
-
 > **Notice**: Although these examples are [open source](LICENSE), the libraries obtained from the Atomic Wire Maven repository require a license. To request an evaluation license, please contact us via [our website](https://www.atomicwire.io/).
 
 <!-- TOC -->
