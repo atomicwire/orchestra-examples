@@ -6,7 +6,7 @@ plugins {
 orchestra {
   specification {
     markdown {
-      reference orchestraHub(name: 'fix-latest', version: 'ep292')
+      reference orchestraHub(name: 'fix-latest', version: 'ep293')
     }
   }
 

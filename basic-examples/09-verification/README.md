@@ -23,7 +23,7 @@ Include the `validation` extension in the [build.gradle](./build.gradle) file to
 orchestra {
   specification {
     markdown {
-      reference orchestraHub(name: 'fix-latest', version: 'ep292')
+      reference orchestraHub(name: 'fix-latest', version: 'ep293')
     }
   }
 
@@ -48,7 +48,7 @@ To enable encoding compatibility checking for FIX tagvalue, use the `fixCompatib
 orchestra {
   specification {
     markdown {
-      reference orchestraHub(name: 'fix-latest', version: 'ep292')
+      reference orchestraHub(name: 'fix-latest', version: 'ep293')
     }
   }
 
@@ -69,7 +69,7 @@ To enable metadata checking for document generation, use the `messageDefinitionR
 orchestra {
   specification {
     markdown {
-      reference orchestraHub(name: 'fix-latest', version: 'ep292')
+      reference orchestraHub(name: 'fix-latest', version: 'ep293')
     }
   }
 
