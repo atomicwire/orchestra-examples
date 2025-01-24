@@ -21,7 +21,7 @@ orchestra {
   specification {
     // Specification is derived from fix-latest
     markdown {
-      reference orchestraHub(name: 'fix-latest', version: 'ep292')
+      reference orchestraHub(name: 'fix-latest', version: 'ep293')
       enableSpotless()
     }
 
