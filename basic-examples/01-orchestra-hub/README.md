@@ -15,7 +15,7 @@ Specify the `name` and `version` of the specification in the [build.gradle](./bu
 ```groovy
 orchestra {
   specification {
-    repository orchestraHub(name: 'fix-latest', version: 'ep293')
+    repository orchestraHub(name: 'fix-latest', version: 'ep295')
   }
 }
 ```

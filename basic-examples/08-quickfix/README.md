@@ -14,7 +14,7 @@ Include the QuickFIX `dataDictionary` extension in the [build.gradle](./build.gr
 orchestra {
   specification {
     markdown {
-      reference orchestraHub(name: 'fix-latest', version: 'ep293')
+      reference orchestraHub(name: 'fix-latest', version: 'ep295')
     }
   }
 

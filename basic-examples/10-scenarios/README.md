@@ -32,7 +32,7 @@ orchestra {
   specification {
     markdown {
       // Specify the name and version of the reference specification
-      reference orchestraHub(name: 'fix-latest', version: 'ep293')
+      reference orchestraHub(name: 'fix-latest', version: 'ep295')
     }
   }
 }
