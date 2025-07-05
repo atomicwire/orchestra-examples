@@ -10,16 +10,16 @@ The derived specification features a single custom FIX message incorporating use
 
 ## Configuration
 
-The reference specification is configured in the [build.gradle](./build.gradle) file using the `reference` parameter. 
+The reference specification is configured in the [build.gradle.kts](./build.gradle.kts) file using the `reference` parameter. 
 
 The [Markdown file](./orchestra/specification/03-derived.md) for the derived specification is in the default location so does not need to be configured.
 
-```groovy
+```kotlin
 orchestra {
   specification {
     markdown {
       // Specify the name and version of the reference specification
-      reference orchestraHub(name: 'fix-4.4', version: '4.4')
+      reference(orchestraHub(name = "fix-4.4", version = "4.4"))
     }
   }
 }

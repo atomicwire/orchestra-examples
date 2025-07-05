@@ -8,9 +8,9 @@ As in the [previous](../01-orchestra-hub) example, the plugin lets users generat
 
 ## Configuration
 
-Include the `markdown` extension in the [build.gradle](./build.gradle) file to enable building the Orchestra specification from a Markdown file. 
+Include the `markdown` extension in the [build.gradle.kts](./build.gradle.kts) file to enable building the Orchestra specification from a Markdown file. 
 
-```groovy
+```kotlin
 orchestra {
   specification {
     // By default, the plugin will search for a Markdown file at `orchestra/specification/<project-name>.md`.
@@ -21,7 +21,7 @@ orchestra {
 
 To use a Markdown file in a different location, use the `inputFile` property.
 
-```groovy
+```kotlin
 orchestra {
   specification {
     markdown {
@@ -37,7 +37,7 @@ The plugin uses [Spotless](https://github.com/diffplug/spotless) to automaticall
 
 To enable this feature, include the `enableSpotless` function in the `markdown` extension.
 
-```groovy
+```kotlin
 orchestra {
   specification {
     markdown {

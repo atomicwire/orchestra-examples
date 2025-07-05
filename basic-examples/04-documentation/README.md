@@ -20,22 +20,22 @@ This example extends the derived specification from the [previous](../03-derived
 
 The plugin uses [Pandoc](https://pandoc.org) to generate MDRs from an Orchestra specification.
 
-To enable this, include the `com.bmuschko.docker-remote-api` plugin in the [build.gradle](./build.gradle) file. This allows the use of a Pandoc Docker image to run Pandoc and install the necessary LaTeX plugins.
+To enable this, include the `com.bmuschko.docker-remote-api` plugin in the [build.gradle.kts](./build.gradle.kts) file. This allows the use of a Pandoc Docker image to run Pandoc and install the necessary LaTeX plugins.
 
-```groovy
+```kotlin
 plugins {
-  id 'io.atomicwire.gradle.orchestra'
-  id 'com.bmuschko.docker-remote-api' // Gradle plugin for managing Docker images and containers
+  id("io.atomicwire.gradle.orchestra")
+  id("com.bmuschko.docker-remote-api") // Gradle plugin for managing Docker images and containers
 }
 ```
 
-Include the `messageDefinitionReport` extension in the [build.gradle](./build.gradle) file to enable document generation. 
+Include the `messageDefinitionReport` extension in the [build.gradle.kts](./build.gradle.kts) file to enable document generation. 
 
-```groovy
+```kotlin
 orchestra {
   specification {
     markdown {
-      reference orchestraHub(name: 'fix-4.4', version: '4.4')
+      reference(orchestraHub(name = "fix-4.4", version = "4.4"))
     }
   }
 
@@ -48,11 +48,11 @@ orchestra {
 
 Include the `epub` extension to also enable document generation in Electronic Publication (EPUB) format.
 
-```groovy
+```kotlin
 orchestra {
   specification {
     markdown {
-      reference orchestraHub(name: 'fix-4.4', version: '4.4')
+      reference(orchestraHub(name = "fix-4.4", version = "4.4"))
     }
   }
 
@@ -81,7 +81,7 @@ $ ./gradlew :basic-examples:04-documentation:runExample
 > **Note**: `runExample` is wired to call the `orchestraGenerateMessageDefinitionReportPdf` task from the Orchestra plugin.
 
 
-To generate an ePub file, the [build.gradle](./build.gradle) configuration must be modified as shown above. You can then use the Gradle wrapper as follows:
+To generate an ePub file, the [build.gradle.kts](./build.gradle.kts) configuration must be modified as shown above. You can then use the Gradle wrapper as follows:
 
 ```shell
 $ ./gradlew :basic-examples:04-documentation:orchestraGenerateMessageDefinitionReportEpub

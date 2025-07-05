@@ -10,43 +10,31 @@ The example uses the Order Book specification from a [previous](../02-markdown) 
 
 To generate a JSON schema from an Orchestra specification, additional type information is needed to map each datatype in the Orchestra specification to the corresponding JSON datatype.
 
-Add the `encoding` extension to the [build.gradle](./build.gradle) file and define a datatype mapping for each datatype in your Orchestra specification.
+Add the `encoding` extension to the [build.gradle.kts](./build.gradle.kts) file and define a datatype mapping for each datatype in your Orchestra specification.
 
 JSON schema generation is enabled by the presence of the `jsonSchema` extension. A `namespace` value must be provided.
 
-```groovy
+```kotlin
 orchestra {
   specification {
     markdown {}
 
     // Specify the corresponding JSON datatype for each datatype in the Orchestra specification.
     encoding {
-      datatypeMapping([
-        Double: [
-          JSON: 'number',
-        ],
-        Integer: [
-          JSON: 'number',
-        ],
-        Price: [
-          JSON: 'number',
-        ],
-        Quantity: [
-          JSON: 'number',
-        ],
-        String: [
-          JSON: 'string',
-        ],
-        Timestamp: [
-          JSON: 'string',
-        ],
-      ])
+      datatypeMapping(
+          mapOf(
+              "Double" to mapOf("JSON" to "number"),
+              "Integer" to mapOf("JSON" to "number"),
+              "Price" to mapOf("JSON" to "number"),
+              "Quantity" to mapOf("JSON" to "number"),
+              "String" to mapOf("JSON" to "string"),
+              "Timestamp" to mapOf("JSON" to "string")))
     }
   }
 
   // Enable JSON schema generation
   jsonSchema {
-    namespace = 'org.example.orchestra'
+    namespace = "org.example.orchestra"
   }
 }
 ```

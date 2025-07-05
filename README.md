@@ -68,12 +68,12 @@ The application examples are each demonstrated differently. Please refer to thei
 
 ## Plugin configuration
 
-The [settings.gradle](./settings.gradle) file contains the complete setup to run the examples. The settings relevant to the Orchestra plugin are:
+The [settings.gradle.kts](./settings.gradle.kts) file contains the complete setup to run the examples. The settings relevant to the Orchestra plugin are:
 
-```groovy
+```kotlin
 pluginManagement {
   plugins {
-    id 'io.atomicwire.gradle.orchestra' version '<version>'
+    id("io.atomicwire.gradle.orchestra") version "<version>"
   }
 
   repositories {
@@ -81,18 +81,18 @@ pluginManagement {
 
     // Configure access to Atomic Wire maven repository
     maven {
-      name = 'atomicwire'
-      url = uri('https://maven.atomicwire.dev/external')
+      name = "atomicwire"
+      url = uri("https://maven.atomicwire.dev/external")
     }
   }
 }
 
 ```
 
-To use the plugin in a subproject add the following to `build.gradle` file:
+To use the plugin in a subproject add the following to `build.gradle.kts` file:
 
-```groovy
+```kotlin
 plugins {
-  id 'io.atomicwire.gradle.orchestra'
+  id("io.atomicwire.gradle.orchestra")
 }
 ```

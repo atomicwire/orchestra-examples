@@ -11,24 +11,23 @@ The QuickFIX client sends the following:
 * Invalid messages missing the required `Account` field.
 * Invalid messages containing the `SecondaryOrderID` field, which is not defined in the custom `NewOrderSingle` message.
 
-
 The example uses the [derived specification](./orchestra/specification/02-quickfix.md) that defines a single custom `NewOrderSingle` message.
 
 ## Configuration
 
 ### Orchestra plugin
 
-The [build.gradle](./build.gradle) includes the Orchestra plugin with configuration to use a reference standard and enable generation of a QuickFIX data dictionary.
+The [build.gradle.kts](./build.gradle.kts) includes the Orchestra plugin with configuration to use a reference standard and enable generation of a QuickFIX data dictionary.
 
-```groovy
+```kotlin
 plugins {
-    id 'io.atomicwire.gradle.orchestra'
+  id("io.atomicwire.gradle.orchestra")
 }
 
 orchestra {
   specification {
     markdown {
-      reference orchestraHub(name: 'fix-4.4', version: '4.4')
+      reference(orchestraHub(name = "fix-4.4", version = "4.4"))
     }
   }
 
@@ -47,16 +46,16 @@ The engine and client applications each contain a QuickFIX/J configuration file,
 The generated QuickFIX data dictionary is based on FIX 4.4 and uses [FIXT](https://www.fixtrading.org/family-of-standards/fixt/) for the session layer. As a result, the QuickFIX/J configuration includes the following parameters.
 
 
-```groovy
-  BeginString=FIXT.1.1
-  DefaultApplVerID=FIX.4.4
+```properties
+BeginString=FIXT.1.1
+DefaultApplVerID=FIX.4.4
 ```
 
 Please refer to the [QuickFIX/J user manual](https://www.quickfixj.org/usermanual/2.3.0/usage/configuration.html) for further information.
 
 #### Code generation
 
-The [build.gradle](./build.gradle) file includes a custom Gradle task that invokes the QuickFIX/J code generator to produce the source code for QuickFIX messages, which are used in the FIX engine and client applications. The generated source files are located in the `build/generated/sources/quickfix` directory.
+The [build.gradle.kts](./build.gradle.kts) file includes a custom Gradle task that invokes the QuickFIX/J code generator to produce the source code for QuickFIX messages, which are used in the FIX engine and client applications. The generated source files are located in the `build/generated/sources/quickfix` directory.
 
 FIXT source code generation is disabled in favor of using the pre-built `FIXT11.xml` transport data dictionary that is available in QuickFIX/J.
 

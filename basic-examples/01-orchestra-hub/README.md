@@ -10,12 +10,12 @@ The plugin enables users to fetch a specification from the repository, create [d
 
 ## Configuration
 
-Specify the `name` and `version` of the specification in the [build.gradle](./build.gradle) file using the `repository` extension.
+Specify the `name` and `version` of the specification in the [build.gradle.kts](./build.gradle.kts) file using the `repository` extension.
 
-```groovy
+```kotlin
 orchestra {
   specification {
-    repository orchestraHub(name: 'fix-latest', version: 'ep295')
+    repository(orchestraHub(name = "fix-latest", version = "ep295"))
   }
 }
 ```

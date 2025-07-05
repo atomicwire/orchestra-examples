@@ -12,38 +12,32 @@ This example includes an implementation of the generated API scaffolding in [Ins
 
 ## Configuration
 
-This example requires configuration of JSON schema generation in the [build.gradle](./build.gradle) file (as seen in a [previous](../../basic-examples/06-json-schema) example), the addition of a custom Gradle task, and the set up of an OpenAPI documentation generator.
+This example requires configuration of JSON schema generation in the [build.gradle.kts](./build.gradle.kts) file (as seen in a [previous](../../basic-examples/06-json-schema) example), the addition of a custom Gradle task, and the set up of an OpenAPI documentation generator.
 
 ### Orchestra plugin
 
-```groovy
+```kotlin
 orchestra {
   specification {
     // Specification is derived from fix-latest
     markdown {
-      reference orchestraHub(name: 'fix-latest', version: 'ep295')
+      reference(orchestraHub(name = "fix-latest", version = "ep295"))
       enableSpotless()
     }
 
     // Specify the corresponding JSON datatype for each datatype in the Orchestra specification.
     encoding {
-      datatypeMapping([
-        double: [
-          JSON: 'number',
-        ],
-        string: [
-          JSON: 'string',
-        ],
-        Pattern: [
-          JSON: 'string',
-        ],
-      ])
+      datatypeMapping(
+          mapOf(
+              "int" to mapOf("JSON" to "number"),
+              "String" to mapOf("JSON" to "string"),
+              "Pattern" to mapOf("JSON" to "string")))
     }
   }
 
   // Generate a JSON Schema for inclusion in the OpenAPI specification
   jsonSchema {
-    namespace = 'org.example.orchestra'
+    namespace = "org.example.orchestra"
   }
 }
 ```
@@ -51,51 +45,48 @@ orchestra {
 
 A custom Gradle task is added to place the two files together, allowing the provided [openapi.yaml](./openapi.yaml) file to easily reference schemas from the JSON schema file generated and later renamed by the plugin.
 
-```groovy
-def colocateFiles = tasks.register('colocateOpenApiFiles', Copy) {
-  from(orchestraGenerateJsonSchema) {
-    rename { 'schemas.json' }
-  }
-  from 'openapi.yaml'
+```kotlin
+val colocateOpenApiFiles =
+    tasks.register<Copy>("colocateOpenApiFiles") {
+      from(tasks.named("orchestraGenerateJsonSchema")) { rename { "schemas.json" } }
+      from("openapi.yaml")
 
-  into layout.buildDirectory.dir('tmp/openapi')
-}
+      into(layout.buildDirectory.dir("tmp/openapi"))
+    }
 ```
 
 ### OpenAPI document generator
 
 Finally, a Gradle task `openApiGenerate` is configured to generate the Spring Boot application scaffolding.
 
-```groovy
+```kotlin
 // Configure the OpenAPI Generator
-def openApiGenerate = tasks.named('openApiGenerate', GenerateTask) {
-  inputs.dir(colocateOpenApiFiles.map { it.destinationDir })
-  inputSpec = colocateOpenApiFiles.map {"${it.destinationDir}/openapi.yaml" as String }
+val openApiGenerate =
+    tasks.named<GenerateTask>("openApiGenerate") {
+      inputs.dir(colocateOpenApiFiles.map { it.destinationDir })
+      inputSpec.set(colocateOpenApiFiles.map { "${it.destinationDir}/openapi.yaml" })
 
-  generatorName = 'spring'
+      generatorName.set("spring")
 
-  // Configure the generated code package names
-  def basePackage = 'org.example.orchestra.springboot'
-  invokerPackage = basePackage
-  modelPackage = "${basePackage}.model"
-  apiPackage = "${basePackage}.api"
-  configOptions.putAll(configPackage: "${basePackage}.config")
+      // Configure the generated code package names
+      val basePackage = "org.example.orchestra.springboot"
+      invokerPackage.set(basePackage)
+      modelPackage.set("${basePackage}.model")
+      apiPackage.set("${basePackage}.api")
+      configOptions.put("configPackage", "${basePackage}.config")
 
-  configOptions.putAll(
-    delegatePattern: 'true',
-    useSpringBoot3: 'true',
-  )
+      configOptions.putAll(
+          mapOf(
+              "delegatePattern" to "true",
+              "useSpringBoot3" to "true"))
 
-  // Skip generating some extraneous files
-  generateApiDocumentation  = false
-  openapiGeneratorIgnoreList = ['pom.xml', 'src/test/']
-  configOptions.putAll([
-    documentationProvider: 'none',
-    openApiNullable: 'false',
-  ])
+      // Skip generating some extraneous files
+      generateApiDocumentation.set(false)
+      openapiGeneratorIgnoreList.set(listOf("pom.xml", "src/test/"))
+      configOptions.putAll(mapOf("documentationProvider" to "none", "openApiNullable" to "false"))
 
-  outputDir = generatedSourceDir.get().toString()
-}
+      outputDir.set(generatedSourceDir.get().toString())
+    }
 ```
 
 ## Run

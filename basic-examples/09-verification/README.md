@@ -17,13 +17,13 @@ The example uses a derived specification with multiple errors to demonstrate the
 
 ## Configuration
 
-Include the `validation` extension in the [build.gradle](./build.gradle) file to enable validation.
+Include the `validation` extension in the [build.gradle.kts](./build.gradle.kts) file to enable validation.
 
-```groovy
+```kotlin
 orchestra {
   specification {
     markdown {
-      reference orchestraHub(name: 'fix-latest', version: 'ep295')
+      reference(orchestraHub(name = "fix-latest", version = "ep295"))
     }
   }
 
@@ -34,7 +34,7 @@ orchestra {
 
 > **Note**: Syntax validation and integrity checking are enabled by default, even if the `validation` extension is not included. This ensures compatibility with other plugin features that rely on a valid specification. Unless explicitly disabled by setting the `enabled` property to `false`, the plugin will output error messages to the console for syntax and semantic issues.
 >
-> ```groovy
+> ```kotlin
 > validation {
 >   enabled = false
 > }
@@ -44,11 +44,11 @@ orchestra {
 
 To enable encoding compatibility checking for FIX tagvalue, use the `fixCompatible` extension.
 
-```groovy
+```kotlin
 orchestra {
   specification {
     markdown {
-      reference orchestraHub(name: 'fix-latest', version: 'ep295')
+      reference(orchestraHub(name = "fix-latest", version = "ep295"))
     }
   }
 
@@ -65,11 +65,11 @@ orchestra {
 
 To enable metadata checking for document generation, use the `messageDefinitionReport` extension. Refer to the [documentation](../04-documentation) example to configure the Docker plugin.  
 
-```groovy
+```kotlin
 orchestra {
   specification {
     markdown {
-      reference orchestraHub(name: 'fix-latest', version: 'ep295')
+      reference(orchestraHub(name = "fix-latest", version = "ep295"))
     }
   }
 

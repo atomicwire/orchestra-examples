@@ -10,48 +10,39 @@ The example uses the Order Book specification from a [previous](../02-markdown) 
 
 To generate an Avro schema from an Orchestra specification, additional type information is needed to map each datatype in the Orchestra specification to the corresponding Avro datatype.
 
-Add the `encoding` extension to the [build.gradle](./build.gradle) file and define a datatype mapping for each datatype in your Orchestra specification. 
+Add the `encoding` extension to the [build.gradle.kts](./build.gradle.kts) file and define a datatype mapping for each datatype in your Orchestra specification. 
 
 The plugin supports [Avro logical types](https://avro.apache.org/docs/1.11.0/spec.html#Logical+Types), enabling representation of more complex or semantically meaningful data types beyond Avro's primitive types.
 
 Avro schema generation is enabled by the presence of the `avro` extension. A `namespace` value must be provided.
 
-```groovy
+```kotlin
 orchestra {
   specification {
     markdown {}
 
     // Specify the corresponding Avro datatype for each datatype in the Orchestra specification.
     encoding {
-      datatypeMapping([
-        Double: [
-          Avro: 'double',
-        ],
-        Integer: [
-          Avro: 'int',
-        ],
-        Price: [
-          Avro: 'double',
-        ],
-        Quantity: [
-          Avro: 'int',
-        ],
-        String: [
-          Avro: 'string',
-        ],
-        Timestamp: [
-          Avro: [
-            standardType: 'long',
-            avroLogicalType: 'timestamp-micros',
-          ],
-        ],
-      ])
+      datatypeMapping(
+          mapOf(
+              "Double" to mapOf("Avro" to "double"),
+              "Integer" to mapOf("Avro" to "int"),
+              "Price" to mapOf("Avro" to "double"),
+              "Quantity" to mapOf("Avro" to "int"),
+              "String" to mapOf("Avro" to "string"),
+              "Timestamp" to
+                  mapOf(
+                      "Avro" to
+                          mapOf(
+                              "standardType" to "long",
+                              "avroLogicalType" to "timestamp-micros",
+                          ))))
     }
   }
     
   // Enable Avro schema generation
   avro {
-    namespace = 'org.example.orchestra'
+    namespace = "org.example.orchestra"
   }
 }
 ```

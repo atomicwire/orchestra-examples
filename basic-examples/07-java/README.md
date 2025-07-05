@@ -12,44 +12,32 @@ The example uses the Order Book specification from a [previous](../02-markdown) 
 
 To generate Java code from an Orchestra specification, additional type information is needed to map each datatype in the Orchestra specification to the corresponding Java datatype.
 
-Add the `encoding` extension to the [build.gradle](./build.gradle) file and define a datatype mapping for each datatype in your Orchestra specification.
+Add the `encoding` extension to the [build.gradle.kts](./build.gradle.kts) file and define a datatype mapping for each datatype in your Orchestra specification.
 
 Java code generation is enabled by the presence of the Java `codeGen` extension. A `packageName` value must be provided.
 
-```groovy
+```kotlin
 orchestra {
   specification {
     markdown {}
 
     // Specify the corresponding Java type for each datatype in the Orchestra specification.
     encoding {
-      datatypeMapping([
-        Double: [
-          Java: 'double',
-        ],
-        Integer: [
-          Java: 'int',
-        ],
-        Price: [
-          Java: 'double',
-        ],
-        Quantity: [
-          Java: 'int',
-        ],
-        String: [
-          Java: 'string',
-        ],
-        Timestamp: [
-          Java: 'instant',
-        ],
-      ])
+      datatypeMapping(
+          mapOf(
+              "Double" to mapOf("Java" to "double"),
+              "Integer" to mapOf("Java" to "int"),
+              "Price" to mapOf("Java" to "double"),
+              "Quantity" to mapOf("Java" to "int"),
+              "String" to mapOf("Java" to "string"),
+              "Timestamp" to mapOf("Java" to "instant")))
     }
   }
 
   // Enable Java code generation
   java {
     codeGen {
-      packageName = 'org.example.orchestra'
+      packageName = "org.example.orchestra"
     }
   }
 }

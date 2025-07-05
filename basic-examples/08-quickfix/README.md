@@ -8,13 +8,13 @@ The example uses the derived specification from a [previous](../03-derived) exam
 
 ## Configuration
 
-Include the QuickFIX `dataDictionary` extension in the [build.gradle](./build.gradle) file to enable generating a QuickFIX data dictionary.
+Include the QuickFIX `dataDictionary` extension in the [build.gradle.kts](./build.gradle.kts) file to enable generating a QuickFIX data dictionary.
 
-```groovy
+```kotlin
 orchestra {
   specification {
     markdown {
-      reference orchestraHub(name: 'fix-latest', version: 'ep295')
+      reference(orchestraHub(name = "fix-4.4", version = "4.4"))
     }
   }
 
