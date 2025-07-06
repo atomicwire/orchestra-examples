@@ -23,16 +23,16 @@ Additionally, four message scenarios are provided, each featuring a customized `
 
 ## Configuration
 
-The reference specification is configured in the [build.gradle](./build.gradle) file using the `reference` parameter. 
+The reference specification is configured in the [build.gradle.kts](./build.gradle.kts) file using the `reference` parameter. 
 
 The [Markdown file](./orchestra/specification/10-scenarios.md) for the derived specification is in the default location so does not need to be configured.
 
-```groovy
+```kotlin
 orchestra {
   specification {
     markdown {
       // Specify the name and version of the reference specification
-      reference orchestraHub(name: 'fix-latest', version: 'ep295')
+      reference(orchestraHub(name = "fix-latest", version = "ep295"))
     }
   }
 }
