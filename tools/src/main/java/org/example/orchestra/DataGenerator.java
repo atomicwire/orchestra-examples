@@ -4,9 +4,9 @@
  */
 package org.example.orchestra;
 
+import io.atomicwire.orchestra.fix.FixLocalMarketDateConverter;
+import io.atomicwire.orchestra.fix.FixUtcTimestampConverter;
 import io.atomicwire.orchestra.id.OrchestraFieldId;
-import io.atomicwire.orchestra.spec.fixlatest.FixLocalMarketDateConverter;
-import io.atomicwire.orchestra.spec.fixlatest.FixUtcTimestampConverter;
 import io.atomicwire.orchestra.type.InstantPlatformType;
 import io.atomicwire.orchestra.type.LocalDatePlatformType;
 import jakarta.annotation.Nonnull;

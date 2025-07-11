@@ -10,8 +10,7 @@ dependencies {
   implementation(libs.orchestra.accessor.quickfix)
 
   // Orchestra Java plugins for FIX 4.4
-  implementation(platform(libs.orchestra.specs.bom))
-  implementation(libs.orchestra.spec.fix44.plugins)
+  runtimeOnly(libs.orchestra.fix.plugins)
 
   // Jackson
   implementation(libs.jackson.databind)

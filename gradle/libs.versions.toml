@@ -3,8 +3,7 @@ jackson = "2.18.+"
 jakarta-annotation-api = "3.0.+"
 log4j = "2.24.+"
 lombok = "1.18.+"
-orchestra = "0.1.10"
-orchestra-specs-bom = "ci-1246"
+orchestra = "0.1.12"
 picocli = "4.7.+"
 quickfixj = "2.3.+"
 slf4j = "2.0.+"
@@ -14,11 +13,10 @@ jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-datab
 jakarta-annotation-api = { group = "jakarta.annotation", name = "jakarta.annotation-api", version.ref = "jakarta-annotation-api" }
 log4j-slf4j2-impl = { group = "org.apache.logging.log4j", name = "log4j-slf4j2-impl", version.ref = "log4j" }
 lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" }
+orch-gen-quickfix-code-generator = { group = "io.atomicwire.orchestra", name = "orch-gen-quickfix-code-generator-cli", version.ref = "orchestra" }
 orchestra-accessor-quickfix = { group = "io.atomicwire.orchestra", name = "orchestra-accessor-quickfix", version.ref = "orchestra" }
 orchestra-core = { group = "io.atomicwire.orchestra", name = "orchestra-core", version.ref = "orchestra" }
-orch-gen-quickfix-code-generator = { group = "io.atomicwire.orchestra", name = "orch-gen-quickfix-code-generator-cli", version.ref = "orchestra" }
-orchestra-specs-bom = { group = "io.atomicwire.orchestra", name = "external-orch-specs-bom", version.ref = "orchestra-specs-bom" }
-orchestra-spec-fix44-plugins = { group = "io.atomicwire.orchestra.spec", name = "fix-44-plugins" }
+orchestra-fix-plugins = { group = "io.atomicwire.orchestra", name = "orchestra-fix-plugins", version.ref = "orchestra"}
 picocli = { group = "info.picocli", name = "picocli", version.ref = "picocli" }
 quickfixj = { group = "org.quickfixj", name = "quickfixj-core", version.ref = "quickfixj" }
 slf4j-api = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }
