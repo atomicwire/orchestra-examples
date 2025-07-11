@@ -9,8 +9,7 @@ dependencies {
   implementation(libs.orchestra.core)
 
   // Orchestra Java plugins for FIX 4.4
-  implementation(platform(libs.orchestra.specs.bom))
-  implementation(libs.orchestra.spec.fix44.plugins)
+  implementation(libs.orchestra.fix.plugins)
 
   // Picocli
   implementation(libs.picocli)
